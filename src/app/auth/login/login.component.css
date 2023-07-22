@@ -1,0 +1,87 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+  
+  .title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 540px;
+    height: 95px;
+    background-color: #6638B5;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .title-container h2 {
+    color: white;
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 539px;
+    height: 590px;
+  }
+  
+  .input-container {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .full-width {
+    width: 90%;
+    padding-left: 30px;
+  }
+  
+  .links-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .left-link {
+    padding-left: 30px;
+    padding-bottom: 10px;
+  }
+
+  .right-link {
+    padding-right: 30px;
+  }
+  
+  .logo {
+    padding: 10px;
+    width: 180px;
+    height: 250px;
+  }
+
+  .register {
+    color: #ffffff;
+    font-size: 35px;
+    padding-top: 15px;
+}
+
+.custom-button {
+    margin-left: 25px;
+    width: 90%;
+    background-color: #6638B5;
+    color: white !important;
+    border-radius: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+}

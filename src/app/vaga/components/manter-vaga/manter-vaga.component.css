@@ -1,0 +1,121 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.content {
+    width: 910px;
+    height: 710px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    width: 910px;
+    height: 66px;
+    background-color: #6638B5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.register {
+    color: #ffffff;
+    font-size: 35px;
+    padding-top: 15px;
+}
+
+.register-box {
+    padding-left: 12px;
+    padding-top: 10px;
+    width: 866px;
+    height: auto;
+    background-color: #F7F2FA;
+    border-radius: 10px;
+    position: absolute;
+    top: 360px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mat-input-element-title {
+    width: 65%;
+    padding-right: 10px;
+}
+
+.mat-input-element-turn {
+    width: 32%;
+}
+
+.mat-input-element-description {
+    width: 98%;
+}
+
+.mat-input-element-requirements {
+    width: 49%;
+    padding-right: 10px;
+}
+
+.mat-input-element-curse {
+    width: 48%;
+}
+
+.mat-input-element-responsibilities {
+    width: 48%;
+    padding-right: 10px;
+}
+
+.mat-input-element-profit {
+    width: 49%;
+}
+
+.mat-input-element-backpack {
+    width: 33%;
+    padding-right: 10px;
+}
+
+.mat-input-element-validate {
+    width: 33%;
+    padding-right: 8px;
+}
+
+.mat-input-element-mod {
+    width: 30%;
+}
+
+
+.custom-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: green;
+    color: white !important;
+    border-radius: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.custom-button-2 {
+    position: absolute;
+    bottom: 0;
+    right: 1;
+    color: black !important;
+    border-radius: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 35px;
+}
+
+textarea {
+    resize: none;
+}
