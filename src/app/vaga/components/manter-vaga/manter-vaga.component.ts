@@ -38,7 +38,7 @@ export class ManterVagaComponent implements OnInit {
   vaga!: Vaga;
   novaCompetencia: any = {};
   meuFormulario: FormGroup;
-  @Input() alterarVaga: Vaga = new Vaga();
+  @Input() idVaga: number | undefined;
 
   turnos: Turno[] = [
     Turno.INTEGRAL,
@@ -71,17 +71,17 @@ export class ManterVagaComponent implements OnInit {
       prazo: new FormControl('', Validators.required),
       curso: new FormControl('', Validators.required),
       turno: new FormControl('', Validators.required)
-      
     });
 
   }
 
   ngOnInit() {
-    if(this.alterarVaga){
-      this.vaga = this.alterarVaga;
-      
+    if(this.idVaga){
+      this.buscarVaga();
     } else {
       this.vaga = new Vaga();
+      this.vaga.requisitos = [];
+      this.vaga.cursos = [];
     }
 
     if(this.meuFormulario.valid){
@@ -90,20 +90,17 @@ export class ManterVagaComponent implements OnInit {
 
     this.competenciaService.buscarTodos().subscribe(competencias =>{
       this.competencias = competencias;
-      console.log(competencias);
     });
 
     this.cursoService.buscarTodos().subscribe(cursos =>{
       this.cursos = cursos;
-      console.log(this.cursos);
     });
 
-    this.vaga.requisitos = [];
-    this.vaga.cursos = [];
+    //console.log(this.vaga);
+  }
 
-    console.log(this.alterarVaga);
-    
-    
+  onFormSubmit() {
+    this.idVaga ? this.alterarVaga() : this.inserirVaga();
   }
 
   inserirVaga() {
@@ -114,8 +111,7 @@ export class ManterVagaComponent implements OnInit {
       }
       return value;
     });
-    
-    // Converte a string JSON de volta para um objeto JSON
+
     this.vaga = JSON.parse(json);
     this.vagaService.inserir(this.vaga).subscribe(
       (response) => {
@@ -133,15 +129,47 @@ export class ManterVagaComponent implements OnInit {
     );
   }
 
+  buscarVaga() {   
+    this.vagaService.buscarPorId(this.idVaga!).subscribe((response) => {
+      this.vaga = response as Vaga;
+      console.log(this.vaga);
+    },
+    (error) => {
+      console.log(error);
+    });
+  }
+
+  alterarVaga() {
+    const json = JSON.stringify(this.vaga, (key, value) => {
+      if (key.startsWith('_')) {
+        return undefined;
+      }
+      return value;
+    });
+    
+    this.vaga = JSON.parse(json);
+    this.vagaService.alterar(this.vaga).subscribe(
+      (response) => {
+        this.snackBar.open(`Vaga número ${this.vaga.id} alterada com sucesso!`, 'Fechar', {
+          duration: 3000,
+          panelClass: 'snackbar-success',
+        });
+      },
+      (error) => {
+        this.snackBar.open('Erro ao realizar a alteração!', 'Fechar', {
+          duration: 3000,
+          panelClass: 'snackbar-error',
+        });
+      }
+    );
+  }
   
   adicionarRequisito(event: MatSelectChange) {
     this.vaga.requisitos = event.value;
-    //console.log(this.vaga.competencias);
   }
 
   adicionarCurso(event: MatSelectChange) {
     this.vaga.cursos = event.value;
-    //console.log(this.vaga.cursos);
   }
 
   getModalidadeString(index: number): string {

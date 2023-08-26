@@ -17,14 +17,16 @@ export class VagaService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para obter todas as vagas
   buscarTodos(): Observable<Vaga[]> {
     return this.http.get<Vaga[]>(this.apiUrl);
   }
 
-  // Método para criar uma nova vaga
   inserir(vaga: Vaga): Observable<Vaga> {
     return this.http.post<Vaga>(this.apiUrl, vaga, {headers: this.headers});
+  }
+
+  alterar(vaga: Vaga): Observable<Vaga> {
+    return this.http.put<Vaga>(this.apiUrl, vaga, {headers: this.headers});
   }
 
   buscarPorId(id: number): Observable<Vaga> {
