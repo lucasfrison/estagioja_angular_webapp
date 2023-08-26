@@ -2,8 +2,11 @@
 <div class="container">
     <form [formGroup]="meuFormulario" (submit)="inserirVaga()">
         <div class="content">
-                <div class="title">
+                <div class="title" *ngIf="!alterarVaga">
                     <h2 class="register">Cadastrar Vaga</h2>
+                </div>
+                <div class="title" *ngIf="alterarVaga">
+                    <h2 class="register">Alterar Vaga</h2>
                 </div>
                 <div class="register-box">
                     <div class="form-row">

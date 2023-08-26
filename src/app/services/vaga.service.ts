@@ -9,7 +9,7 @@ import { Injectable } from "@angular/core";
 
 export class VagaService {
 
-  private apiUrl = 'https://localhost:7238/vaga'; // URL da API
+  private apiUrl = 'https://localhost:7238/Vaga'; // URL da API
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -25,5 +25,9 @@ export class VagaService {
   // Método para criar uma nova vaga
   inserir(vaga: Vaga): Observable<Vaga> {
     return this.http.post<Vaga>(this.apiUrl, vaga, {headers: this.headers});
+  }
+
+  buscarPorId(id: number): Observable<Vaga> {
+    return this.http.get<Vaga>(`${this.apiUrl}/${id}`);   
   }
 }

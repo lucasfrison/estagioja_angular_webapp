@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -11,11 +11,8 @@ import { CursoService } from 'src/app/services/curso.service';
 import { CompetenciaService } from 'src/app/services/competencia.service';
 import { Curso } from 'src/app/shared/models/curso.model';
 import { Competencia } from 'src/app/shared/models/competencia.model';
-import { Observable } from 'rxjs';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list'; 
 import { CommonModule } from '@angular/common';
 import { Vaga } from 'src/app/shared/models/vaga.model';
@@ -38,9 +35,10 @@ export class ManterVagaComponent implements OnInit {
 
   cursos: Curso[] = [];
   competencias: Competencia[] = [];
-  vaga: Vaga = new Vaga();
+  vaga!: Vaga;
   novaCompetencia: any = {};
   meuFormulario: FormGroup;
+  @Input() alterarVaga: Vaga = new Vaga();
 
   turnos: Turno[] = [
     Turno.INTEGRAL,
@@ -73,10 +71,19 @@ export class ManterVagaComponent implements OnInit {
       prazo: new FormControl('', Validators.required),
       curso: new FormControl('', Validators.required),
       turno: new FormControl('', Validators.required)
+      
     });
+
   }
 
   ngOnInit() {
+    if(this.alterarVaga){
+      this.vaga = this.alterarVaga;
+      
+    } else {
+      this.vaga = new Vaga();
+    }
+
     if(this.meuFormulario.valid){
       console.log(this.meuFormulario.value);
     }
@@ -93,6 +100,9 @@ export class ManterVagaComponent implements OnInit {
 
     this.vaga.requisitos = [];
     this.vaga.cursos = [];
+
+    console.log(this.alterarVaga);
+    
     
   }
 
