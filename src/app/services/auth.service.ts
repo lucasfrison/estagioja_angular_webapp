@@ -19,11 +19,11 @@ export class AuthService {
     constructor(private http: HttpClient) { }
 
     public cadastrarEstudante(estudante: Estudante) {
-        return this.http.post<Estudante>(this.apiUrl, estudante, {headers: this.headers});
+        return this.http.post<Estudante>(`${this.apiUrl}/cadastrar-estudante`, estudante, {headers: this.headers});
     }
 
     public cadastrarEmpresa(empresa: Empresa) {
-        return this.http.post<Empresa>(this.apiUrl, empresa, {headers: this.headers});
+        return this.http.post<Empresa>(`${this.apiUrl}/cadastrar-empresa`, empresa, {headers: this.headers});
     }
 
 }

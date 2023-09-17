@@ -9,8 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { CepService } from 'src/app/services/cep.service';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
@@ -35,9 +36,11 @@ export class CadastroComponent implements OnInit{
     estudante!: Estudante;
     esconderSenha: boolean = true;
 
-    constructor(private cepService: CepService) {
-        
-    }
+    constructor(
+        private cepService: CepService, 
+        private authService: AuthService, 
+        private snackBar: MatSnackBar
+    ) {}
 
     ngOnInit() {
         this.empresa = new Empresa();
@@ -92,7 +95,22 @@ export class CadastroComponent implements OnInit{
         {
             this.cepService.buscarEndereco(this.endereco.cep!).subscribe(
                 res => {
-                    this.endereco = res
+                    this.endereco = res;
+                    if (!this.perfilEmpresa) {
+                        this.formEstudante.patchValue({
+                            cidade: res.localidade,
+                            estado: res.uf,
+                            endereco: res.logradouro,
+                            bairro: res.bairro
+                        });
+                    } else {
+                        this.formEmpresa.patchValue({
+                            cidade: res.localidade,
+                            estado: res.uf,
+                            endereco: res.logradouro,
+                            bairro: res.bairro
+                        });
+                    }
                     console.log(this.endereco);
                 },
                 error => {
@@ -114,6 +132,27 @@ export class CadastroComponent implements OnInit{
             form.get('email')?.value,
             form.get('senha')?.value
         );
+
+        console.log(this.empresa);
+
+        const json = JSON.stringify(this.empresa);
+    
+        this.empresa = JSON.parse(json);
+        console.log(this.empresa);
+        this.authService.cadastrarEmpresa(this.empresa).subscribe(
+          (response) => {
+            this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
+              duration: 3000,
+              panelClass: 'snackbar-success',
+            });
+          },
+          (error) => {
+            this.snackBar.open('Erro ao realizar o cadastro!', 'Fechar', {
+              duration: 3000,
+              panelClass: 'snackbar-error',
+            });
+          }
+        );
     }
 
     onFormEstudanteSubmit() {
@@ -128,6 +167,29 @@ export class CadastroComponent implements OnInit{
             form.get('email')?.value,
             form.get('senha')?.value
         );
+
+        const json = JSON.stringify(this.estudante, (key, value) => {
+            if (key.startsWith('_')) {
+              return undefined;
+            }
+            return value;
+          });
+      
+          this.estudante = JSON.parse(json);
+          this.authService.cadastrarEstudante(this.estudante).subscribe(
+            (response) => {
+              this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
+                duration: 3000,
+                panelClass: 'snackbar-success',
+              });
+            },
+            (error) => {
+              this.snackBar.open('Erro ao realizar o cadastro!', 'Fechar', {
+                duration: 3000,
+                panelClass: 'snackbar-error',
+              });
+            }
+          );
     }
 
 }

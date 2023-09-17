@@ -215,8 +215,9 @@
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-password" appearance="outline">
                         <mat-label>Senha</mat-label>
-                        <input matInput type="password" formControlName="senha" placeholder="Digite sua senha" required minlength="8">
-                        <mat-error ng-show="formEmpresa.senha.$error.required && formEmpresa.senha.$touched">
+                        <input [type]="esconderSenha ? 'password' : 'text'" matInput formControlName="senha" placeholder="Digite sua senha" required minlength="8">
+                        <mat-icon matSuffix (click)="esconderSenha = !esconderSenha">{{esconderSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error ng-show="formEstudante.senha.$error.required && formEstudante.senha.$touched">
                             Por favor, crie uma senha.
                         </mat-error>
                     </mat-form-field>
