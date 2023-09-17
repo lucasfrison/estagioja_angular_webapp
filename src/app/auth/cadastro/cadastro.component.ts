@@ -10,12 +10,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
+import { CepService } from 'src/app/services/cep.service';
+import { Empresa } from 'src/app/shared/models/empresa.model';
+import { Endereco } from 'src/app/shared/models/endereco.model';
+import { Estudante } from 'src/app/shared/models/estudante.model';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css'],
-  imports: [MatSlideToggleModule, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, ReactiveFormsModule, MatSnackBarModule],
+  imports: [RouterModule, MatSlideToggleModule, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, ReactiveFormsModule, MatSnackBarModule],
   standalone: true
 })
   
@@ -24,14 +29,22 @@ export class CadastroComponent implements OnInit{
     perfilEmpresa!: MatSlideToggle;
     formEmpresa!: FormGroup;
     formEstudante!: FormGroup;
+    errorService: boolean = false;
+    endereco!: Endereco;
+    empresa!: Empresa;
+    estudante!: Estudante;
+    esconderSenha: boolean = true;
 
-    constructor() {
-        this.inicializarFormEstudante();
-        this.inicializarFormEmpresa();
+    constructor(private cepService: CepService) {
+        
     }
 
     ngOnInit() {
-        return null;
+        this.empresa = new Empresa();
+        this.estudante = new Estudante();
+        this.endereco = new Endereco();
+        this.inicializarFormEstudante();
+        this.inicializarFormEmpresa();
     }
 
     inicializarFormEstudante() {
@@ -68,6 +81,53 @@ export class CadastroComponent implements OnInit{
             email: new FormControl('', Validators.required),
             senha: new FormControl('', Validators.required)
         });
+    }
+
+    public buscarCep()
+    {
+        this.endereco.cep = this.formEstudante.get('cep')?.value ? 
+                            this.formEstudante.get('cep')?.value :
+                            this.formEmpresa.get('cep')?.value;
+        if(this.endereco.cep!.length === 8)
+        {
+            this.cepService.buscarEndereco(this.endereco.cep!).subscribe(
+                res => {
+                    this.endereco = res
+                    console.log(this.endereco);
+                },
+                error => {
+                    this.errorService = error
+                }
+            )
+        }
+    }
+
+    onFormEmpresaSubmit() {
+        let form = this.formEmpresa;
+        this.empresa = new Empresa(
+            0,
+            form.get('cnpj')?.value,
+            form.get('razaoSocial')?.value,
+            form.get('nomeFantasia')?.value,
+            form.get('telefone')?.value,
+            this.endereco,
+            form.get('email')?.value,
+            form.get('senha')?.value
+        );
+    }
+
+    onFormEstudanteSubmit() {
+        let form = this.formEstudante;
+        this.estudante = new Estudante(
+            0,
+            form.get('cpf')?.value,
+            form.get('nome')?.value,
+            form.get('dataNascimento')?.value,
+            form.get('telefone')?.value,
+            this.endereco,
+            form.get('email')?.value,
+            form.get('senha')?.value
+        );
     }
 
 }
