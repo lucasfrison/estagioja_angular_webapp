@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -11,11 +11,8 @@ import { CursoService } from 'src/app/services/curso.service';
 import { CompetenciaService } from 'src/app/services/competencia.service';
 import { Curso } from 'src/app/shared/models/curso.model';
 import { Competencia } from 'src/app/shared/models/competencia.model';
-import { Observable } from 'rxjs';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list'; 
 import { CommonModule } from '@angular/common';
 import { Vaga } from 'src/app/shared/models/vaga.model';
@@ -38,9 +35,10 @@ export class ManterVagaComponent implements OnInit {
 
   cursos: Curso[] = [];
   competencias: Competencia[] = [];
-  vaga: Vaga = new Vaga();
+  vaga!: Vaga;
   novaCompetencia: any = {};
   meuFormulario: FormGroup;
+  @Input() idVaga: number | undefined;
 
   turnos: Turno[] = [
     Turno.INTEGRAL,
@@ -74,26 +72,35 @@ export class ManterVagaComponent implements OnInit {
       curso: new FormControl('', Validators.required),
       turno: new FormControl('', Validators.required)
     });
+
   }
 
   ngOnInit() {
+    if(this.idVaga){
+      this.buscarVaga();
+    } else {
+      this.vaga = new Vaga();
+      this.vaga.requisitos = [];
+      this.vaga.cursos = [];
+    }
+
     if(this.meuFormulario.valid){
       console.log(this.meuFormulario.value);
     }
 
     this.competenciaService.buscarTodos().subscribe(competencias =>{
       this.competencias = competencias;
-      console.log(competencias);
     });
 
     this.cursoService.buscarTodos().subscribe(cursos =>{
       this.cursos = cursos;
-      console.log(this.cursos);
     });
 
-    this.vaga.requisitos = [];
-    this.vaga.cursos = [];
-    
+    //console.log(this.vaga);
+  }
+
+  onFormSubmit() {
+    this.idVaga ? this.alterarVaga() : this.inserirVaga();
   }
 
   inserirVaga() {
@@ -104,8 +111,7 @@ export class ManterVagaComponent implements OnInit {
       }
       return value;
     });
-    
-    // Converte a string JSON de volta para um objeto JSON
+
     this.vaga = JSON.parse(json);
     this.vagaService.inserir(this.vaga).subscribe(
       (response) => {
@@ -123,15 +129,47 @@ export class ManterVagaComponent implements OnInit {
     );
   }
 
+  buscarVaga() {   
+    this.vagaService.buscarPorId(this.idVaga!).subscribe((response) => {
+      this.vaga = response as Vaga;
+      console.log(this.vaga);
+    },
+    (error) => {
+      console.log(error);
+    });
+  }
+
+  alterarVaga() {
+    const json = JSON.stringify(this.vaga, (key, value) => {
+      if (key.startsWith('_')) {
+        return undefined;
+      }
+      return value;
+    });
+    
+    this.vaga = JSON.parse(json);
+    this.vagaService.alterar(this.vaga).subscribe(
+      (response) => {
+        this.snackBar.open(`Vaga número ${this.vaga.id} alterada com sucesso!`, 'Fechar', {
+          duration: 3000,
+          panelClass: 'snackbar-success',
+        });
+      },
+      (error) => {
+        this.snackBar.open('Erro ao realizar a alteração!', 'Fechar', {
+          duration: 3000,
+          panelClass: 'snackbar-error',
+        });
+      }
+    );
+  }
   
   adicionarRequisito(event: MatSelectChange) {
     this.vaga.requisitos = event.value;
-    //console.log(this.vaga.competencias);
   }
 
   adicionarCurso(event: MatSelectChange) {
     this.vaga.cursos = event.value;
-    //console.log(this.vaga.cursos);
   }
 
   getModalidadeString(index: number): string {

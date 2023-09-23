@@ -1,110 +1,109 @@
-<form [formGroup]="meuFormulario" (submit)="inserirVaga()">
 <div class="container">
-    <form [formGroup]="meuFormulario" (submit)="inserirVaga()">
-        <div class="content">
-                <div class="title">
-                    <h2 class="register">Cadastrar Vaga</h2>
-                </div>
-                <div class="register-box">
-                    <div class="form-row">
-                        <mat-form-field class="mat-input-element-title" appearance="outline">
-                            <mat-label>Título</mat-label>
-                            <input matInput formControlName="titulo" [(ngModel)]="vaga.titulo" placeholder="Digite o título da vaga">
-                            <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                                Por favor, preencha o campo titulo.
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="mat-input-element-turn" appearance="outline">
-                            <mat-label>Turno</mat-label>
-                            <mat-select formControlName="turno" [(ngModel)]="vaga.turno" placeholder="Selecione o turno">
-                                <mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>
-                            </mat-select>
-                            <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
-                                Por favor, preencha o campo turno.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="form-row full-width">
-                        <mat-form-field class="mat-input-element-description" appearance="outline">
-                            <mat-label>Descrição da vaga</mat-label>
-                            <textarea matInput formControlName="descricao" [(ngModel)]="vaga.descricao" rows="6" placeholder="Digite a descrição da vaga"></textarea>
-                            <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
-                                Por favor, preencha o campo descrição.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    
-                    <div class="form-row">
-                        <mat-form-field class="mat-input-element-requirements" appearance="outline">
-                            <mat-label>Requisitos</mat-label>
-                            <mat-select formControlName="requisitos" (selectionChange)="adicionarRequisito($event)" multiple [value]="vaga.requisitos" placeholder="Requisitos">
-                                <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
-                            </mat-select>
-                            <mat-error ng-show="meuFormulario.requisitos.$error.required && meuFormulario.requisitos.$touched">
-                                Por favor, preencha o campo requisitos.
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="mat-input-element-curse" appearance="outline">
-                            <mat-label>Curso</mat-label>
-                            <mat-select formControlName="cursos" (selectionChange)="adicionarCurso($event)" multiple [value]="vaga.cursos" placeholder="Curso">
-                                <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
-                            </mat-select>
-                            <mat-error ng-show="meuFormulario.cursos.$error.required && meuFormulario.cursos.$touched">
-                                Por favor, preencha o campo cursos.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="form-row">
-                        <mat-form-field class="mat-input-element-responsibilities" appearance="outline">
-                            <mat-label>Responsabilidades</mat-label>
-                            <textarea matInput formControlName="responsabilidades" [(ngModel)]="vaga.responsabilidades" placeholder="Digite as responsabilidades"></textarea>
-                            <mat-error ng-show="meuFormulario.responsabilidades.$error.required && meuFormulario.responsabilidades.$touched">
-                                Por favor, preencha o campo responsabilidades.
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="mat-input-element-profit" appearance="outline">
-                            <mat-label>Benefícios</mat-label>
-                            <textarea matInput formControlName="beneficios" [(ngModel)]="vaga.beneficios" placeholder="Digite os benefícios"></textarea>
-                            <mat-error ng-show="meuFormulario.beneficios.$error.required && meuFormulario.beneficios.$touched">
-                                Por favor, preencha o campo beneficios.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="form-row">
-                        <mat-form-field class="mat-input-element-backpack" appearance="outline">
-                            <mat-label>Bolsa</mat-label>
-                            <input matInput formControlName="valorDaBolsa" [(ngModel)]="vaga.valorDaBolsa" type="number" placeholder="Digite o valor da bolsa">
-                            <mat-error ng-show="meuFormulario.valorDaBolsa.$error.required && meuFormulario.valorDaBolsa.$touched">
-                                Por favor, preencha o campo bolsa.
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="mat-input-element-validate" appearance="outline">
-                            <mat-label>Data de validade</mat-label>
-                            <input matInput formControlName="prazo" [(ngModel)]="vaga.prazo" [matDatepicker]="picker">
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-error ng-show="meuFormulario.prazo.$error.required && meuFormulario.prazo.$touched">
-                                Por favor, preencha o campo prazo.
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="mat-input-element-mod" appearance="outline">
-                            <mat-label>Modalidade</mat-label>
-                            <mat-select formControlName="modalidade" [(ngModel)]="vaga.modalidade" placeholder="Selecione a modalidade">
-                                <mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>
-                            </mat-select>
-                            <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
-                                Por favor, preencha a modalidade.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
-                <button mat-button class="mat-primary custom-button">
-                    Confirmar
-                    <mat-icon>add</mat-icon>
-                </button>
+  <form [formGroup]="meuFormulario" (submit)="onFormSubmit()">
+  <div class="content">
+     <div class="title" *ngIf="!idVaga">
+        <h2 class="register">Cadastrar Vaga</h2>
+     </div>
+     <div class="title" *ngIf="idVaga">
+        <h2 class="register">Alterar Vaga</h2>
+     </div>
+     <div class="register-box">
+        <div class="form-row">
+           <mat-form-field class="mat-input-element-title" appearance="outline">
+              <mat-label>Título</mat-label>
+              <input matInput formControlName="titulo" [(ngModel)]="vaga.titulo" placeholder="Digite o título da vaga">
+              <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
+                 Por favor, preencha o campo titulo.
+              </mat-error>
+           </mat-form-field>
+           <mat-form-field class="mat-input-element-turn" appearance="outline">
+              <mat-label>Turno</mat-label>
+              <mat-select formControlName="turno" [(ngModel)]="vaga.turno" placeholder="Selecione o turno">
+              <mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>
+              </mat-select>
+              <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
+                 Por favor, preencha o campo turno.
+              </mat-error>
+           </mat-form-field>
         </div>
-    </form>
+        <div class="form-row full-width">
+           <mat-form-field class="mat-input-element-description" appearance="outline">
+              <mat-label>Descrição da vaga</mat-label>
+              <textarea matInput formControlName="descricao" [(ngModel)]="vaga.descricao" rows="6" placeholder="Digite a descrição da vaga"></textarea>
+              <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
+                 Por favor, preencha o campo descrição.
+              </mat-error>
+           </mat-form-field>
+        </div>
+        <div class="form-row">
+           <mat-form-field class="mat-input-element-requirements" appearance="outline">
+              <mat-label>Requisitos</mat-label>
+              <mat-select formControlName="requisitos" (selectionChange)="adicionarRequisito($event)" multiple [value]="vaga.requisitos" placeholder="Requisitos">
+              <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
+              </mat-select>
+              <mat-error ng-show="meuFormulario.requisitos.$error.required && meuFormulario.requisitos.$touched">
+                 Por favor, preencha o campo requisitos.
+              </mat-error>
+           </mat-form-field>
+           <mat-form-field class="mat-input-element-curse" appearance="outline">
+              <mat-label>Curso</mat-label>
+              <mat-select formControlName="cursos" (selectionChange)="adicionarCurso($event)" multiple [value]="vaga.cursos" placeholder="Curso">
+              <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
+              </mat-select>
+              <mat-error ng-show="meuFormulario.cursos.$error.required && meuFormulario.cursos.$touched">
+                 Por favor, preencha o campo cursos.
+              </mat-error>
+           </mat-form-field>
+        </div>
+        <div class="form-row">
+           <mat-form-field class="mat-input-element-responsibilities" appearance="outline">
+              <mat-label>Responsabilidades</mat-label>
+              <textarea matInput formControlName="responsabilidades" [(ngModel)]="vaga.responsabilidades" placeholder="Digite as responsabilidades"></textarea>
+              <mat-error ng-show="meuFormulario.responsabilidades.$error.required && meuFormulario.responsabilidades.$touched">
+                 Por favor, preencha o campo responsabilidades.
+              </mat-error>
+           </mat-form-field>
+           <mat-form-field class="mat-input-element-profit" appearance="outline">
+              <mat-label>Benefícios</mat-label>
+              <textarea matInput formControlName="beneficios" [(ngModel)]="vaga.beneficios" placeholder="Digite os benefícios"></textarea>
+              <mat-error ng-show="meuFormulario.beneficios.$error.required && meuFormulario.beneficios.$touched">
+                 Por favor, preencha o campo beneficios.
+              </mat-error>
+           </mat-form-field>
+        </div>
+        <div class="form-row">
+           <mat-form-field class="mat-input-element-backpack" appearance="outline">
+              <mat-label>Bolsa</mat-label>
+              <input matInput formControlName="valorDaBolsa" [(ngModel)]="vaga.valorDaBolsa" type="number" placeholder="Digite o valor da bolsa">
+              <mat-error ng-show="meuFormulario.valorDaBolsa.$error.required && meuFormulario.valorDaBolsa.$touched">
+                 Por favor, preencha o campo bolsa.
+              </mat-error>
+           </mat-form-field>
+           <mat-form-field class="mat-input-element-validate" appearance="outline">
+              <mat-label>Data de validade</mat-label>
+              <input matInput formControlName="prazo" [(ngModel)]="vaga.prazo" [matDatepicker]="picker">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error ng-show="meuFormulario.prazo.$error.required && meuFormulario.prazo.$touched">
+                 Por favor, preencha o campo prazo.
+              </mat-error>
+           </mat-form-field>
+           <mat-form-field class="mat-input-element-mod" appearance="outline">
+              <mat-label>Modalidade</mat-label>
+              <mat-select formControlName="modalidade" [(ngModel)]="vaga.modalidade" placeholder="Selecione a modalidade">
+              <mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>
+              </mat-select>
+              <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
+                 Por favor, preencha a modalidade.
+              </mat-error>
+           </mat-form-field>
+        </div>
+     </div>
+     <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+     <button mat-button class="mat-primary custom-button">
+        Salvar
+        <mat-icon>add</mat-icon>
+     </button>
+  </div>
+  </form>         
 </div>

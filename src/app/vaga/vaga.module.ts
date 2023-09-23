@@ -7,13 +7,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserModule } from '@angular/platform-browser';
+import { AlterarVagaComponent } from './components/alterar-vaga/alterar-vaga.component';
 
 
 
 
 
 @NgModule({
-    declarations: [],
+    declarations: [
+    AlterarVagaComponent,
+    ManterVagaComponent
+  ],
     imports: [
       CommonModule,
       SharedModule,
