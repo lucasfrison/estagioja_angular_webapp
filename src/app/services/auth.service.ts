@@ -9,7 +9,7 @@ import { Empresa } from '../shared/models/empresa.model';
 })
 export class AuthService {
 
-    private apiUrl = 'https://localhost:7238/auth';
+    private apiUrl = 'https://localhost:7238/Auth';
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'

@@ -29,7 +29,7 @@
                 <div class="form-row">
                 <mat-form-field class="mat-input-element-birth" appearance="outline">
                     <mat-label>Data de Nascimento</mat-label>
-                    <input matInput [matDatepicker]="picker" mask="d0/M0/0000">
+                    <input matInput formControlName="dataNascimento" [matDatepicker]="picker">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error ng-show="formEstudante.dataNascimento.$error.required && formEstudante.dataNascimento.$touched">
@@ -97,7 +97,7 @@
                 <div class="form-row">
                 <mat-form-field class="mat-input-element-email" appearance="outline">
                     <mat-label>E-mail</mat-label>
-                    <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail" mask="A*@A*.SSS" required>
+                    <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail" required>
                     <mat-error ng-show="formEstudante.email.$error.required && formEstudante.email.$touched">
                         Por favor, preencha o e-mail.
                     </mat-error>
@@ -208,7 +208,7 @@
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-email" appearance="outline">
                         <mat-label>E-mail</mat-label>
-                        <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail" mask="A*@A*.SSS" required>
+                        <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail" required>
                         <mat-error ng-show="formEmpresa.email.$error.required && formEmpresa.email.$touched">
                             Por favor, preencha o e-mail.
                         </mat-error>
