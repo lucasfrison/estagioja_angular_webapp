@@ -7,7 +7,7 @@
 
 .content {
     width: 910px;
-    height: 690px;
+    height: 740px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -34,7 +34,7 @@
 }
 
 .register-box {
-    padding-top: 35px;
+    padding-top: 10px;
     height: auto;
     border-radius: 10px;
 }
@@ -147,4 +147,50 @@
 
 .form-row {
     margin-bottom: 20px;
+}
+
+::ng-deep .mdc-switch {
+    width: 60px !important;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::before {
+    background-color: #6638B5 !important;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::after {
+    background-color: #6638B5 !important;
+}
+
+::ng-deep .mdc-switch__track {
+    height: 25px !important;
+    border-radius: 15px !important;
+    border: solid 2px rgb(65, 62, 62) !important;
+}
+
+::ng-deep .mdc-switch__handle {
+    height: 25px !important;
+    width: 25px !important;
+    border-radius: 50% !important;
+    border: solid 1px rgb(65, 62, 62) !important;
+}
+
+::ng-deep .mdc-switch__icon {
+    height: 25px !important;
+    width: 25px !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+}
+
+.profile-type {
+    text-align: center;
+    margin-right: 60px;
+    margin-top: 25px;
+}
+
+.label-company {
+    padding-left: 10px;
+}
+
+.label-student {
+    padding-right: 10px;
 }

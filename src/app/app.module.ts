@@ -12,14 +12,16 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './auth/login/login.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent
     ],
-    providers: [],
+    providers: [
+        provideNgxMask()
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -31,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
         MatToolbarModule,
         LoginComponent,
         MatDatepickerModule,
-        HttpClientModule
+        HttpClientModule,
+        NgxMaskDirective, 
+        NgxMaskPipe    
     ]
 })
 export class AppModule { }

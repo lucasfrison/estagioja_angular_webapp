@@ -1,123 +1,237 @@
 <div class="container">
-    <form>
       <div class="content">
-         <div class="title">
-            <h2 class="register">Cadastrar Estudante</h2>
-         </div>
-         <div class="register-box">
-            <div class="form-row">
-               <mat-form-field class="mat-input-element-cpf" appearance="outline">
-                  <mat-label>CPF</mat-label>
-                  <input matInput formControlName="cpf" placeholder="Digite seu CPF">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo CPF.
-                  </mat-error>
-               </mat-form-field>
-               <mat-form-field class="mat-input-element-name" appearance="outline">
-                  <mat-label>Nome</mat-label>
-                  <input matInput formControlName="cpf" placeholder="Digite seu nome">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo nome.
-                  </mat-error>
-               </mat-form-field>
-            </div>
-            <div class="form-row">
-               <mat-form-field class="mat-input-element-birth" appearance="outline">
-                  <mat-label>Data de Nascimento</mat-label>
-                  <input matInput [matDatepicker]="picker">
-                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-error ng-show="meuFormulario.prazo.$error.required && meuFormulario.prazo.$touched">
-                     Por favor, preencha sua data de nascimento.
-                  </mat-error>
-               </mat-form-field> 
-               <mat-form-field class="mat-input-element-phone" appearance="outline">
-                  <mat-label>Telefone</mat-label>
-                  <input matInput formControlName="cpf" placeholder="(00) 00000-0000">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo Telefone.
-                  </mat-error>
-               </mat-form-field>
-               <mat-form-field class="mat-input-element-cep" appearance="outline">
-                  <mat-label>CEP</mat-label>
-                  <input matInput formControlName="cep" placeholder="000000-000">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo CEP.
-                  </mat-error>
-               </mat-form-field>
-            </div>
-            <div class="form-row">
-               <mat-form-field class="mat-input-element-city" appearance="outline">
-                  <mat-label>Cidade</mat-label>
-                  <input matInput formControlName="city" placeholder="Informe a cidade">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo cidade.
-                  </mat-error>
-               </mat-form-field>
-               <mat-form-field class="mat-input-element-state" appearance="outline">
-                  <mat-label>UF</mat-label>
-                  <mat-select>
-                    <!--<mat-option *ngFor="let estado of tiposDeEstado" [value]="estado">{{ estado }}</mat-option> -->
-                    <mat-option value="PR">PR</mat-option>
-                  </mat-select>
+        <div class="title">
+            <h2 class="register">{{ perfilEmpresa ? "Cadastrar Empresa" : "Cadastrar Estudante" }}</h2>
+        </div>
+        <div class="form-row profile-type">
+            <label class="label-student">Estudante</label>
+            <mat-slide-toggle [(ngModel)]="perfilEmpresa" class="mat-slide-toggle-bar"></mat-slide-toggle>
+            <label class="label-company">Empresa</label>
+        </div>
+        <form [formGroup]="formEstudante" *ngIf="!perfilEmpresa" (submit)="onFormEstudanteSubmit()">
+            <div class="register-box">
+                <div class="form-row">
+                <mat-form-field class="mat-input-element-cpf" appearance="outline">
+                    <mat-label>CPF</mat-label>
+                    <input matInput formControlName="cpf" placeholder="Digite seu CPF" maxlength="14" mask="000.000.000-00">
+                    <mat-error ng-show="formEstudante.cpf.$error.required && formEstudante.cpf.$touched">
+                        Por favor, preencha o campo CPF.
+                    </mat-error>
                 </mat-form-field>
-               <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
-                  <mat-label>Bairro</mat-label>
-                  <input matInput formControlName="neighborhood" placeholder="Informe o bairro">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo bairro.
-                  </mat-error>
-               </mat-form-field>
-               <mat-form-field class="mat-input-element-number" appearance="outline">
-                  <mat-label>Número</mat-label>
-                  <input matInput formControlName="number" placeholder="000">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o campo número.
-                  </mat-error>
-               </mat-form-field>
+                <mat-form-field class="mat-input-element-name" appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" placeholder="Digite seu nome">
+                    <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
+                        Por favor, preencha o campo nome.
+                    </mat-error>
+                </mat-form-field>
+                </div>
+                <div class="form-row">
+                <mat-form-field class="mat-input-element-birth" appearance="outline">
+                    <mat-label>Data de Nascimento</mat-label>
+                    <input matInput formControlName="dataNascimento" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error ng-show="formEstudante.dataNascimento.$error.required && formEstudante.dataNascimento.$touched">
+                        Por favor, preencha sua data de nascimento.
+                    </mat-error>
+                </mat-form-field> 
+                <mat-form-field class="mat-input-element-phone" appearance="outline">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
+                    <mat-error ng-show="formEstudante.telefone.$error.required && formEstudante.telefone.$touched">
+                        Por favor, preencha o campo Telefone.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-cep" appearance="outline">
+                    <mat-label>CEP</mat-label>
+                    <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
+                    <mat-error ng-show="formEstudante.cep.$error.required && formEstudante.cep.$touched">
+                        Por favor, preencha o campo CEP.
+                    </mat-error>
+                </mat-form-field>
+                </div>
+                <div class="form-row">
+                <mat-form-field class="mat-input-element-city" appearance="outline">
+                    <mat-label>Cidade</mat-label>
+                    <input matInput formControlName="cidade" placeholder="Informe a cidade">
+                    <mat-error ng-show="formEstudante.cidade.$error.required && formEstudante.cidade.$touched">
+                        Por favor, preencha o campo cidade.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-state" appearance="outline">
+                    <mat-label>UF</mat-label>
+                    <input matInput formControlName="estado" placeholder="UF">
+                    <mat-error ng-show="formEstudante.estado.$error.required && formEstudante.estado.$touched">
+                        Por favor, preencha o campo UF.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
+                    <mat-label>Bairro</mat-label>
+                    <input matInput formControlName="bairro" placeholder="Informe o bairro">
+                    <mat-error ng-show="formEstudante.bairro.$error.required && formEstudante.bairro.titulo.$touched">
+                        Por favor, preencha o campo bairro.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-number" appearance="outline">
+                    <mat-label>Número</mat-label>
+                    <input matInput formControlName="numero" placeholder="000">
+                </mat-form-field>
+                </div>
+                <div class="form-row">
+                <mat-form-field class="mat-input-element-address" appearance="outline">
+                    <mat-label>Endereço</mat-label>
+                    <input matInput formControlName="endereco" placeholder="Ex: Rua Alcides Vieira Arcoverde">
+                    <mat-error ng-show="formEstudante.endereco.$error.required && formEstudante.endereco.$touched">
+                        Por favor, informe o endereço.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-complement" appearance="outline">
+                    <mat-label>Complemento</mat-label>
+                    <input matInput formControlName="complemento" placeholder="Apartamento, sala, edifício, andar, etc." >
+                    <mat-error ng-show="formEstudante.complemento.$error.required && formEstudante.complemento.$touched">
+                        Por favor, informe o complemento.
+                    </mat-error>
+                </mat-form-field>
+                </div>
+                <div class="form-row">
+                <mat-form-field class="mat-input-element-email" appearance="outline">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail" required>
+                    <mat-error ng-show="formEstudante.email.$error.required && formEstudante.email.$touched">
+                        Por favor, preencha o e-mail.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-password" appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input [type]="esconderSenha ? 'password' : 'text'" matInput formControlName="senha" placeholder="Digite sua senha" required minlength="8">
+                    <mat-icon matSuffix (click)="esconderSenha = !esconderSenha">{{esconderSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error ng-show="formEstudante.senha.$error.required && formEstudante.senha.$touched">
+                        Por favor, crie uma senha.
+                    </mat-error>
+                </mat-form-field>
+                </div>
+                <div class="buttons">
+                <button mat-button class="mat-primary custom-button">
+                    Cadastrar  
+                </button>
+                <div class="form-row">
+                    <a [routerLink]="['/']">Voltar</a>
+                </div>
+                </div>
             </div>
-            <div class="form-row">
-               <mat-form-field class="mat-input-element-address" appearance="outline">
-                  <mat-label>Endereço</mat-label>
-                  <input matInput formControlName="address" placeholder="Ex: Rua Alcides Vieira Arcoverde">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, informe o endereço.
-                  </mat-error>
-               </mat-form-field>
-               <mat-form-field class="mat-input-element-complement" appearance="outline">
-                  <mat-label>Complemento</mat-label>
-                  <input matInput formControlName="complement" placeholder="Apartamento, sala, edifício, andar, etc.">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, informe o complemento.
-                  </mat-error>
-               </mat-form-field>
+        </form>   
+        <form [formGroup]="formEmpresa" *ngIf="perfilEmpresa" (submit)="onFormEmpresaSubmit()">
+            <div class="register-box">
+                <div class="form-row">
+                <mat-form-field class="mat-input-element-cpf" appearance="outline">
+                    <mat-label>CNPJ</mat-label>
+                    <input matInput formControlName="cnpj" placeholder="Digite seu cnpj"  maxlength="18" mask="00.000.000/0000-00">
+                    <mat-error ng-show="formEmpresa.cnpj.$error.required && formEmpresa.cnpj.$touched">
+                        Por favor, preencha o campo CNPJ.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-input-element-name" appearance="outline">
+                    <mat-label>Razão Social</mat-label>
+                    <input matInput formControlName="razaoSocial" placeholder="Digite a razão social da empresa" >
+                    <mat-error ng-show="formEmpresa.razaoSocial.$error.required && formEmpresa.razaoSocial.$touched">
+                        Por favor, preencha o campo razão social.
+                    </mat-error>
+                </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-address" appearance="outline">
+                        <mat-label>Nome Fantasia</mat-label>
+                        <input matInput formControlName="nomeFantasia" placeholder="Digite o nome fantasia da empresa" >
+                        <mat-error ng-show="formEmpresa.nomeFantasia.$error.required && formEmpresa.nomeFantasia.$touched">
+                            Por favor, preencha o campo nome fantasia.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-phone" appearance="outline">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
+                        <mat-error ng-show="formEmpresa.telefone.$error.required && formEmpresa.telefone.$touched">
+                            Por favor, preencha o campo Telefone.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-cep" appearance="outline">
+                        <mat-label>CEP</mat-label>
+                        <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
+                        <mat-error ng-show="formEmpresa.cep.$error.required && formEmpresa.cep.$touched">
+                            Por favor, preencha o campo CEP.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-city" appearance="outline">
+                        <mat-label>Cidade</mat-label>
+                        <input matInput formControlName="cidade" placeholder="Informe a cidade">
+                        <mat-error ng-show="formEmpresa.cidade.$error.required && formEmpresa.cidade.$touched">
+                            Por favor, preencha o campo cidade.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-state" appearance="outline">
+                        <mat-label>UF</mat-label>
+                        <input matInput formControlName="estado" placeholder="UF">
+                        <mat-error ng-show="formEstudante.estado.$error.required && formEstudante.estado.$touched">
+                            Por favor, preencha o campo UF.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
+                        <mat-label>Bairro</mat-label>
+                        <input matInput formControlName="bairro" placeholder="Informe o bairro">
+                        <mat-error ng-show="formEmpresa.bairro.$error.required && formEmpresa.bairro.$touched">
+                            Por favor, preencha o campo bairro.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-number" appearance="outline">
+                        <mat-label>Número</mat-label>
+                        <input matInput formControlName="numero" placeholder="000">
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-address" appearance="outline">
+                        <mat-label>Endereço</mat-label>
+                        <input matInput formControlName="endereco" placeholder="Ex: Rua Alcides Vieira Arcoverde">
+                        <mat-error ng-show="formEmpresa.endereco.$error.required && formEmpresa.endereco.$touched">
+                            Por favor, informe o endereço.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-complement" appearance="outline">
+                        <mat-label>Complemento</mat-label>
+                        <input matInput formControlName="complemento" placeholder="Apartamento, sala, edifício, andar, etc." >
+                        <mat-error ng-show="formEmpresa.complemento.$error.required && formEmpresa.complemento.$touched">
+                            Por favor, informe o complemento.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-email" appearance="outline">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail" required>
+                        <mat-error ng-show="formEmpresa.email.$error.required && formEmpresa.email.$touched">
+                            Por favor, preencha o e-mail.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-password" appearance="outline">
+                        <mat-label>Senha</mat-label>
+                        <input [type]="esconderSenha ? 'password' : 'text'" matInput formControlName="senha" placeholder="Digite sua senha" required minlength="8">
+                        <mat-icon matSuffix (click)="esconderSenha = !esconderSenha">{{esconderSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error ng-show="formEstudante.senha.$error.required && formEstudante.senha.$touched">
+                            Por favor, crie uma senha.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="buttons">
+                    <button mat-button class="mat-primary custom-button">
+                        Cadastrar  
+                    </button>
+                    <div class="form-row">
+                        <a [routerLink]="['/cadastrar']">Voltar</a>
+                    </div>
+                </div>
             </div>
-            <div class="form-row">
-               <mat-form-field class="mat-input-element-email" appearance="outline">
-                  <mat-label>E-mail</mat-label>
-                  <input matInput formControlName="email" placeholder="Digite seu e-mail">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, preencha o e-mail.
-                  </mat-error>
-               </mat-form-field>
-               <mat-form-field class="mat-input-element-password" appearance="outline">
-                  <mat-label>Senha</mat-label>
-                  <input matInput formControlName="password" placeholder="Digite sua senha">
-                  <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                     Por favor, crie uma senha.
-                  </mat-error>
-               </mat-form-field>
-            </div>
-            <div class="buttons">
-               <button mat-button class="mat-primary custom-button">
-                  Cadastrar  
-               </button>
-               <div class="form-row">
-                  <a href="login">Voltar</a>
-               </div>
-            </div>
-         </div>
-      </div>
-    </form>         
+        </form>   
+    </div>      
   </div>
   
