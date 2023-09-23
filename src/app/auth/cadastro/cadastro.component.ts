@@ -11,17 +11,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { AuthService } from 'src/app/services/auth.service';
 import { CepService } from 'src/app/services/cep.service';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
 import { Estudante } from 'src/app/shared/models/estudante.model';
 
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css'],
-  imports: [RouterModule, MatSlideToggleModule, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, ReactiveFormsModule, MatSnackBarModule],
+  imports: [RouterModule, MatSlideToggleModule, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, ReactiveFormsModule, MatSnackBarModule,
+  NgxMaskDirective, NgxMaskPipe],
   standalone: true
 })
   
