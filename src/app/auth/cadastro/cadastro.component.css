@@ -124,12 +124,19 @@
 .mat-input-element-email {
     padding-left: 30px;
     padding-right: 28px;
-    width: 42%;
+    width: 31%;
 }
 
 .mat-input-element-password {
-    width: 48%;
+    width: 28%;
+    padding-right: 28px;
 }
+
+.mat-input-element-password-confirm {
+    width: 28%;
+
+}
+
 
 .custom-button {
     position: center;

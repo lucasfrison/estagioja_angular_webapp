@@ -69,7 +69,8 @@ export class CadastroComponent implements OnInit{
             endereco: new FormControl('', Validators.required),
             complemento: new FormControl(''),
             email: new FormControl('', Validators.required),
-            senha: new FormControl('', Validators.required)
+            senha: new FormControl('', Validators.required),
+            confirmarSenha: new FormControl('', Validators.required)
         });
     }
 
@@ -87,7 +88,8 @@ export class CadastroComponent implements OnInit{
             endereco: new FormControl('', Validators.required),
             complemento: new FormControl(''),
             email: new FormControl('', Validators.required),
-            senha: new FormControl('', Validators.required)
+            senha: new FormControl('', Validators.required),
+            confirmarSenha: new FormControl('', Validators.required)
         });
     }
 
