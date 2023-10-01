@@ -1,0 +1,28 @@
+.container {
+    width: 220px;
+    height: 800px;
+    border-radius: 10px;
+    background-color: #6638B5;
+    margin: 20px;
+}
+
+.title {
+    color: #FFF;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 50px;
+}
+
+.image-ufpr {
+    text-align: center;
+    padding-bottom: 120px;
+}
+
+.image-siga {
+    text-align: center;
+    padding-bottom: 120px;
+}
+
+.image-ciee {
+    text-align: center;
+}
