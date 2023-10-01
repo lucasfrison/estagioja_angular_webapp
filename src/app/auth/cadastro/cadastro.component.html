@@ -110,6 +110,14 @@
                         Por favor, crie uma senha.
                     </mat-error>
                 </mat-form-field>
+                <mat-form-field class="mat-input-element-password-confirm" appearance="outline">
+                    <mat-label>Confirmar Senha</mat-label>
+                    <input [type]="esconderSenha ? 'password' : 'text'" matInput formControlName="confirmarSenha" placeholder="Confirme sua senha" required minlength="8">
+                    <mat-icon matSuffix (click)="esconderSenha = !esconderSenha">{{esconderSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="formEstudante.get('senha')?.value !== formEstudante.get('confirmarSenha')?.value && formEstudante.get('confirmarSenha')?.touched">
+                        As senhas não correspondem.
+                    </mat-error>
+                </mat-form-field>
                 </div>
                 <div class="buttons">
                 <button mat-button class="mat-primary custom-button">
@@ -219,6 +227,14 @@
                         <mat-icon matSuffix (click)="esconderSenha = !esconderSenha">{{esconderSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <mat-error ng-show="formEstudante.senha.$error.required && formEstudante.senha.$touched">
                             Por favor, crie uma senha.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-password-confirm" appearance="outline">
+                        <mat-label>Confirmar Senha</mat-label>
+                        <input [type]="esconderSenha ? 'password' : 'text'" matInput formControlName="confirmarSenha" placeholder="Confirme sua senha" required minlength="8">
+                        <mat-icon matSuffix (click)="esconderSenha = !esconderSenha">{{esconderSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error *ngIf="formEmpresa.get('senha')?.value !== formEmpresa.get('confirmarSenha')?.value && formEmpresa.get('confirmarSenha')?.touched">
+                            As senhas não correspondem.
                         </mat-error>
                     </mat-form-field>
                 </div>
