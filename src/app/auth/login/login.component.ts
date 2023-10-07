@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit{
 
   formLogin!: FormGroup;
   login!: AuthRequest;
+  chave: string = "login";
 
   constructor( 
     private authService: AuthService,
@@ -49,6 +50,7 @@ export class LoginComponent implements OnInit{
     this.authService.logar(this.login).subscribe(
       (response) => {
         console.log(response);
+        localStorage.setItem(this.chave, JSON.stringify(response));
       },
       (error) => {
         this.snackBar.open('Credenciais incorretas, por favor tente novamente!', 'Fechar', {
