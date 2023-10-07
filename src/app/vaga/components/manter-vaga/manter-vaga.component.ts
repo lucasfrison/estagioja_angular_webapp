@@ -20,6 +20,7 @@ import { Turno } from 'src/app/shared/models/turno.model';
 import { Modalidade } from 'src/app/shared/models/modalidade.model';
 import { Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 
 
@@ -57,6 +58,7 @@ export class ManterVagaComponent implements OnInit {
     private vagaService: VagaService,
     private cursoService: CursoService,
     private competenciaService: CompetenciaService,
+    private empresaService: EmpresaService,
     private snackBar: MatSnackBar
   ) {
     this.meuFormulario = new FormGroup({
@@ -104,15 +106,7 @@ export class ManterVagaComponent implements OnInit {
   }
 
   inserirVaga() {
-    this.vaga.status = 'ABERTO';
-    const json = JSON.stringify(this.vaga, (key, value) => {
-      if (key.startsWith('_')) {
-        return undefined;
-      }
-      return value;
-    });
-
-    this.vaga = JSON.parse(json);
+    this.popularVaga();
     this.vagaService.inserir(this.vaga).subscribe(
       (response) => {
         this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
@@ -129,6 +123,25 @@ export class ManterVagaComponent implements OnInit {
     );
   }
 
+  popularVaga() {
+    let form = this.meuFormulario;
+    this.vaga = new Vaga(
+        form.get('titulo')?.value,
+        form.get('descricao')?.value,
+        form.get('cursos')?.value,
+        form.get('responsabilidades')?.value,
+        form.get('beneficios')?.value,
+        form.get('valorDaBolsa')?.value,
+        'ABERTO',
+        form.get('modalidade')?.value,
+        form.get('requisitos')?.value,
+        form.get('prazo')?.value,
+        form.get('curso')?.value,
+        form.get('turno')?.value
+    );
+    this.vaga.idEmpresa = JSON.parse(localStorage.getItem('login')!);
+  }
+
   buscarVaga() {   
     this.vagaService.buscarPorId(this.idVaga!).subscribe((response) => {
       this.vaga = response as Vaga;
@@ -140,14 +153,7 @@ export class ManterVagaComponent implements OnInit {
   }
 
   alterarVaga() {
-    const json = JSON.stringify(this.vaga, (key, value) => {
-      if (key.startsWith('_')) {
-        return undefined;
-      }
-      return value;
-    });
-    
-    this.vaga = JSON.parse(json);
+    this.popularVaga();
     this.vagaService.alterar(this.vaga).subscribe(
       (response) => {
         this.snackBar.open(`Vaga número ${this.vaga.id} alterada com sucesso!`, 'Fechar', {
