@@ -3,11 +3,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthRequest } from 'src/app/shared/models/authRequest.model';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { PerfilAcesso } from 'src/app/shared/models/perfil-acesso.model';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +23,12 @@ export class LoginComponent implements OnInit{
 
   formLogin!: FormGroup;
   login!: AuthRequest;
+  chave: string = "login";
 
   constructor( 
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -48,7 +52,13 @@ export class LoginComponent implements OnInit{
 
     this.authService.logar(this.login).subscribe(
       (response) => {
-        console.log(response);
+        let login: AuthResponse = response;
+        localStorage.setItem(this.chave, JSON.stringify(login));
+        if (login.perfil === PerfilAcesso.ESTUDANTE) {
+            this.router.navigate(['/inicial-estudante']);
+        } else {
+            this.router.navigate(['/inicial-empresa']);
+        }
       },
       (error) => {
         this.snackBar.open('Credenciais incorretas, por favor tente novamente!', 'Fechar', {

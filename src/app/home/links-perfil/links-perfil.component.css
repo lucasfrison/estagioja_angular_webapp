@@ -1,0 +1,82 @@
+.container {
+    width: 220px;
+    height: 800px;
+    border-radius: 10px;
+    background-color: #6638B5;
+    margin: 20px;
+}
+
+.menu-item {
+    color: #FFF;
+}
+
+.menu-item-logo {
+    text-align: center;
+    color: #FFF;
+    padding-bottom: 20px;
+}
+
+.menu-item-welcome {
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    padding-bottom: 40px;
+}
+
+.menu-item-vacancies {
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 60px;
+}
+
+.menu-item-help {
+    color: #FFF;
+    text-align: left;
+    font-size: 20px;
+    padding-left: 23px;
+    padding-bottom: 70px;
+}
+
+.image-logo {
+    padding-top: 15px;
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.motivational-area {
+    text-align: center;
+    color: #FFF;
+}
+
+.person {
+    font-size: 80px;
+    width: 100px;
+    height: 75px;
+    padding-top: 20px;
+}
+
+.people {
+    font-size: 30px;
+    padding-right: 20px;
+}
+
+.message {
+    color: #FFF;
+}
+
+.help-icon {
+    font-size: 30px;
+    height: 30px;
+    padding-right: 20px;
+    float: left;
+}
+
+.icon {
+    display: inline;
+}
+
+.text-help {
+    float: left;
+    padding-top: 5px;
+}
