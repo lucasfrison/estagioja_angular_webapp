@@ -1,0 +1,36 @@
+.container {
+    height: 111px;
+    width: 898px;
+    border-radius: 10px;
+    background-color: #6638B5;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+
+}
+
+.text {
+    color: #FFF;
+    font-size: 27px;
+    margin-left: 20px;
+    margin-top: calc((111px - 27px) / 2);
+    margin-bottom: calc((111px - 27px) / 2);
+}
+
+.input-button {
+    border-radius: 20px;
+    padding: 100px;
+    border-color: #6638B5;
+}
+
+::ng-deep .mat-mdc-form-field-flex{
+    border-radius: 20px;
+    background-color: white;
+    width: 100px;
+    border-color: #6638B5;
+}
+
+::ng-deep .mat-mdc-form-field {
+    border-color: #6638B5;
+
+}

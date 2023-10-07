@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlterarVagaComponent } from './components/alterar-vaga/alterar-vaga.component';
+import { PesquisaVagaComponent } from './pesquisa-vaga/pesquisa-vaga.component';
 
 
 
@@ -16,7 +17,8 @@ import { AlterarVagaComponent } from './components/alterar-vaga/alterar-vaga.com
 @NgModule({
     declarations: [
     AlterarVagaComponent,
-    ManterVagaComponent
+    ManterVagaComponent,
+    PesquisaVagaComponent
   ],
     imports: [
       CommonModule,
