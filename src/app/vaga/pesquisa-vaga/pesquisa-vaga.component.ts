@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -8,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-pesquisa-vaga',
   templateUrl: './pesquisa-vaga.component.html',
   styleUrls: ['./pesquisa-vaga.component.css'],
-  imports: [ MatInputModule, MatFormFieldModule ],
+  imports: [ MatInputModule, MatFormFieldModule, MatIconModule ],
   standalone: true
 })
 export class PesquisaVagaComponent {
