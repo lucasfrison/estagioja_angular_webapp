@@ -7,6 +7,7 @@ import { CadastroComponent } from './auth/cadastro/cadastro.component';
 import { LinksUteisComponent } from './home/links-uteis/links-uteis.component';
 import { PesquisaVagaComponent } from './vaga/pesquisa-vaga/pesquisa-vaga.component';
 import { LinksPerfilComponent } from './home/links-perfil/links-perfil.component';
+import { InicialEstudanteComponent } from './home/inicial-estudante/inicial-estudante.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'alterar-vaga/:id', component: AlterarVagaComponent },
   { path: 'links-uteis', component: LinksUteisComponent},
   { path: 'pesquisar-vaga', component: PesquisaVagaComponent},
-  { path: 'links-perfil', component: LinksPerfilComponent}
+  { path: 'links-perfil', component: LinksPerfilComponent},
+  { path: 'inicial-estudante', component: InicialEstudanteComponent}
 ];
 
 @NgModule({

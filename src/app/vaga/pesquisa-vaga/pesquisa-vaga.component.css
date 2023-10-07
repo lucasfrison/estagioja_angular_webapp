@@ -1,6 +1,6 @@
 .container {
     height: 111px;
-    width: 898px;
+    width: 1200px;
     border-radius: 10px;
     background-color: #6638B5;
     margin: 20px;
@@ -15,8 +15,8 @@ h5 {
 
 .text {
     color: #FFF;
-    font-size: 27px;
-    margin-left: 20px;
+    font-size: 30px;
+    margin-left: 14%;
     margin-top: calc((111px - 27px) / 2);
     margin-bottom: calc((111px - 27px) / 2);
 }
@@ -35,14 +35,15 @@ h5 {
   
   .icon {
     margin-right: 8px;
+    cursor: pointer;
   }
   
   .input-field {
     border: none;
     outline: none;
     flex: 1;
-    font-size: 16px;
-    height: 30px;
+    font-size: 20px;
+    height: 35px;
   }
   
   .filter-button {

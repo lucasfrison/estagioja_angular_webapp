@@ -4,7 +4,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
 
-
 @Component({
   selector: 'app-pesquisa-vaga',
   templateUrl: './pesquisa-vaga.component.html',
@@ -12,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [ MatInputModule, MatFormFieldModule, MatIconModule ],
   standalone: true
 })
+
 export class PesquisaVagaComponent {
 
 }

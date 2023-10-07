@@ -1,0 +1,78 @@
+.container {
+    width: 1200px;
+    height: 650px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #faf7f7;
+}
+
+app-pesquisa-vaga {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+app-links-uteis {
+    position: absolute;
+    top: 7%;
+    left: 85%;
+}
+
+.title {
+    font-size: 36px;
+    margin: 20px;
+}
+
+.vaga {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    margin: 10px;
+    padding: 20px;
+    background-color: #FFF;
+}
+
+.vaga-info {
+    display: flex;
+    align-items: center;
+}
+
+.vaga-imagem {
+    margin-right: 20px;
+}
+
+.vaga-detalhes {
+    flex: auto; /* Faz com que os detalhes da vaga ocupem todo o espaço disponível */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icone {
+    cursor: pointer;
+    flex: 1;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    margin-left: 10px;
+    padding-bottom: 20px;
+}
+
+.btn-desistir {
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-desistir:hover {
+    background-color: darkred;
+}
