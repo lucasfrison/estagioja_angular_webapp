@@ -8,6 +8,7 @@ import { LinksUteisComponent } from './home/links-uteis/links-uteis.component';
 import { PesquisaVagaComponent } from './vaga/pesquisa-vaga/pesquisa-vaga.component';
 import { LinksPerfilComponent } from './home/links-perfil/links-perfil.component';
 import { InicialEstudanteComponent } from './home/inicial-estudante/inicial-estudante.component';
+import { InicialEmpresaComponent } from './home/inicial-empresa/inicial-empresa.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'links-uteis', component: LinksUteisComponent},
   { path: 'pesquisar-vaga', component: PesquisaVagaComponent},
   { path: 'links-perfil', component: LinksPerfilComponent},
-  { path: 'inicial-estudante', component: InicialEstudanteComponent}
+  { path: 'inicial-estudante', component: InicialEstudanteComponent},
+  { path: 'inicial-empresa', component: InicialEmpresaComponent}
 ];
 
 @NgModule({
