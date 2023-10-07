@@ -6,7 +6,7 @@ import { PerfilAcesso } from '../shared/models/perfil-acesso.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardEmpresaService {
+export class AuthGuardEstudanteService {
 
   chave: string = 'login';
   login?: AuthResponse;
@@ -15,8 +15,8 @@ export class AuthGuardEmpresaService {
 
   canActivate(): boolean {
     this.login = JSON.parse(localStorage.getItem(this.chave)!);
-    if (!(this.login?.perfil === PerfilAcesso.EMPRESA)) {
-        this.router.navigate(['/inicial-estudante']);
+    if (!(this.login?.perfil === PerfilAcesso.ESTUDANTE)) {
+        this.router.navigate(['/inicial-empresa']);
         return false;
     }
     return true;
