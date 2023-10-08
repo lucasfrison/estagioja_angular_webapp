@@ -21,6 +21,7 @@ import { Modalidade } from 'src/app/shared/models/modalidade.model';
 import { Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 
 
 
@@ -42,16 +43,16 @@ export class ManterVagaComponent implements OnInit {
   @Input() idVaga: number | undefined;
 
   turnos: Turno[] = [
-    Turno.INTEGRAL,
     Turno.MATUTINO,
+    Turno.VESPERTINO,
     Turno.NOTURNO,
-    Turno.VESPERTINO
+    Turno.INTEGRAL
   ];
 
   modalidades: Modalidade[] = [
     Modalidade.PRESENCIAL,
-    Modalidade.REMOTO,
-    Modalidade.SEMIPRESENCIAL
+    Modalidade.SEMIPRESENCIAL,
+    Modalidade.REMOTO
   ];
 
   constructor(
@@ -107,6 +108,7 @@ export class ManterVagaComponent implements OnInit {
 
   inserirVaga() {
     this.popularVaga();
+    console.log(this.vaga);
     this.vagaService.inserir(this.vaga).subscribe(
       (response) => {
         this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
@@ -126,25 +128,38 @@ export class ManterVagaComponent implements OnInit {
   popularVaga() {
     let form = this.meuFormulario;
     this.vaga = new Vaga(
+        this.idVaga,
         form.get('titulo')?.value,
         form.get('descricao')?.value,
         form.get('cursos')?.value,
         form.get('responsabilidades')?.value,
         form.get('beneficios')?.value,
-        form.get('valorDaBolsa')?.value,
         'ABERTO',
+        form.get('valorDaBolsa')?.value,
         form.get('modalidade')?.value,
         form.get('requisitos')?.value,
         form.get('prazo')?.value,
-        form.get('curso')?.value,
         form.get('turno')?.value
     );
-    this.vaga.idEmpresa = JSON.parse(localStorage.getItem('login')!);
+    let login: AuthResponse = JSON.parse(localStorage.getItem('login')!);
+    this.vaga.idEmpresa = login.id;
   }
 
   buscarVaga() {   
     this.vagaService.buscarPorId(this.idVaga!).subscribe((response) => {
       this.vaga = response as Vaga;
+      this.meuFormulario.patchValue({
+        titulo: this.vaga.titulo,
+        descricao: this.vaga.descricao,
+        responsabilidades: this.vaga.responsabilidades,
+        beneficios: this.vaga.beneficios,
+        valorDaBolsa: this.vaga.valorDaBolsa,
+        modalidade: this.vaga.modalidade,
+        prazo: this.vaga.prazo,
+        turno: this.vaga.turno,
+        cursos: this.vaga.cursos,
+        requisitos: this.vaga.requisitos
+      });
       console.log(this.vaga);
     },
     (error) => {

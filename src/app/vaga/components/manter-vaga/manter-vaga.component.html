@@ -38,7 +38,7 @@
         <div class="form-row">
            <mat-form-field class="mat-input-element-requirements" appearance="outline">
               <mat-label>Requisitos</mat-label>
-              <mat-select formControlName="requisitos" (selectionChange)="adicionarRequisito($event)" multiple [value]="vaga.requisitos" placeholder="Requisitos">
+              <mat-select formControlName="requisitos" (selectionChange)="adicionarRequisito($event)" multiple placeholder="Requisitos">
               <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.requisitos.$error.required && meuFormulario.requisitos.$touched">
@@ -47,7 +47,7 @@
            </mat-form-field>
            <mat-form-field class="mat-input-element-curse" appearance="outline">
               <mat-label>Curso</mat-label>
-              <mat-select formControlName="cursos" (selectionChange)="adicionarCurso($event)" multiple [value]="vaga.cursos" placeholder="Curso">
+              <mat-select formControlName="cursos" (selectionChange)="adicionarCurso($event)" multiple placeholder="Curso">
               <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.cursos.$error.required && meuFormulario.cursos.$touched">
