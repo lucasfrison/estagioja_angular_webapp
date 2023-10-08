@@ -32,7 +32,14 @@ export class LoginComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.login = new AuthRequest();
+    let usuarioLogado: AuthResponse | null = JSON.parse(localStorage.getItem(this.chave)!);
+    if (usuarioLogado) {
+        if (usuarioLogado.perfil === PerfilAcesso.ESTUDANTE) {
+            this.router.navigate(['/inicial-estudante']);
+        } else {
+            this.router.navigate(['/inicial-empresa']);
+        }
+    }
     this.inicializarFormLogin();
   }
 
