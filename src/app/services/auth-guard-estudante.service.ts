@@ -15,6 +15,10 @@ export class AuthGuardEstudanteService {
 
   canActivate(): boolean {
     this.login = JSON.parse(localStorage.getItem(this.chave)!);
+    if (!this.login) {
+        this.router.navigate(['/']);
+        return false;
+    }
     if (!(this.login?.perfil === PerfilAcesso.ESTUDANTE)) {
         this.router.navigate(['/inicial-empresa']);
         return false;
