@@ -80,21 +80,21 @@
 .mat-input-element-state {
     padding-left: 14px;
     padding-right: 22px;
-    width: 22%;
+    width: 10%;
 }
 
 .mat-input-element-neighborhood {
-    width: 22%;
+    width: 35%;
     padding-right: 22px;
 }
 
 .mat-input-element-number {
-    width: 22%;
+    width: 12%;
     padding-right: 22px;
 }
 
 .mat-input-element-address {
-    width: 22%;
+    width: 33%;
     padding-right: 15px;
 }
 

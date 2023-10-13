@@ -84,7 +84,6 @@ export class VisualizaEmpresaComponent implements OnInit {
         endereco: new FormControl('', Validators.required),
         complemento: new FormControl('')
     });
-    
-}
+  } 
 
 }
