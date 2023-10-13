@@ -3,97 +3,98 @@
         <div class="title">
             <h2 class="register">Perfil</h2>
         </div>
-        <div class="register-box">
-            <div class="form-row">
-                <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">
-                <div class="info-text">
-                    <p>Nome: [Nome do Estudante]</p>
+        <form [formGroup]="formEmpresa">
+            <div class="register-box">
+                <div class="form-row">
+                    <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">
+                    <div class="info-text">
+                        <p>Nome: [Nome do Estudante]</p>
+                    </div>
+                    <div class="info-text">
+                        <p>Idade: [Idade do Estudante]</p>
+                    </div>
+                    <div class="info-text">
+                        <p>Telefone: [Número de Telefone]</p>
+                    </div>                          
                 </div>
-                <div class="info-text">
-                    <p>Idade: [Idade do Estudante]</p>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-description" appearance="outline">
+                        <mat-label>Sobre a empresa</mat-label>
+                        <textarea matInput formControlName="descricao" rows="6" placeholder="Digite as informações da empresa"></textarea>
+                        <mat-error ng-show="formEmpresa.descricao.$error.required && formEmpresa.descricao.$touched">
+                        Por favor, preencha o campo descrição.
+                        </mat-error>
+                    </mat-form-field>
+                    
                 </div>
-                <div class="info-text">
-                    <p>Telefone: [Número de Telefone]</p>
-                </div>            
-                
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-branch" appearance="outline">
+                        <mat-label>Ramo de Atuação</mat-label>
+                        <input matInput formControlName="nome" placeholder="Digite o ramo de atuação da empresa">
+                        <mat-error ng-show="formEmpresa.nome.$error.required && formEmpresa.cpf.$touched">
+                            Por favor, preencha o ramo de atuação.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-phone" appearance="outline">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
+                        <mat-error ng-show="formEmpresa.telefone.$error.required && formEmpresa.telefone.$touched">
+                            Por favor, preencha o campo Telefone.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-cep" appearance="outline">
+                        <mat-label>CEP</mat-label>
+                        <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
+                        <mat-error ng-show="formEmpresa.cep.$error.required && formEmpresa.cep.$touched">
+                            Por favor, preencha o campo CEP.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-city" appearance="outline">
+                        <mat-label>Cidade</mat-label>
+                        <input matInput formControlName="cidade" placeholder="Informe a cidade">
+                        <mat-error ng-show="formEmpresa.cidade.$error.required && formEmpresa.cidade.$touched">
+                            Por favor, preencha o campo cidade.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-state" appearance="outline">
+                        <mat-label>UF</mat-label>
+                        <input matInput formControlName="estado" placeholder="UF">
+                        <mat-error ng-show="formEmpresa.estado.$error.required && formEmpresa.estado.$touched">
+                            Por favor, preencha o campo UF.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
+                        <mat-label>Bairro</mat-label>
+                        <input matInput formControlName="bairro" placeholder="Informe o bairro">
+                        <mat-error ng-show="formEmpresa.bairro.$error.required && formEmpresa.bairro.titulo.$touched">
+                            Por favor, preencha o campo bairro.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-address" appearance="outline">
+                        <mat-label>Endereço</mat-label>
+                        <input matInput formControlName="endereco" placeholder="Ex: Rua Alcides Vieira Arcoverde">
+                        <mat-error ng-show="formEmpresa.endereco.$error.required && formEmpresa.endereco.$touched">
+                            Por favor, informe o endereço.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-number" appearance="outline">
+                        <mat-label>Número</mat-label>
+                        <input matInput formControlName="numero" placeholder="000">
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-complement" appearance="outline">
+                        <mat-label>Complemento</mat-label>
+                        <input matInput formControlName="complemento" placeholder="Apartamento, sala, edifício, andar, etc." >
+                        <mat-error ng-show="formEmpresa.complemento.$error.required && formEmpresa.complemento.$touched">
+                            Por favor, informe o complemento.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="form-row">
-                <mat-form-field class="mat-input-element-description" appearance="outline">
-                    <mat-label>Sobre a empresa</mat-label>
-                    <textarea matInput formControlName="descricao" rows="6" placeholder="Digite as informações da empresa"></textarea>
-                    <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
-                       Por favor, preencha o campo descrição.
-                    </mat-error>
-                 </mat-form-field>
-                
-            </div>
-            <div class="form-row">
-                <mat-form-field class="mat-input-element-branch" appearance="outline">
-                    <mat-label>Ramo de Atuação</mat-label>
-                    <input matInput formControlName="nome" placeholder="Digite o ramo">
-                    <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
-                        Por favor, preencha o ramo de atuação.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-phone" appearance="outline">
-                    <mat-label>Telefone</mat-label>
-                    <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
-                    <mat-error ng-show="formEstudante.telefone.$error.required && formEstudante.telefone.$touched">
-                        Por favor, preencha o campo Telefone.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-row">
-                <mat-form-field class="mat-input-element-cep" appearance="outline">
-                    <mat-label>CEP</mat-label>
-                    <input matInput formControlName="cep" placeholder="000000-000" maxlength="9" mask="00000-000">
-                    <mat-error ng-show="formEstudante.cep.$error.required && formEstudante.cep.$touched">
-                        Por favor, preencha o campo CEP.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-city" appearance="outline">
-                    <mat-label>Cidade</mat-label>
-                    <input matInput formControlName="cidade" placeholder="Informe a cidade">
-                    <mat-error ng-show="formEstudante.cidade.$error.required && formEstudante.cidade.$touched">
-                        Por favor, preencha o campo cidade.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-state" appearance="outline">
-                    <mat-label>UF</mat-label>
-                    <input matInput formControlName="estado" placeholder="UF">
-                    <mat-error ng-show="formEstudante.estado.$error.required && formEstudante.estado.$touched">
-                        Por favor, preencha o campo UF.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
-                    <mat-label>Bairro</mat-label>
-                    <input matInput formControlName="bairro" placeholder="Informe o bairro">
-                    <mat-error ng-show="formEstudante.bairro.$error.required && formEstudante.bairro.titulo.$touched">
-                        Por favor, preencha o campo bairro.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-row">
-                <mat-form-field class="mat-input-element-address" appearance="outline">
-                    <mat-label>Endereço</mat-label>
-                    <input matInput formControlName="endereco" placeholder="Ex: Rua Alcides Vieira Arcoverde">
-                    <mat-error ng-show="formEstudante.endereco.$error.required && formEstudante.endereco.$touched">
-                        Por favor, informe o endereço.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-number" appearance="outline">
-                    <mat-label>Número</mat-label>
-                    <input matInput formControlName="numero" placeholder="000">
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-complement" appearance="outline">
-                    <mat-label>Complemento</mat-label>
-                    <input matInput formControlName="complemento" placeholder="Apartamento, sala, edifício, andar, etc." >
-                    <mat-error ng-show="formEstudante.complemento.$error.required && formEstudante.complemento.$touched">
-                        Por favor, informe o complemento.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
+        </form>
         <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
         <button mat-button class="custom-button">
            Editar
