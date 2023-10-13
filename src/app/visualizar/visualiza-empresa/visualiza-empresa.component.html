@@ -48,7 +48,7 @@
                         <mat-label>CEP</mat-label>
                         <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
                         <mat-error ng-show="formEmpresa.cep.$error.required && formEmpresa.cep.$touched">
-                            Por favor, preencha o campo CEP.
+                            Preencha o CEP.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-city" appearance="outline">
@@ -62,14 +62,14 @@
                         <mat-label>UF</mat-label>
                         <input matInput formControlName="estado" placeholder="UF">
                         <mat-error ng-show="formEmpresa.estado.$error.required && formEmpresa.estado.$touched">
-                            Por favor, preencha o campo UF.
+                            Preencha.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
                         <mat-label>Bairro</mat-label>
                         <input matInput formControlName="bairro" placeholder="Informe o bairro">
                         <mat-error ng-show="formEmpresa.bairro.$error.required && formEmpresa.bairro.titulo.$touched">
-                            Por favor, preencha o campo bairro.
+                            Preencha o campo bairro.
                         </mat-error>
                     </mat-form-field>
                 </div>

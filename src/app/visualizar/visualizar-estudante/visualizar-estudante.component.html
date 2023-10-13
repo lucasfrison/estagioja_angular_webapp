@@ -72,7 +72,7 @@
                         <mat-label>UF</mat-label>
                         <input matInput formControlName="estado" placeholder="UF">
                         <mat-error ng-show="formEstudante.estado.$error.required && formEstudante.estado.$touched">
-                            Por favor, preencha o campo UF.
+                            Preencha.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
@@ -108,14 +108,14 @@
                         <!--<mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>-->
                         </mat-select>
                         <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
-                        Por favor, preencha a modalidade.
+                        Preencha a modalidade.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-backpack" appearance="outline">
                         <mat-label>Bolsa</mat-label>
                         <input matInput formControlName="valorDaBolsa" type="number" placeholder="Digite o valor da bolsa">
                         <mat-error ng-show="meuFormulario.valorDaBolsa.$error.required && meuFormulario.valorDaBolsa.$touched">
-                        Por favor, preencha o campo bolsa.
+                        Preencha o campo bolsa.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-turn" appearance="outline">
@@ -124,7 +124,7 @@
                         <!--<mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>-->
                         </mat-select>
                         <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
-                        Por favor, preencha o campo turno.
+                        Preencha o campo turno.
                         </mat-error>
                     </mat-form-field>
                 </div>
