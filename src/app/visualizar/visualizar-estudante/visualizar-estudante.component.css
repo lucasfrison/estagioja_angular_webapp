@@ -11,9 +11,6 @@
     border-radius: 10px;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .title {
@@ -153,6 +150,6 @@
     margin-right: 20px;
 }
 
-.info-text {
-    margin-bottom: 35px;
+::ng-deep mat-list mat-list-item {
+    margin: -10%;
 }

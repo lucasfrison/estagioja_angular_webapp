@@ -6,17 +6,12 @@
         <form [formGroup]="formEstudante">
             <div class="register-box">
                 <div class="form-row">
-                    <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">
-                    <div class="info-text">
-                        <p>Nome: [Nome do Estudante]</p>
-                    </div>
-                    <div class="info-text">
-                        <p>Idade: [Idade do Estudante]</p>
-                    </div>
-                    <div class="info-text">
-                        <p>Telefone: [Número de Telefone]</p>
-                    </div>            
-                    
+                    <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
+                    <mat-list>
+                        <mat-list-item> Nome: [Nome do Estudante] </mat-list-item>
+                        <mat-list-item> Idade: [Idade do Estudante] </mat-list-item>
+                        <mat-list-item> Telefone: [Número de Telefone] </mat-list-item>
+                    </mat-list>
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-description" appearance="outline">
@@ -25,8 +20,7 @@
                         <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
                         Por favor, preencha o campo descrição.
                         </mat-error>
-                    </mat-form-field>
-                    
+                    </mat-form-field>             
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-compt" appearance="outline">
