@@ -7,7 +7,7 @@
 
 .content {
     width: 910px;
-    height: 750px;
+    height: 700px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -41,7 +41,7 @@
     background-color: #F7F2FA;
     border-radius: 10px;
     position: absolute;
-    top: 385px;
+    top: 360px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -145,4 +145,8 @@
 .info-text {
     margin-bottom: 35px;
     width: 100%;
+}
+
+::ng-deep mat-list mat-list-item {
+    margin: -7%;
 }

@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CepService } from 'src/app/services/cep.service';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-visualiza-empresa',
@@ -26,7 +27,8 @@ import { Endereco } from 'src/app/shared/models/endereco.model';
     MatInputModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatListModule
   ],
   templateUrl: './visualiza-empresa.component.html',
   styleUrls: ['./visualiza-empresa.component.css']
