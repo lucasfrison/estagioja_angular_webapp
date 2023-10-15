@@ -13,6 +13,7 @@ import { AuthGuardEmpresaService } from './services/auth-guard-empresa.service';
 import { AuthGuardEstudanteService } from './services/auth-guard-estudante.service';
 import { VisualizarEstudanteComponent } from './visualizar/visualizar-estudante/visualizar-estudante.component';
 import { VisualizaEmpresaComponent } from './visualizar/visualiza-empresa/visualiza-empresa.component';
+import { VisualizarVagaComponent } from './vaga/visualizar-vaga/visualizar-vaga.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'inicial-estudante', component: InicialEstudanteComponent, canActivate: [AuthGuardEstudanteService]},
   { path: 'inicial-empresa', component: InicialEmpresaComponent, canActivate: [AuthGuardEmpresaService]},
   { path: 'visualizar-estudante', component: VisualizarEstudanteComponent},
-  { path: 'visualizar-empresa', component: VisualizaEmpresaComponent}
+  { path: 'visualizar-empresa', component: VisualizaEmpresaComponent},
+  { path: 'visualizar-vaga', component: VisualizarVagaComponent}
 ];
 
 @NgModule({

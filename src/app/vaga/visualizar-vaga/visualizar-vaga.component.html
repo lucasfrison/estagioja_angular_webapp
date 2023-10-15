@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="content">
+            <div class="form-row adjust-height">
+                <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
+                <mat-list>
+                    <mat-list-item> <h1>Estágio em .NET</h1> </mat-list-item>
+                    <mat-list-item> %EMPRESA% - Curitiba, Paraná(Presencial) </mat-list-item>
+                    <mat-list-item> Há 3 semanas - 15 candidaturas </mat-list-item>
+                </mat-list>
+                <button mat-button class="custom-button">
+                    Candidatar-se
+                 </button>
+            </div>
+            <div class="register-box">
+                <div class="form-row">
+                    <mat-form-field class="mat-input-element-description" appearance="outline">
+                        <textarea matInput formControlName="descricao" rows="18" readonly placeholder="dajsidjiasdiasidjiosajdajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddoiasdasdasd">
+                        </textarea>
+                        <mat-error ng-show="formEmpresa.descricao.$error.required && formEmpresa.descricao.$touched">
+                        Por favor, preencha o campo descrição.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+    </div>
+</div>
+
