@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -9,10 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CepService } from 'src/app/services/cep.service';
-import { Empresa } from 'src/app/shared/models/empresa.model';
-import { Endereco } from 'src/app/shared/models/endereco.model';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { PerfilAcesso } from 'src/app/shared/models/perfil-acesso.model';
 
 
 @Component({
@@ -27,12 +25,22 @@ import { Endereco } from 'src/app/shared/models/endereco.model';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    FormsModule,
     ReactiveFormsModule,
     MatListModule],
   templateUrl: './visualizar-vaga.component.html',
   styleUrls: ['./visualizar-vaga.component.css']
 })
-export class VisualizarVagaComponent {
+export class VisualizarVagaComponent implements OnInit {
+
+  chave: string = "login";
+  loginDetectado!: PerfilAcesso;
+
+  ngOnInit() {
+    let usuarioLogado: AuthResponse | null = JSON.parse(localStorage.getItem(this.chave)!);
+    if (usuarioLogado) {
+      this.loginDetectado = usuarioLogado.perfil!;
+      console.log(this.loginDetectado);
+    }
+  }
 
 }
