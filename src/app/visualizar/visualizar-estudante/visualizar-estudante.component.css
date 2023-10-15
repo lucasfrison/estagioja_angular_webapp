@@ -1,0 +1,169 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.content {
+    width: 910px;
+    height: 750px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    width: 910px;
+    height: 66px;
+    background-color: #6638B5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.register {
+    color: #ffffff;
+    font-size: 35px;
+    padding-top: 15px;
+}
+
+.register-box {
+    padding-left: 12px;
+    padding-top: 10px;
+    width: 866px;
+    height: auto;
+    background-color: #F7F2FA;
+    border-radius: 10px;
+    position: absolute;
+    top: 385px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mat-input-element-compt {
+    width: 46%;
+    padding-right: 35px;
+    padding-left: 14px;
+}
+
+.mat-input-element-course {
+    width: 46%;
+    padding-right: 14px;
+}
+
+.mat-input-element-phone {
+    width: 30%;
+    padding-right: 25px;
+    padding-left: 14px;
+}
+
+.mat-input-element-cep {
+    width: 30%;
+    padding-right: 25px;
+}
+
+.mat-input-element-city {
+    width: 30%;
+}
+
+.mat-input-element-description {
+    padding-left: 14px;
+    width: 96%;
+}
+
+.mat-input-element-state {
+    padding-left: 14px;
+    padding-right: 22px;
+    width: 12%;
+}
+
+.mat-input-element-neighborhood {
+    width: 35%;
+    padding-right: 22px;
+}
+
+.mat-input-element-number {
+    width: 12%;
+    padding-right: 22px;
+}
+
+.mat-input-element-address {
+    width: 33%;
+    padding-right: 15px;
+}
+
+.mat-input-element-complement {
+    padding-left: 14px;
+    width: 22%;
+    padding-right: 22px;
+}
+
+.mat-input-element-mod {
+    width: 22%;
+    padding-right: 22px;
+}
+
+.mat-input-element-backpack {
+    width: 22%;
+    padding-right: 22px;
+}
+
+.mat-input-element-turn {
+    width: 22%;
+}
+
+.custom-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #6638B5;
+    color: white !important;
+    border-radius: 100px;
+    padding: 20px;
+    width: 120px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.custom-button-2 {
+    position: absolute;
+    bottom: 0;
+    right: 1;
+    color: black !important;
+    border-radius: 100px;
+    margin-right: 20px;
+    padding: 20px;
+    font-size: 35px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
+.img-perfil {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.img-curriculum {
+    width: 50px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+::ng-deep mat-list mat-list-item {
+    margin: -10%;
+}
+
+.right-bottom {
+    position: absolute;
+    bottom: 1;
+    right: 0;
+    margin-top: -4%;
+    padding-right: 30px;
+}

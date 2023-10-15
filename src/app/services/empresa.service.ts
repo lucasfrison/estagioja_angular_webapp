@@ -17,7 +17,7 @@ export class EmpresaService {
   constructor(private http: HttpClient) { }
 
   buscarPorId(id: number): Observable<Empresa> {
-    return this.http.get<Empresa>(`${this.apiUrl}/${id}`);  
+    return this.http.get<Empresa>(`${this.apiUrl}/empresaId/${id}`);  
   }
 
 }

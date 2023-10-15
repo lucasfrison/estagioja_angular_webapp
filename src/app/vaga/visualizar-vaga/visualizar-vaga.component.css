@@ -1,0 +1,163 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.content {
+    width: 910px;
+    height: 680px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    width: 910px;
+    height: 66px;
+    background-color: #6638B5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.register-box {
+    width: 850px;
+    height: 465px;
+    background-color: #F7F2FA;
+    border-radius: 10px;
+    position: absolute;
+    top: 360px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+}
+
+.mat-input-element-description {
+    width: 100%;
+}
+
+.custom-button {
+    position: absolute;
+    top: 1;
+    right: 0;
+    background-color: #6638B5;
+    color: white !important;
+    border-radius: 100px;
+    padding: 20px;
+    width: 160px;
+    margin-right: 28px;
+    margin-bottom: 10px;
+}
+
+.custom-button-2 {
+    position: absolute;
+    bottom: 0;
+    right: 1;
+    color: black !important;
+    border-radius: 100px;
+    margin-right: 30px;
+    padding: 30px;
+    font-size: 35px;
+}
+
+.custom-button-3 {
+    position: absolute;
+    top: 1;
+    right: 0;
+    background-color: #6638B5;
+    color: white !important;
+    border-radius: 100px;
+    width: 160px;
+    padding: 20px;
+    margin-right: 28px;
+    margin-bottom: 10px;
+    margin-bottom: 47px;
+    font-size: 12px;
+}
+
+.custom-button-4 {
+    position: absolute;
+    top: 1;
+    right: 0;
+    background-color: #6638B5;
+    color: white !important;
+    border-radius: 100px;
+    padding: 20px;
+    width: 160px;
+    margin-right: 28px;
+    margin-bottom: 10px;
+    margin-top: 53px;
+    font-size: 12px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
+.img-perfil {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    margin-left: 15px;
+}
+
+.img-curriculum {
+    width: 50px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+::ng-deep mat-list mat-list-item {
+    margin: -8%;
+}
+
+.right-bottom {
+    position: absolute;
+    bottom: 1;
+    right: 0;
+    margin-top: -4%;
+    padding-right: 30px;
+}
+
+textarea {
+    resize: none;
+}
+
+.adjust-height {
+    margin-top: 10px;
+}
+
+.custom-button-5 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #FF0000;
+    color: white !important;
+    border-radius: 100px;
+    padding: 20px;
+    width: 150px;
+    margin-right: 28px;
+    margin-bottom: 18px;
+}
+
+.vaga-info {
+    width: 827px;
+    height: 443px;
+    overflow: auto;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.list-title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.list-item {
+    font-size: 16px;
+}

@@ -11,45 +11,45 @@
         <form [formGroup]="formEstudante" *ngIf="!perfilEmpresa" (submit)="onFormEstudanteSubmit()">
             <div class="register-box">
                 <div class="form-row">
-                <mat-form-field class="mat-input-element-cpf" appearance="outline">
-                    <mat-label>CPF</mat-label>
-                    <input matInput formControlName="cpf" placeholder="Digite seu CPF" maxlength="14" mask="000.000.000-00">
-                    <mat-error ng-show="formEstudante.cpf.$error.required && formEstudante.cpf.$touched">
-                        Por favor, preencha o campo CPF.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-name" appearance="outline">
-                    <mat-label>Nome</mat-label>
-                    <input matInput formControlName="nome" placeholder="Digite seu nome">
-                    <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
-                        Por favor, preencha o campo nome.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="mat-input-element-cpf" appearance="outline">
+                        <mat-label>CPF</mat-label>
+                        <input matInput formControlName="cpf" placeholder="Digite seu CPF" maxlength="14" mask="000.000.000-00">
+                        <mat-error ng-show="formEstudante.cpf.$error.required && formEstudante.cpf.$touched">
+                            Por favor, preencha o campo CPF.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-name" appearance="outline">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nome" placeholder="Digite seu nome">
+                        <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
+                            Por favor, preencha o campo nome.
+                        </mat-error>
+                    </mat-form-field>
                 </div>
                 <div class="form-row">
-                <mat-form-field class="mat-input-element-birth" appearance="outline">
-                    <mat-label>Data de Nascimento</mat-label>
-                    <input matInput formControlName="dataNascimento" [matDatepicker]="picker">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error ng-show="formEstudante.dataNascimento.$error.required && formEstudante.dataNascimento.$touched">
-                        Por favor, preencha sua data de nascimento.
-                    </mat-error>
-                </mat-form-field> 
-                <mat-form-field class="mat-input-element-phone" appearance="outline">
-                    <mat-label>Telefone</mat-label>
-                    <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
-                    <mat-error ng-show="formEstudante.telefone.$error.required && formEstudante.telefone.$touched">
-                        Por favor, preencha o campo Telefone.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="mat-input-element-cep" appearance="outline">
-                    <mat-label>CEP</mat-label>
-                    <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
-                    <mat-error ng-show="formEstudante.cep.$error.required && formEstudante.cep.$touched">
-                        Por favor, preencha o campo CEP.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="mat-input-element-birth" appearance="outline">
+                        <mat-label>Data de Nascimento</mat-label>
+                        <input matInput formControlName="dataNascimento" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error ng-show="formEstudante.dataNascimento.$error.required && formEstudante.dataNascimento.$touched">
+                            Por favor, preencha sua data de nascimento.
+                        </mat-error>
+                    </mat-form-field> 
+                    <mat-form-field class="mat-input-element-phone" appearance="outline">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
+                        <mat-error ng-show="formEstudante.telefone.$error.required && formEstudante.telefone.$touched">
+                            Por favor, preencha o campo Telefone.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="mat-input-element-cep" appearance="outline">
+                        <mat-label>CEP</mat-label>
+                        <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
+                        <mat-error ng-show="formEstudante.cep.$error.required && formEstudante.cep.$touched">
+                            Por favor, preencha o campo CEP.
+                        </mat-error>
+                    </mat-form-field>
                 </div>
                 <div class="form-row">
                 <mat-form-field class="mat-input-element-city" appearance="outline">
