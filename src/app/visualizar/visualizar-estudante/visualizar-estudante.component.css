@@ -150,6 +150,20 @@
     margin-right: 20px;
 }
 
+.img-curriculum {
+    width: 50px;
+    height: 40px;
+    margin-right: 20px;
+}
+
 ::ng-deep mat-list mat-list-item {
     margin: -10%;
+}
+
+.right-bottom {
+    position: absolute;
+    bottom: 1;
+    right: 0;
+    margin-top: -4%;
+    padding-right: 30px;
 }
