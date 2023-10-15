@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'inicial-empresa', component: InicialEmpresaComponent, canActivate: [AuthGuardEmpresaService]},
   { path: 'visualizar-estudante', component: VisualizarEstudanteComponent},
   { path: 'visualizar-empresa', component: VisualizaEmpresaComponent},
-  { path: 'visualizar-vaga', component: VisualizarVagaComponent}
+  { path: 'visualizar-vaga/:id', component: VisualizarVagaComponent}
 ];
 
 @NgModule({
