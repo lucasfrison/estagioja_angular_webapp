@@ -3,33 +3,47 @@
             <div class="form-row adjust-height">
                 <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
                 <mat-list>
-                    <mat-list-item> <h1>Estágio em .NET</h1> </mat-list-item>
-                    <mat-list-item> %EMPRESA% - Curitiba, Paraná(Presencial) </mat-list-item>
-                    <mat-list-item> Há 3 semanas - 15 candidaturas </mat-list-item>
+                    <mat-list-item> <h1>{{ vaga.titulo }}</h1> </mat-list-item>
+                    <mat-list-item> {{ empresa.razaoSocial }} - {{ empresa.endereco?.localidade }}, {{ empresa.endereco?.uf }}({{ getModalidadeString(vaga.modalidade!) }}) </mat-list-item>
+                    <mat-list-item> {{ vaga.quantidadeCandidaturas }} candidatura(s) </mat-list-item>
                 </mat-list>
-                <button mat-button class="custom-button" *ngIf="loginDetectado === 0">
+                <button mat-button class="custom-button" (click)="registrarCandidatura()" *ngIf="isEstudante()">
                     Candidatar-se
-                 </button>
-                <button mat-button class="custom-button-3" *ngIf="loginDetectado === 1">
+                </button>
+                <button mat-button class="custom-button-3" (click)="alterarVaga()" *ngIf="isEmpresa()">
                     Editar vaga
                 </button>
-                <button mat-button class="custom-button-4" *ngIf="loginDetectado === 1">
+                <button mat-button class="custom-button-4" *ngIf="isEmpresa()">
                     Exibir Candidatos
                 </button>
             </div>
             <div class="register-box">
                 <div class="form-row">
-                    <mat-form-field class="mat-input-element-description" appearance="outline">
-                        <textarea matInput formControlName="descricao" rows="18" readonly placeholder="dajsidjiasdiasidjiosajdajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddajsidjiasdiasidjiosajdoiasdasdasddoiasdasdasd">
-                        </textarea>
-                        <mat-error ng-show="formEmpresa.descricao.$error.required && formEmpresa.descricao.$touched">
-                        Por favor, preencha o campo descrição.
-                        </mat-error>
-                    </mat-form-field>
+                    <div class="vaga-info">
+                        <p class="list-title">Sobre a vaga</p>
+                        <p class="list-item">{{ vaga.descricao }}</p>
+                        <p class="list-title">Requisitos</p>
+                        <ul *ngFor="let item of vaga.requisitos">
+                            <li class="list-item">
+                                {{ item.descricao }}
+                            </li>
+                        </ul>
+                        <p class="list-title">Responsabilidades</p>
+                        <p class="list-item">{{ vaga.responsabilidades }}</p>
+                        <p class="list-title">Bolsa</p>
+                        <p class="list-item">R$ {{ vaga.valorDaBolsa }},00</p>
+                        <p class="list-title">Turno</p>
+                        <p class="list-item">{{ getTurnoString(vaga.turno!) }}</p>
+                        <p class="list-title">Modalidade</p>
+                        <p class="list-item">{{ getModalidadeString(vaga.modalidade!) }}</p>
+                        <p class="list-title">Benefícios</p>
+                        <p class="list-item">{{ vaga.beneficios }}</p>
+                        <p class="list-title">Venha ser EMPRESA!</p>
+                    </div>
                 </div>
             </div>
         <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
-        <button mat-button class="custom-button-5" *ngIf="loginDetectado === 1">
+        <button mat-button class="custom-button-5" (click)="finalizarVaga()" *ngIf="isEmpresa()">
             Finalizar
         </button>
     </div>
