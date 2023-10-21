@@ -1,0 +1,135 @@
+.container {
+    width: 1200px;
+    height: 800px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #faf7f7;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.custom-button-2 {
+    position: absolute;
+    left: 0;
+    color: #FFF !important;
+    border-radius: 100px;
+    padding: 20px;
+    font-size: 35px;
+}
+
+.mat-primary.custom-button-2 {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFF !important;
+    border-radius: 100px;
+    padding: 20px;
+    font-size: 35px;
+}
+
+.title {
+    font-size: 36px;
+    margin: 20px;
+}
+
+.main-title {
+    width: 1180px;
+    height: 66px;
+    background-color: #6638B5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: sticky;
+    top: 0;
+}
+
+.internship {
+    color: #ffffff;
+    font-size: 35px;
+    padding-top: 15px;
+}
+
+.vaga {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    margin: 10px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #FFF;
+}
+
+.vaga-info {
+    display: flex;
+    align-items: center;
+}
+
+.vaga-imagem {
+    margin-right: 20px;
+}
+
+.vaga-detalhes {
+    flex: auto; /* Faz com que os detalhes da vaga ocupem todo o espaço disponível */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icone {
+    cursor: pointer;
+    width: 30px;
+    font-size: 30px;
+    padding-bottom: 30px;
+    margin-left: 10px;
+}
+
+.aplicant-name {
+  display: flex;
+  align-items: center;
+}
+
+.btn-reject {
+  position: absolute;
+  right: 2%;
+}
+
+.btn-approve {
+  position: absolute;
+  right: 9%;
+}
+
+.btn-show-aplicants {
+  position: absolute;
+  right: 16.3%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6638B5;
+  }
+
+  ::ng-deep mat-list mat-list-item {
+    margin: -15%;
+  }

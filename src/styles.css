@@ -2,3 +2,39 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.vermelho {
+    background-color: rgb(197, 7, 7);
+}
+
+.vermelho:hover {
+    background-color: rgb(112, 2, 2);
+}
+
+.roxo {
+    background-color: #6638B5;
+}
+
+.roxo:hover {
+    background-color: #422279;
+}
+
+.verde {
+    background-color: green;
+}
+
+.verde:hover {
+    background-color: darkgreen;
+}
+
+.button {
+    color: white !important;
+    padding: 15px;
+    border-radius: 100px;
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 8px;
+}

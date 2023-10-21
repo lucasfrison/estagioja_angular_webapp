@@ -58,6 +58,7 @@ export class VisualizarVagaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.route.params.subscribe(params => {
         this.idVaga = +params['id']; 
     });
@@ -159,6 +160,10 @@ export class VisualizarVagaComponent implements OnInit {
 
   getTurnoString(index: number): string {
     return Turno[index];
+  }
+
+  visualizarCandidatos() {
+    this.router.navigate([`visualizar-candidatos/${this.idVaga}`]);
   }
 
 }
