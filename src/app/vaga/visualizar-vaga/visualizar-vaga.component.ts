@@ -162,4 +162,8 @@ export class VisualizarVagaComponent implements OnInit {
     return Turno[index];
   }
 
+  visualizarCandidatos() {
+    this.router.navigate([`visualizar-candidatos/${this.idVaga}`]);
+  }
+
 }

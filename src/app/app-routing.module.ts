@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'visualizar-estudante', component: VisualizarEstudanteComponent},
   { path: 'visualizar-empresa', component: VisualizaEmpresaComponent},
   { path: 'visualizar-vaga/:id', component: VisualizarVagaComponent},
-  { path: 'visualizar-candidatos', component: VisualizarCandidatosComponent}
+  { path: 'visualizar-candidatos/:idVaga', component: VisualizarCandidatosComponent, canActivate: [AuthGuardEmpresaService]}
 ];
 
 @NgModule({
