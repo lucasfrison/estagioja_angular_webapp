@@ -1,5 +1,11 @@
 <div class="container">
-    <h1 class="title">Últimas vagas cadastradas</h1>
+    <div class="main-title">
+        <a [routerLink]="['/visualizar-vaga']">
+            <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        </a>
+        <h2 class="internship">Cadastrar Vaga</h2>
+     </div>
+    <h1 class="title">Candidatos</h1>
     <div class="vaga" *ngFor="let vaga of vagas">
         <div class="vaga-info">
             <div class="vaga-imagem">
@@ -8,7 +14,9 @@
             <div class="vaga-detalhes">
                 <h2>{{ vaga.titulo }}</h2>
                 <mat-icon class="icone">open_in_new</mat-icon>
-                <button class="btn-desistir" color="warn">Desistir</button>
+                <button mat-button class="mat-primary button roxo" color="warn">Baixar Curriculo</button>
+                <button mat-button class="mat-primary button verde" color="warn">Aprovar</button>
+                <button mat-button class="mat-primary button vermelho" color="warn">Rejeitar</button>
             </div>
         </div>
     </div>

@@ -8,6 +8,27 @@
     transform: translate(-50%, -50%);
     background-color: #faf7f7;
     border-radius: 10px;
+    overflow: auto;
+}
+
+.custom-button-2 {
+    position: absolute;
+    left: 0;
+    color: #FFF !important;
+    border-radius: 100px;
+    padding: 20px;
+    font-size: 35px;
+}
+
+.mat-primary.custom-button-2 {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFF !important;
+    border-radius: 100px;
+    padding: 20px;
+    font-size: 35px;
 }
 
 .title {
@@ -15,12 +36,33 @@
     margin: 20px;
 }
 
+.main-title {
+    width: 1180px;
+    height: 66px;
+    background-color: #6638B5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: sticky;
+    top: 0;
+}
+
+.internship {
+    color: #ffffff;
+    font-size: 35px;
+    padding-top: 15px;
+}
+
 .vaga {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     margin: 10px;
-    padding: 20px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
     background-color: #FFF;
 }
 
@@ -50,7 +92,7 @@
     padding-bottom: 20px;
 }
 
-.btn-desistir {
+.btn-reject {
     border: none;
     outline: none;
     background-color: red;
@@ -61,6 +103,22 @@
     transition: background-color 0.3s;
 }
 
-.btn-desistir:hover {
-    background-color: darkred;
-}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6638B5;
+  }
