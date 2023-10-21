@@ -38,7 +38,7 @@ export class VisualizarVagaComponent implements OnInit {
   ngOnInit() {
     let usuarioLogado: AuthResponse | null = JSON.parse(localStorage.getItem(this.chave)!);
     if (usuarioLogado) {
-      this.loginDetectado = usuarioLogado.perfil!;
+      this.loginDetectado = usuarioLogado.perfil  !;
       console.log(this.loginDetectado);
     }
   }
