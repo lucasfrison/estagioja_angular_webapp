@@ -7,15 +7,15 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthRequest } from 'src/app/shared/models/authRequest.model';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { PerfilAcesso } from 'src/app/shared/models/perfil-acesso.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, RouterModule, ReactiveFormsModule, MatSnackBarModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, RouterModule, ReactiveFormsModule],
   standalone: true
 })
 
@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit{
 
   constructor( 
     private authService: AuthService,
-    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
@@ -68,10 +67,12 @@ export class LoginComponent implements OnInit{
         }
       },
       (error) => {
-        this.snackBar.open('Credenciais incorretas, por favor tente novamente!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Credenciais incorretas, por favor tente novamente!',
+          timer: 2500
+        })
       }
     );
   }
