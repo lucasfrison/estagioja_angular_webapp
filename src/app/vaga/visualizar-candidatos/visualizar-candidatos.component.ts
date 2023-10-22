@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VagaService } from 'src/app/services/vaga.service';
 import { EstudanteCandidato } from 'src/app/shared/models/estudante-candidato.model';
 import { MatListModule } from '@angular/material/list';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Candidatura } from 'src/app/shared/models/candidatura.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-visualizar-candidatos',
@@ -15,7 +16,8 @@ import { Candidatura } from 'src/app/shared/models/candidatura.model';
     CommonModule,
     MatIconModule,
     RouterModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule
   ],
   templateUrl: './visualizar-candidatos.component.html',
   styleUrls: ['./visualizar-candidatos.component.css']
@@ -30,7 +32,8 @@ export class VisualizarCandidatosComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private vagaService: VagaService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,16 +52,20 @@ export class VisualizarCandidatosComponent implements OnInit{
   aprovarCandidato(id: number) {
     this.vagaService.aprovarCandidato(new Candidatura(this.idVaga, id)).subscribe(
       (response) => {
-        this.snackBar.open('Candidato arpovado! Vaga finalizada!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-success',
-        });
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: `Candidato Aprovado! Vaga Finalizada.`,
+            timer: 2500
+        })
       },
       (error) => {
-        this.snackBar.open('Erro ao aprovar o candidato!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+            icon: 'success',
+            title: 'ERRO',
+            text: `Ocorreu um erro durante a requisição!`,
+            timer: 2500
+        })
       }
     );
   }
@@ -67,18 +74,26 @@ export class VisualizarCandidatosComponent implements OnInit{
     this.vagaService.rejeitarCandidato(new Candidatura(this.idVaga, id)).subscribe(
       (response) => {
         this.buscarCandidatos();
-        this.snackBar.open('Candidatura rejeitada com sucesso.', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-success',
-        });
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: `Candidatura rejeitada!`,
+            timer: 2500
+        })
       },
       (error) => {
-        this.snackBar.open('Erro ao rejeitar a candidatura!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+            icon: 'success',
+            title: 'ERRO',
+            text: `Erro ao rejeitar o candidato!`,
+            timer: 2500
+        })
       }
     );
+  }
+
+  voltar() {
+    this.router.navigate([`/visualizar-vaga/${this.idVaga}`]);
   }
 
 }

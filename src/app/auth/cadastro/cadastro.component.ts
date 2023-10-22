@@ -176,7 +176,7 @@ export class CadastroComponent implements OnInit{
           (response) => {
             Swal.fire({
                 icon: 'success',
-                title: 'ERRO',
+                title: 'Sucesso!',
                 text: 'Cadastro realizado com sucesso!',
                 timer: 2500
             })

@@ -121,7 +121,7 @@ export class ManterVagaComponent implements OnInit {
       (response) => {
         Swal.fire({
           icon: 'success',
-          title: 'ERRO',
+          title: 'Sucesso',
           text: 'Cadastro realizado com sucesso!',
           timer: 2500
       })
@@ -185,7 +185,7 @@ export class ManterVagaComponent implements OnInit {
       (response) => {
         Swal.fire({
           icon: 'success',
-          title: 'ERRO',
+          title: 'Sucesso!',
           text: `Vaga número ${this.vaga.id} alterada com sucesso!`,
           timer: 2500
         })

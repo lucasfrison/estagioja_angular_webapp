@@ -93,7 +93,7 @@ export class VisualizarVagaComponent implements OnInit {
       (response) => {
         Swal.fire({
           icon: 'success',
-          title: 'ERRO',
+          title: 'Sucesso!',
           text: 'Candidatura realizada com sucesso!',
           timer: 2500
         })
@@ -136,7 +136,7 @@ export class VisualizarVagaComponent implements OnInit {
       (response) => {
         Swal.fire({
           icon: 'success',
-          title: 'ERRO',
+          title: 'Sucesso!',
           text: 'Vaga finalizada com sucesso!',
           timer: 2500
         })
