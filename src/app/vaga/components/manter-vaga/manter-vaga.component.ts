@@ -23,8 +23,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 
-
-
 @Component({
   selector: 'app-manter-vaga',
   templateUrl: './manter-vaga.component.html',

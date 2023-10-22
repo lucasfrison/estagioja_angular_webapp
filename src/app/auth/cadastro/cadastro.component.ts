@@ -19,6 +19,7 @@ import { Endereco } from 'src/app/shared/models/endereco.model';
 import { Estudante } from 'src/app/shared/models/estudante.model';
 import { CnpjUtils } from 'src/app/shared/utils/CnpjUtils';
 import { CpfUtils } from 'src/app/shared/utils/CpfUtils';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -152,25 +153,31 @@ export class CadastroComponent implements OnInit{
         this.empresa = JSON.parse(json);
         console.log(this.empresa);
         if (!CnpjUtils.validarCNPJ(this.empresa.cnpj!)) {
-            this.snackBar.open('Erro ao realizar cadastro!\n CNPJ inválido!', 'Fechar', {
-                duration: 3000,
-                panelClass: 'snackbar-error',
-            });
+            Swal.fire({
+                icon: 'error',
+                title: 'ERRO',
+                text: 'Por favor, verifique se todos os campos foram preenchidos!',
+                timer: 2500
+            })
             return;
         }
 
         this.authService.cadastrarEmpresa(this.empresa).subscribe(
           (response) => {
-            this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
-              duration: 3000,
-              panelClass: 'snackbar-success',
-            });
+            Swal.fire({
+                icon: 'success',
+                title: 'ERRO',
+                text: 'Cadastro realizado com sucesso!',
+                timer: 2500
+            })
           },
           (error) => {
-            this.snackBar.open('Erro ao realizar o cadastro!', 'Fechar', {
-              duration: 3000,
-              panelClass: 'snackbar-error',
-            });
+            Swal.fire({
+                icon: 'error',
+                title: 'ERRO',
+                text: 'Erro ao realizar o cadastro!',
+                timer: 2500
+            })
           }
         );
     }
@@ -192,26 +199,32 @@ export class CadastroComponent implements OnInit{
       
         console.log(this.estudante);
         if (!CpfUtils.validarCPF(this.estudante.cpf!)) {
-            this.snackBar.open('Erro ao realizar cadastro!\n CPF inválido!', 'Fechar', {
-                duration: 3000,
-                panelClass: 'snackbar-error',
-            });
+            Swal.fire({
+                icon: 'error',
+                title: 'ERRO',
+                text: 'Por favor, verifique se todos os campos foram preenchidos!',
+                timer: 2500
+            })
             return;
         }
 
         this.authService.cadastrarEstudante(this.estudante).subscribe(
         (response) => {
-            this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
-            duration: 3000,
-            panelClass: 'snackbar-success',
-            });
+            Swal.fire({
+                icon: 'success',
+                title: 'ERRO',
+                text: 'Cadastro realizado com sucesso!',
+                timer: 2500
+            })
         },
         (error) => {
-            this.snackBar.open('Erro ao realizar o cadastro!', 'Fechar', {
-                duration: 3000,
-                panelClass: 'snackbar-error',
-            });
-        }
+            Swal.fire({
+                icon: 'error',
+                title: 'ERRO',
+                text: 'Erro ao realizar o cadastro!',
+                timer: 2500
+                })
+            }
         );
     }
 

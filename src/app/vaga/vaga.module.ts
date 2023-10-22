@@ -9,16 +9,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlterarVagaComponent } from './components/alterar-vaga/alterar-vaga.component';
 import { PesquisaVagaComponent } from './pesquisa-vaga/pesquisa-vaga.component';
-
-
-
-
+import { VisualizarCandidatosComponent } from './visualizar-candidatos/visualizar-candidatos.component';
 
 @NgModule({
     declarations: [
     AlterarVagaComponent,
     ManterVagaComponent,
-    PesquisaVagaComponent
+    PesquisaVagaComponent,
+    VisualizarCandidatosComponent
   ],
     imports: [
       CommonModule,
@@ -28,7 +26,7 @@ import { PesquisaVagaComponent } from './pesquisa-vaga/pesquisa-vaga.component';
       MatInputModule,
       MatDatepickerModule,
       NgModule,
-      BrowserModule,
+      BrowserModule    
     ]
 })
 export class VagaModule { }
