@@ -1,0 +1,24 @@
+<div class="container-search">
+    <p class="text">Minhas Vagas</p>
+    <p class="text">Recomendações</p>
+    <div class="custom-input">
+        <h5>a</h5>
+        <input placeholder="Pesquise sua vaga" class="input-field">
+        <mat-icon class="icon">search</mat-icon>
+      </div>
+</div>
+<div class="container">
+    <h1 class="title">Minhas vagas</h1>
+    <div class="vaga" *ngFor="let vaga of vagas">
+        <div class="vaga-info">
+            <div class="vaga-imagem">
+                <img src="{{ vaga.imagemUrl }}" alt="Imagem da Vaga">
+            </div>
+            <div class="vaga-detalhes">
+                <h2>{{ vaga.titulo }}</h2>
+                <mat-icon class="icone">open_in_new</mat-icon>
+                <button class="btn-desistir" color="warn">Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>
