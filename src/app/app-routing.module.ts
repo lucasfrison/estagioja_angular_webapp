@@ -1,8 +1,8 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ManterVagaComponent } from './vaga/components/manter-vaga/manter-vaga.component';
+import { ManterVagaComponent } from './vaga/manter-vaga/manter-vaga.component';
 import { LoginComponent } from './auth/login/login.component';
-import { AlterarVagaComponent } from './vaga/components/alterar-vaga/alterar-vaga.component';
+import { AlterarVagaComponent } from './vaga/alterar-vaga/alterar-vaga.component';
 import { CadastroComponent } from './auth/cadastro/cadastro.component';
 import { LinksUteisComponent } from './home/links-uteis/links-uteis.component';
 import { PesquisaVagaComponent } from './vaga/pesquisa-vaga/pesquisa-vaga.component';

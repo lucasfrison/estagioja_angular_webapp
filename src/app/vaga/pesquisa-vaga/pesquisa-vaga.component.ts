@@ -8,7 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-pesquisa-vaga',
   templateUrl: './pesquisa-vaga.component.html',
   styleUrls: ['./pesquisa-vaga.component.css'],
-  imports: [ MatInputModule, MatFormFieldModule, MatIconModule ],
+  imports: [ 
+    MatInputModule, 
+    MatFormFieldModule, 
+    MatIconModule ],
   standalone: true
 })
 

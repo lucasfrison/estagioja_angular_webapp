@@ -19,20 +19,29 @@ import { Vaga } from 'src/app/shared/models/vaga.model';
 import { Turno } from 'src/app/shared/models/turno.model';
 import { Modalidade } from 'src/app/shared/models/modalidade.model';
 import { Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
-
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manter-vaga',
   templateUrl: './manter-vaga.component.html',
   styleUrls: ['./manter-vaga.component.css'],
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, MatListModule, ReactiveFormsModule, MatSnackBarModule ],
+  imports: [
+    CommonModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatSelectModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    FormsModule, 
+    MatListModule, 
+    ReactiveFormsModule],
   standalone: true
-
 })
+
 export class ManterVagaComponent implements OnInit {
 
   cursos: Curso[] = [];
@@ -60,7 +69,6 @@ export class ManterVagaComponent implements OnInit {
     private cursoService: CursoService,
     private competenciaService: CompetenciaService,
     private empresaService: EmpresaService,
-    private snackBar: MatSnackBar
   ) {
     this.meuFormulario = new FormGroup({
       titulo: new FormControl('', Validators.required),
@@ -111,16 +119,20 @@ export class ManterVagaComponent implements OnInit {
     console.log(this.vaga);
     this.vagaService.inserir(this.vaga).subscribe(
       (response) => {
-        this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-success',
-        });
+        Swal.fire({
+          icon: 'success',
+          title: 'ERRO',
+          text: 'Cadastro realizado com sucesso!',
+          timer: 2500
+      })
       },
       (error) => {
-        this.snackBar.open('Erro ao realizar o cadastro!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Erro ao realizar o cadastro!',
+          timer: 2500
+      })
       }
     );
   }
@@ -171,16 +183,20 @@ export class ManterVagaComponent implements OnInit {
     this.popularVaga();
     this.vagaService.alterar(this.vaga).subscribe(
       (response) => {
-        this.snackBar.open(`Vaga número ${this.vaga.id} alterada com sucesso!`, 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-success',
-        });
+        Swal.fire({
+          icon: 'success',
+          title: 'ERRO',
+          text: `Vaga número ${this.vaga.id} alterada com sucesso!`,
+          timer: 2500
+        })
       },
       (error) => {
-        this.snackBar.open('Erro ao realizar a alteração!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Erro ao realizar a alteração!',
+          timer: 2500
+        })
       }
     );
   }

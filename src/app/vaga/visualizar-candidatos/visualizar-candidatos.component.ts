@@ -20,6 +20,7 @@ import { Candidatura } from 'src/app/shared/models/candidatura.model';
   templateUrl: './visualizar-candidatos.component.html',
   styleUrls: ['./visualizar-candidatos.component.css']
 })
+
 export class VisualizarCandidatosComponent implements OnInit{
 
   idVaga!: number;

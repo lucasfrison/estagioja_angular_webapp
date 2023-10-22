@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { CompetenciaService } from './competencia.service';
 
 describe('CompetenciaService', () => {

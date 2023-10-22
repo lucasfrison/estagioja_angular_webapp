@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { VagaService } from 'src/app/services/vaga.service';
@@ -21,7 +20,7 @@ import { PerfilAcesso } from 'src/app/shared/models/perfil-acesso.model';
 import { Turno } from 'src/app/shared/models/turno.model';
 import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.model';
 import { Vaga } from 'src/app/shared/models/vaga.model';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-visualizar-vaga',
@@ -53,7 +52,6 @@ export class VisualizarVagaComponent implements OnInit {
     private route: ActivatedRoute,
     private vagaService: VagaService,
     private empresaService: EmpresaService,
-    private snackBar: MatSnackBar,  
     private router: Router
   ) {}
 
@@ -93,16 +91,20 @@ export class VisualizarVagaComponent implements OnInit {
   registrarCandidatura() {
     this.vagaService.registrarCandidatura(new Candidatura(this.idVaga, this.usuarioLogado?.id!)).subscribe(
       (response) => {
-        this.snackBar.open('Candidatura realizada com sucesso!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-success',
-        });
+        Swal.fire({
+          icon: 'success',
+          title: 'ERRO',
+          text: 'Candidatura realizada com sucesso!',
+          timer: 2500
+        })
       },
       (error) => {
-        this.snackBar.open('Erro ao realizar a candidatura!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Erro ao realizar a candidatura!',
+          timer: 2500
+        }) 
       }
     );
   }
@@ -132,16 +134,20 @@ export class VisualizarVagaComponent implements OnInit {
 
     this.vagaService.alterar(vaga).subscribe(
       (response) => {
-        this.snackBar.open('Vaga finalizada com sucesso!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-success',
-        });
+        Swal.fire({
+          icon: 'success',
+          title: 'ERRO',
+          text: 'Vaga finalizada com sucesso!',
+          timer: 2500
+        })
       },
       (error) => {
-        this.snackBar.open('Erro ao finalizar a vaga!', 'Fechar', {
-          duration: 3000,
-          panelClass: 'snackbar-error',
-        });
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Erro ao finalizar a vaga!',
+          timer: 2500
+        })
       }
     );
   }

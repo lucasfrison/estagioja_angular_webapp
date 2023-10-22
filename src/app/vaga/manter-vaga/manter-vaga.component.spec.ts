@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ManterVagaComponent } from './manter-vaga.component';
 
-import { AlterarVagaComponent } from './alterar-vaga.component';
-
-describe('AlterarVagaComponent', () => {
-  let component: AlterarVagaComponent;
-  let fixture: ComponentFixture<AlterarVagaComponent>;
+describe('ManterVagaComponent', () => {
+  let component: ManterVagaComponent;
+  let fixture: ComponentFixture<ManterVagaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AlterarVagaComponent ]
+      declarations: [ ManterVagaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AlterarVagaComponent);
+    fixture = TestBed.createComponent(ManterVagaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

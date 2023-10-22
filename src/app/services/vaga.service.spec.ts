@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { VagaService } from './vaga.service';
 
 describe('VagaService', () => {
