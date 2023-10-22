@@ -83,15 +83,16 @@ app-links-uteis {
 /**************************************************/
 
 .container-search {
-    height: 111px;
     width: 1200px;
-    border-radius: 10px;
-    background-color: #6638B5;
-    margin: 20px;
-    margin-left: 360px;
-    display: flex;
+    height: 111px;
+    position: absolute;
     align-items: center;
-
+    display: flex;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6638B5;
+    border-radius: 10px;
 }
 
 h5 {
