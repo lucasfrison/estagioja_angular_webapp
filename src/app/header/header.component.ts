@@ -9,9 +9,7 @@ export class HeaderComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {
-        
-    }
+    ngOnInit(): void {}
 
     logout() {
         localStorage.removeItem('login');

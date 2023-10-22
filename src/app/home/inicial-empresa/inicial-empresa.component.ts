@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
   ],
   standalone: true
 })
+
 export class InicialEmpresaComponent {
 
   caminhoDaImagem: string = '../../assets/vaga_image.png';

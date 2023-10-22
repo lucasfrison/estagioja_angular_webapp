@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './visualizar-candidatos.component.html',
   styleUrls: ['./visualizar-candidatos.component.css']
 })
+
 export class VisualizarCandidatosComponent implements OnInit{
 
   caminhoDaImagem: string = '../../assets/vaga_image.png';

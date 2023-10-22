@@ -22,7 +22,6 @@ import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.mod
 import { Vaga } from 'src/app/shared/models/vaga.model';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-visualizar-vaga',
   standalone: true,

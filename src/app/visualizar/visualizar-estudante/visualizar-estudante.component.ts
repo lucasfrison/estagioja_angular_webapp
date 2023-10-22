@@ -14,7 +14,6 @@ import { CepService } from 'src/app/services/cep.service';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
 
-
 @Component({
   selector: 'app-visualizar-estudante',
   templateUrl: './visualizar-estudante.component.html',

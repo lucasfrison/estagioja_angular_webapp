@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./links-uteis.component.css'],
   standalone: true
 })
+
 export class LinksUteisComponent {
 
 }

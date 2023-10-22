@@ -20,13 +20,25 @@ import { CnpjUtils } from 'src/app/shared/utils/CnpjUtils';
 import { CpfUtils } from 'src/app/shared/utils/CpfUtils';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css'],
-  imports: [RouterModule, MatSlideToggleModule, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, ReactiveFormsModule,
-  NgxMaskDirective, NgxMaskPipe],
+  imports: [
+    RouterModule, 
+    MatSlideToggleModule, 
+    CommonModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatSelectModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    FormsModule, 
+    ReactiveFormsModule,
+    NgxMaskDirective, 
+    NgxMaskPipe],
   standalone: true
 })
   

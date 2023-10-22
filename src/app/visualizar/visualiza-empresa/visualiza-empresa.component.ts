@@ -33,6 +33,7 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './visualiza-empresa.component.html',
   styleUrls: ['./visualiza-empresa.component.css']
 })
+
 export class VisualizaEmpresaComponent implements OnInit {
 
   formEmpresa!: FormGroup;

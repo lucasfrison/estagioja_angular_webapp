@@ -27,10 +27,21 @@ import Swal from 'sweetalert2';
   selector: 'app-manter-vaga',
   templateUrl: './manter-vaga.component.html',
   styleUrls: ['./manter-vaga.component.css'],
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatNativeDateModule, FormsModule, MatListModule, ReactiveFormsModule ],
+  imports: [
+    CommonModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatSelectModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    FormsModule, 
+    MatListModule, 
+    ReactiveFormsModule],
   standalone: true
-
 })
+
 export class ManterVagaComponent implements OnInit {
 
   cursos: Curso[] = [];
