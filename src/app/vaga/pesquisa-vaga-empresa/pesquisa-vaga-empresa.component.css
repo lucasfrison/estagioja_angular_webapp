@@ -132,3 +132,12 @@ h5 {
   .align-right {
     margin-left: 790px;
   }
+
+  .vacancies, .recommendations {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+ .vacancies:hover, .recommendations:hover {
+    color: #cee40d;
+ }
