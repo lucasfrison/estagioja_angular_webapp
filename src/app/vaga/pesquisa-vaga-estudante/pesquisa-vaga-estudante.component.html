@@ -15,9 +15,12 @@
                 <img src="{{ vaga.imagemUrl }}" alt="Imagem da Vaga">
             </div>
             <div class="vaga-detalhes">
-                <h2>{{ vaga.titulo }}</h2>
+                <div fxLayout="column">
+                    <h1>{{ vaga.titulo }}</h1>
+                    <h4>Nome Empresa</h4>
+                </div>           
                 <mat-icon class="icone">open_in_new</mat-icon>
-                <button class="btn-desistir" color="warn">Desistir</button>
+                <button mat-button class="button vermelho btn-danger" color="warn">Finalizar</button>
             </div>
         </div>
     </div>
