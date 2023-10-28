@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecuperarSenhaComponent } from './recuperar-senha.component';
+import { RecuperarSenhaComponent } from './RecuperarSenhaComponent';
 
 describe('RecuperarSenhaComponent', () => {
   let component: RecuperarSenhaComponent;

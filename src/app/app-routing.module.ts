@@ -17,6 +17,7 @@ import { VisualizarVagaComponent } from './vaga/visualizar-vaga/visualizar-vaga.
 import { VisualizarCandidatosComponent } from './vaga/visualizar-candidatos/visualizar-candidatos.component';
 import { PesquisaVagaEstudanteComponent } from './vaga/pesquisa-vaga-estudante/pesquisa-vaga-estudante.component';
 import { PesquisaVagaEmpresaComponent } from './vaga/pesquisa-vaga-empresa/pesquisa-vaga-empresa.component';
+import { RecuperarSenhaComponent } from './auth/recuperar-senha/RecuperarSenhaComponent';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'visualizar-vaga/:id', component: VisualizarVagaComponent},
   { path: 'visualizar-candidatos/:idVaga', component: VisualizarCandidatosComponent, canActivate: [AuthGuardEmpresaService]},
   { path: 'pesquisar-vaga-estudante', component: PesquisaVagaEstudanteComponent},
-  { path: 'pesquisar-vaga-empresa', component: PesquisaVagaEmpresaComponent}
+  { path: 'pesquisar-vaga-empresa', component: PesquisaVagaEmpresaComponent},
+  { path: 'recuperar-senha', component: RecuperarSenhaComponent}
 ];
 
 @NgModule({

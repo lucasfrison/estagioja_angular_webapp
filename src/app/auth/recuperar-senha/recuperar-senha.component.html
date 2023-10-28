@@ -1,1 +1,30 @@
-<p>recuperar-senha works!</p>
+<div class="content">
+  <div class="container">
+    <div class="title">
+      <h2>Estágio Já</h2>
+    </div>
+    <p>Preencha o campo para recuperar sua senha</p>
+    <form>
+      <div class="recovery-container">
+        <div class="input-container">
+          <mat-form-field class="full-width">
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              class="input-email"
+              type="email"
+              formControlName="email"
+              placeholder="Digite o e-mail da conta registrada"
+              required
+            />
+            <mat-error ng-show=""> Por favor, preencha o e-mail. </mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-button class="mat-primary custom-button" onclick="">
+          Confirmar
+        </button>
+      </div>
+      <a [routerLink]="['/']">Voltar</a>
+    </form>
+  </div>
+</div>
