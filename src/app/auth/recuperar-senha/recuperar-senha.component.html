@@ -4,7 +4,7 @@
       <h2>Estágio Já</h2>
     </div>
     <p>Preencha o campo para recuperar sua senha</p>
-    <form>
+    <form [formGroup]="form" (submit)="send()">
       <div class="recovery-container">
         <div class="input-container">
           <mat-form-field class="full-width">
@@ -20,7 +20,7 @@
             <mat-error ng-show=""> Por favor, preencha o e-mail. </mat-error>
           </mat-form-field>
         </div>
-        <button mat-button class="mat-primary custom-button" onclick="">
+        <button mat-button class="mat-primary custom-button" onclick="" type="submit">
           Confirmar
         </button>
       </div>

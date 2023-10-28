@@ -77,7 +77,7 @@ p {
 
 a {
   text-align: left;
-  display: block; /* Para garantir que a largura total do contêiner seja usada */
+  display: block;
   margin-left: 30px;
   margin-bottom: 20px;
 }
