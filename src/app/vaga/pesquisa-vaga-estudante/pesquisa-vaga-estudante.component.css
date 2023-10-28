@@ -1,0 +1,151 @@
+.container {
+    width: 1200px;
+    height: 650px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #faf7f7;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+app-pesquisa-vaga {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+app-links-uteis {
+    position: absolute;
+    top: 7%;
+    left: 85%;
+}
+
+.title {
+    font-size: 36px;
+    margin: 20px;
+}
+
+.vaga {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    margin: 10px;
+    padding: 20px;
+    background-color: #FFF;
+}
+
+.vaga-info {
+    display: flex;
+    align-items: center;
+}
+
+.vaga-imagem {
+    margin-right: 20px;
+}
+
+.vaga-detalhes {
+    flex: auto; /* Faz com que os detalhes da vaga ocupem todo o espaço disponível */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icone {
+    cursor: pointer;
+    flex: 1;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    margin-left: 10px;
+    padding-bottom: 50px;
+}
+
+.btn-desistir {
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-desistir:hover {
+    background-color: darkred;
+}
+
+/**************************************************/
+/***************** PESQUISAR VAGA *****************/
+/**************************************************/
+
+.container-search {
+    width: 1200px;
+    height: 111px;
+    position: absolute;
+    align-items: center;
+    display: flex;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6638B5;
+    border-radius: 10px;
+}
+
+h5 {
+    opacity: 0%; /* Necessário para espaçamento do placeholder */ 
+}
+
+.text {
+    color: #FFF;
+    font-size: 30px;
+    margin-left: 8%;
+    margin-top: calc((111px - 27px) / 2);
+    margin-bottom: calc((111px - 27px) / 2);
+}
+
+.custom-input {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    width: 400px; 
+    padding: 8px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 8%;
+  }
+  
+  .icon {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .input-field {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 20px;
+    height: 35px;
+  }
+  
+  .filter-button {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 12px;
+    margin-left: 8px;
+  }
+
+  .vacancies, .recommendations {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+ .vacancies:hover, .recommendations:hover {
+    color: #cee40d;
+ }
