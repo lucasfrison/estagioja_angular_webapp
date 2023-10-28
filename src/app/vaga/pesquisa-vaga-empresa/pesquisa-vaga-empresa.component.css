@@ -8,6 +8,7 @@
     transform: translate(-50%, -50%);
     background-color: #faf7f7;
     border-radius: 10px;
+    padding-top: 1em;
 }
 
 .title {
@@ -125,4 +126,8 @@ h5 {
     border-radius: 20px;
     padding: 8px 12px;
     margin-left: 8px;
+  }
+
+  .align-right {
+    margin-left: 790px;
   }

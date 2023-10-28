@@ -8,7 +8,10 @@
       </div>
 </div>
 <div class="container">
-    <h1 class="title">Vagas Abertas</h1>
+    <span class="title">Vagas Abertas</span>
+    <button mat-button class="button verde btn-approve align-right" color="warn">
+        Nova vaga
+    </button>
     <div class="vaga" *ngFor="let vaga of vagas">
         <div class="vaga-info">
             <div class="vaga-imagem">
@@ -17,7 +20,8 @@
             <div class="vaga-detalhes">
                 <h2>{{ vaga.titulo }}</h2>
                 <mat-icon class="icone">open_in_new</mat-icon>
-                <button class="btn-desistir" color="warn">Desistir</button>
+                <button mat-button class="button roxo btn-approve" color="warn">Exibir Candidatos</button>
+                <button mat-button class="button vermelho btn-danger" color="warn">Finalizar</button>
             </div>
         </div>
     </div>
