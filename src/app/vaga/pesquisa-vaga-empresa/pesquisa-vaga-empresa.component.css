@@ -9,6 +9,7 @@
     background-color: #faf7f7;
     border-radius: 10px;
     padding-top: 1em;
+    overflow: auto;
 }
 
 .title {

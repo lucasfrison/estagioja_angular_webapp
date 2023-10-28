@@ -21,7 +21,9 @@ export class PesquisaVagaEstudanteComponent {
     { id: 1, titulo: 'Estágio Programador .NET ', imagemUrl: this.caminhoDaImagem },
     { id: 2, titulo: 'Programador AngularJS', imagemUrl: this.caminhoDaImagem },
     { id: 3, titulo: 'Desenvolvimento em React', imagemUrl: this.caminhoDaImagem },
-    { id: 4, titulo: 'Vaga Programador Flutter', imagemUrl: this.caminhoDaImagem }
+    { id: 4, titulo: 'Vaga Programador Flutter', imagemUrl: this.caminhoDaImagem },
+    { id: 5, titulo: 'Desenvolvimento em React', imagemUrl: this.caminhoDaImagem },
+    { id: 6, titulo: 'Vaga Programador Flutter', imagemUrl: this.caminhoDaImagem }
   ];
 
 }

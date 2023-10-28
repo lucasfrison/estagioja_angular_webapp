@@ -8,6 +8,7 @@
     transform: translate(-50%, -50%);
     background-color: #faf7f7;
     border-radius: 10px;
+    overflow: auto;
 }
 
 app-pesquisa-vaga {
