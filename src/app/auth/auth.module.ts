@@ -7,9 +7,12 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
 
 @NgModule({
   declarations: [
+  
+    RecuperarSenhaComponent
   ],
   imports: [
     CommonModule,
