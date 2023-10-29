@@ -130,7 +130,7 @@ h5 {
   }
 
   .align-right {
-    margin-left: 773px;
+    margin-left: 790px;
   }
 
   .vacancies, .recommendations {
@@ -139,5 +139,9 @@ h5 {
   }
 
  .vacancies:hover, .recommendations:hover {
+    color: #cee40d;
+ }
+
+ .active {
     color: #cee40d;
  }

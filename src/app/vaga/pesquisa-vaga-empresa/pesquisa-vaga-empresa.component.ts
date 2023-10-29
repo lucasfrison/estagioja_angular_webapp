@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { VagaService } from 'src/app/services/vaga.service';
+import { Vaga } from 'src/app/shared/models/vaga.model';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.model';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pesquisa-vaga-empresa',
@@ -14,17 +20,105 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './pesquisa-vaga-empresa.component.html',
   styleUrls: ['./pesquisa-vaga-empresa.component.css']
 })
-export class PesquisaVagaEmpresaComponent {
-
+export class PesquisaVagaEmpresaComponent implements OnInit {
+  
   caminhoDaImagem: string = '../../assets/vaga_image.png';
+  vagasAbertas: VagaComCandidatos[] = [];
+  vagasFinalizadas: VagaComCandidatos[] = [];
+  login?: AuthResponse;
+  visualizarVagasAbertas: boolean = true;
+  VagasAbertasAtivo: boolean = true;
+  HistoricoAtivo: boolean = false;
 
-  vagas = [
-    { id: 1, titulo: 'Estágio Programador .NET ', imagemUrl: this.caminhoDaImagem },
-    { id: 2, titulo: 'Programador AngularJS', imagemUrl: this.caminhoDaImagem },
-    { id: 3, titulo: 'Desenvolvimento em React', imagemUrl: this.caminhoDaImagem },
-    { id: 4, titulo: 'Vaga Programador Flutter', imagemUrl: this.caminhoDaImagem },
-    { id: 5, titulo: 'Desenvolvimento em React', imagemUrl: this.caminhoDaImagem },
-    { id: 6, titulo: 'Vaga Programador Flutter', imagemUrl: this.caminhoDaImagem }
-  ];
+  constructor(
+    private vagaService: VagaService,
+    private router: Router
+  ) {} 
+
+  ngOnInit(): void {
+    this.login = JSON.parse(localStorage.getItem('login')!);
+    this.buscarVagasPorIdEmpresa();
+  }
+
+  buscarVagasPorIdEmpresa() {
+    this.vagaService.buscarPorIdEmpresa(this.login?.id!).subscribe(
+      response => this.vagasAbertas = response,
+      error => console.error(`Nenhuma vaga encontrada para a empresa!`) 
+    );
+    this.vagaService.buscarHistoricoPorIdEmpresa(this.login?.id!).subscribe(
+      response => this.vagasFinalizadas = response,
+      error => console.error(`Nenhum histórico de vagas encontrado!`) 
+    );
+  }
+
+  cadastrarVaga() {
+    this.router.navigate(['cadastrar-vaga']);
+  }
+
+  visualizarVaga(id: number) {
+    this.router.navigate([`visualizar-vaga/${id}`]);
+  }
+
+  exibirCandidatos(id: number) {
+    this.router.navigate([`visualizar-candidatos/${id}`]);
+  }
+
+  confirmarFinalizarVaga(id: number) {
+    Swal.fire({
+      title: "Deseja finalizar a vaga?",
+      text: "Essa ação não pode ser revertida!",
+      icon: "warning",
+      showCancelButton: true, 
+      confirmButtonColor: "#6638B5",
+      cancelButtonColor: "#CC0000",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.finalizarVaga(id);
+          Swal.fire(
+            "Finalizada",
+            "Vaga finalizada com sucesso!",
+            "success"
+          );
+        }
+      }
+    );
+  }
+
+  finalizarVaga(id: number) {
+    this.vagaService.finalizarVaga(id).subscribe(
+      response => this.buscarVagasPorIdEmpresa()
+    );
+  }
+
+  ativarVisualizarVagasAbertas() {
+    this.VagasAbertasAtivo = true;
+    this.HistoricoAtivo = false;
+  }
+
+  ativarVisualizarHistorico() {
+    this.VagasAbertasAtivo = false;
+    this.HistoricoAtivo = true;
+  }
+
+  pesquisarVaga() {
+    let pesquisa = document.querySelector('#search') as HTMLInputElement;
+    if (!pesquisa.value) {
+      this.buscarVagasPorIdEmpresa();
+      return;
+    }
+    if (this.VagasAbertasAtivo) {
+      this.vagasAbertas = this.vagasAbertas.filter(vaga => vaga.titulo!.toLowerCase().indexOf(pesquisa.value.toLowerCase()) >= 0);
+    } else {
+      this.vagasFinalizadas = this.vagasFinalizadas.filter(vaga => vaga.titulo!.toLowerCase().indexOf(pesquisa.value.toLowerCase()) >= 0);
+    }
+  }
+
+  limparPesquisa() {
+    let pesquisa = document.querySelector('#search') as HTMLInputElement;
+    pesquisa.value = '';
+    this.pesquisarVaga();
+  }
 
 }

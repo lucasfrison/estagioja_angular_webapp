@@ -20,7 +20,8 @@ export class VagaComCandidatos {
         public idEmpresa?: number,
         public idEstudantes?: number[],
         public prazo?: Date,
-        public quantidadeCandidaturas?: number
+        public quantidadeCandidaturas?: number,
+        public nomeEmpresa?: string
     ) {}
 
 }

@@ -21,8 +21,8 @@ export class VagaService {
 
   constructor(private http: HttpClient) { }
 
-  buscarTodos(): Observable<Vaga[]> {
-    return this.http.get<Vaga[]>(this.apiUrl);
+  buscarTodos(): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(this.apiUrl);
   }
 
   inserir(vaga: Vaga): Observable<Vaga> {
@@ -35,6 +35,18 @@ export class VagaService {
 
   buscarPorId(id: number): Observable<Vaga> {
     return this.http.get<Vaga>(`${this.apiUrl}/${id}`);   
+  }
+
+  buscarPorIdEmpresa(id: number): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/by-id-empresa/${id}`);
+  }
+
+  buscarPorIdEstudante(id: number): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/buscar-por-candidato/${id}`);
+  }
+
+  buscarHistoricoPorIdEmpresa(id: number): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/finalizadas-by-id-empresa/${id}`);
   }
 
   buscarVagaComCandidatos(id: number): Observable<VagaComCandidatos> {
@@ -55,6 +67,18 @@ export class VagaService {
 
   rejeitarCandidato(candidatura: Candidatura): Observable<Candidatura> {
     return this.http.post<Candidatura>(`${this.apiUrl}/rejeitar-candidato`, candidatura, {headers: this.headers});
+  }
+
+  finalizarVaga(idVaga: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/finalizar-vaga/${idVaga}`);
+  }
+
+  retirarCandidatura(candidatura: Candidatura): Observable<Candidatura> {
+    return this.http.post<Candidatura>(`${this.apiUrl}/retirar-candidatura`, candidatura, {headers: this.headers});
+  }
+
+  buscarVagasRecomendadas(idEstudante: number): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/recomendadas/${idEstudante}`);
   }
 
 }

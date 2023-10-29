@@ -8,9 +8,9 @@
                 <div class="form-row">
                     <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
                     <mat-list>
-                        <mat-list-item> Nome: [Nome do Estudante] </mat-list-item>
-                        <mat-list-item> Idade: [Idade do Estudante] </mat-list-item>
-                        <mat-list-item> Telefone: [Número de Telefone] </mat-list-item>
+                        <mat-list-item> Nome: {{ estudante.nome }} </mat-list-item>
+                        <mat-list-item> Idade: {{ idade }} </mat-list-item>
+                        <mat-list-item> Telefone: {{ estudante.telefone }} </mat-list-item>
                     </mat-list>
                     <div class="curriculum">
                         <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
@@ -43,22 +43,19 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-phone" appearance="outline">
-                        <mat-label>Telefone</mat-label>
-                        <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
+                        <input matInput formControlName="telefone" [placeholder]="estudante.telefone!" maxlength="14" mask="(00)00000-0000">
                         <mat-error ng-show="formEstudante.telefone.$error.required && formEstudante.telefone.$touched">
                             Por favor, preencha o campo Telefone.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-cep" appearance="outline">
-                        <mat-label>CEP</mat-label>
-                        <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
+                        <input matInput formControlName="cep" [placeholder]="endereco.cep!" (input)="buscarCep()" maxlength="9" mask="00000-000">
                         <mat-error ng-show="formEstudante.cep.$error.required && formEstudante.cep.$touched">
                             Por favor, preencha o campo CEP.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-city" appearance="outline">
-                        <mat-label>Cidade</mat-label>
-                        <input matInput formControlName="cidade" placeholder="Informe a cidade">
+                        <input matInput formControlName="cidade" [placeholder]="endereco.localidade!">
                         <mat-error ng-show="formEstudante.cidade.$error.required && formEstudante.cidade.$touched">
                             Por favor, preencha o campo cidade.
                         </mat-error>
@@ -66,35 +63,30 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-state" appearance="outline">
-                        <mat-label>UF</mat-label>
-                        <input matInput formControlName="estado" placeholder="UF">
+                        <input matInput formControlName="estado" [placeholder]="endereco.uf!">
                         <mat-error ng-show="formEstudante.estado.$error.required && formEstudante.estado.$touched">
                             Preencha.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
-                        <mat-label>Bairro</mat-label>
-                        <input matInput formControlName="bairro" placeholder="Informe o bairro">
+                        <input matInput formControlName="bairro" [placeholder]="endereco.bairro!">
                         <mat-error ng-show="formEstudante.bairro.$error.required && formEstudante.bairro.titulo.$touched">
                             Por favor, preencha o campo bairro.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-address" appearance="outline">
-                        <mat-label>Endereço</mat-label>
-                        <input matInput formControlName="endereco" placeholder="Ex: Rua Alcides Vieira Arcoverde">
+                        <input matInput formControlName="endereco" [placeholder]="endereco.logradouro!">
                         <mat-error ng-show="formEstudante.endereco.$error.required && formEstudante.endereco.$touched">
                             Por favor, informe o endereço.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-number" appearance="outline">
-                        <mat-label>Número</mat-label>
-                        <input matInput formControlName="numero" placeholder="000">
+                        <input matInput formControlName="numero" [placeholder]="endereco.numero!.toString()">
                     </mat-form-field>
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-complement" appearance="outline">
-                        <mat-label>Complemento</mat-label>
-                        <input matInput formControlName="complemento" placeholder="Apartamento, sala, edifício, andar, etc." >
+                        <input matInput formControlName="complemento" [placeholder]="endereco.complemento!" >
                         <mat-error ng-show="formEstudante.complemento.$error.required && formEstudante.complemento.$touched">
                             Por favor, informe o complemento.
                         </mat-error>

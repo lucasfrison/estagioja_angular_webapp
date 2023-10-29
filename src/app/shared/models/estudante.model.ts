@@ -6,7 +6,7 @@ export class Estudante {
         public id?: number,
         public cpf?: string,
         public nome?: string,
-        public dataNascimento?: Date,
+        public dataDeNascimento?: Date,
         public telefone?: string,
         public endereco?: Endereco,
         public email?: string,
