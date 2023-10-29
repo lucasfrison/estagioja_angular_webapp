@@ -37,6 +37,10 @@ export class VagaService {
     return this.http.get<Vaga>(`${this.apiUrl}/${id}`);   
   }
 
+  buscarPorIdEmpresa(id: number): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/by-id-empresa/${id}`);
+  }
+
   buscarVagaComCandidatos(id: number): Observable<VagaComCandidatos> {
     return this.http.get<VagaComCandidatos>(`${this.apiUrl}/visualizar-vaga/${id}`);
   }
@@ -55,6 +59,10 @@ export class VagaService {
 
   rejeitarCandidato(candidatura: Candidatura): Observable<Candidatura> {
     return this.http.post<Candidatura>(`${this.apiUrl}/rejeitar-candidato`, candidatura, {headers: this.headers});
+  }
+
+  finalizarVaga(idVaga: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/finalizar-vaga/${idVaga}`);
   }
 
 }
