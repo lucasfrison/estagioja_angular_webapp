@@ -1,12 +1,12 @@
 <div class="container-search">
-    <p class="text vacancies" (click)="ativarVisualizarVagasAbertas()">Vagas Abertas</p>
-    <p class="text recommendations" (click)="ativarVisualizarHistorico()">Histórico</p>
+    <p class="text vacancies" (click)="ativarVisualizarVagasAbertas()" [ngClass]="{'active': VagasAbertasAtivo}">Vagas Abertas</p>
+    <p class="text recommendations" (click)="ativarVisualizarHistorico()" [ngClass]="{'active': HistoricoAtivo}">Histórico</p>
     <div class="custom-input">
         <input placeholder="  Desenvolvedor .NET" class="input-field">
         <mat-icon class="icon">search</mat-icon>
     </div>
 </div>
-<div class="container" [hidden]="!visualizarVagasAbertas">
+<div class="container" *ngIf="VagasAbertasAtivo">
     <span class="title">Vagas Abertas</span>
     <button mat-button (click)="cadastrarVaga()" class="button verde btn-approve align-right" color="warn">
         Nova vaga
@@ -28,4 +28,4 @@
         </div>
     </div>
 </div>
-<div class="container" [hidden]="visualizarVagasAbertas">Histórico</div>
+<div class="container" *ngIf="HistoricoAtivo">Histórico</div>

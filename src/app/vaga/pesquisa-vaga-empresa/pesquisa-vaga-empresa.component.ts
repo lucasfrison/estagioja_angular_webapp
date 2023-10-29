@@ -26,6 +26,8 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
   vagas: VagaComCandidatos[] = [];
   login?: AuthResponse;
   visualizarVagasAbertas: boolean = true;
+  VagasAbertasAtivo: boolean = true;
+  HistoricoAtivo: boolean = false;
 
   constructor(
     private vagaService: VagaService,
@@ -85,12 +87,14 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
     );
   }
 
-  ativarVisualizarVagasAbertas() {
-    this.visualizarVagasAbertas = true;
-  }
-  
-  ativarVisualizarHistorico() {
-    this.visualizarVagasAbertas = false;
-  }
+ativarVisualizarVagasAbertas() {
+  this.VagasAbertasAtivo = true;
+  this.HistoricoAtivo = false;
+}
+
+ativarVisualizarHistorico() {
+  this.VagasAbertasAtivo = false;
+  this.HistoricoAtivo = true;
+}
 
 }
