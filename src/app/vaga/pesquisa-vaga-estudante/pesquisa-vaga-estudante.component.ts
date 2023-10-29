@@ -140,5 +140,4 @@ export class PesquisaVagaEstudanteComponent {
     this.pesquisarVaga();
   }
 
-
 }

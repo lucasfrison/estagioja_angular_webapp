@@ -10,8 +10,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { CepService } from 'src/app/services/cep.service';
+import { EstudanteService } from 'src/app/services/estudante.service';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
+import { Estudante } from 'src/app/shared/models/estudante.model';
 
 @Component({
   selector: 'app-visualizar-estudante',
@@ -38,15 +41,19 @@ export class VisualizarEstudanteComponent implements OnInit {
   formEstudante!: FormGroup;
   errorService: boolean = false;
   endereco!: Endereco;
-  empresa!: Empresa;
+  estudante!: Estudante;
+  login!: AuthResponse;
+  idade!: number;
 
   ngOnInit(): void {
     this.inicializarFormEstudante();
+    this.buscarEstudante();
     this.endereco = new Endereco();
   }
 
   constructor(
-    private cepService: CepService
+    private cepService: CepService,
+    private estudanteService: EstudanteService
   ) {}
 
   inicializarFormEstudante() {
@@ -89,6 +96,23 @@ export class VisualizarEstudanteComponent implements OnInit {
             }
         )
     }
+  }
+
+  buscarEstudante() {
+    this.login = JSON.parse(localStorage.getItem('login')!);
+    this.estudanteService.buscarPorId(this.login?.id!).subscribe(
+      response => {
+        this.estudante = response
+        this.endereco = this.estudante.endereco!
+        this.idade = this.calcularIdade(this.estudante.dataDeNascimento!)
+      }
+    );
+  }
+
+  calcularIdade(data: Date): number {
+    var diff =(new Date().getTime() - new Date(data).getTime()) / 1000;
+    diff /= (60 * 60 * 24);
+    return Math.abs(Math.round(diff/365.25) - 1);
   }
 
 }
