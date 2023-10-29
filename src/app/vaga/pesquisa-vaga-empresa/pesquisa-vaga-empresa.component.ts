@@ -25,6 +25,7 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
   caminhoDaImagem: string = '../../assets/vaga_image.png';
   vagas: VagaComCandidatos[] = [];
   login?: AuthResponse;
+  visualizarVagasAbertas: boolean = true;
 
   constructor(
     private vagaService: VagaService,
@@ -82,6 +83,14 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
     this.vagaService.finalizarVaga(id).subscribe(
       response => this.buscarVagasPorIdEmpresa()
     );
+  }
+
+  ativarVisualizarVagasAbertas() {
+    this.visualizarVagasAbertas = true;
+  }
+  
+  ativarVisualizarHistorico() {
+    this.visualizarVagasAbertas = false;
   }
 
 }

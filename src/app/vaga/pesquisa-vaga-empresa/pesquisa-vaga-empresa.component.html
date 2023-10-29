@@ -1,12 +1,12 @@
 <div class="container-search">
-    <p class="text vacancies">Vagas Abertas</p>
-    <p class="text recommendations">Histórico</p>
+    <p class="text vacancies" (click)="ativarVisualizarVagasAbertas()">Vagas Abertas</p>
+    <p class="text recommendations" (click)="ativarVisualizarHistorico()">Histórico</p>
     <div class="custom-input">
         <input placeholder="  Desenvolvedor .NET" class="input-field">
         <mat-icon class="icon">search</mat-icon>
     </div>
 </div>
-<div class="container">
+<div class="container" [hidden]="!visualizarVagasAbertas">
     <span class="title">Vagas Abertas</span>
     <button mat-button (click)="cadastrarVaga()" class="button verde btn-approve align-right" color="warn">
         Nova vaga
@@ -28,3 +28,4 @@
         </div>
     </div>
 </div>
+<div class="container" [hidden]="visualizarVagasAbertas">Histórico</div>
