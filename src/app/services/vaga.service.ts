@@ -41,6 +41,10 @@ export class VagaService {
     return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/by-id-empresa/${id}`);
   }
 
+  buscarHistoricoPorIdEmpresa(id: number): Observable<VagaComCandidatos[]> {
+    return this.http.get<VagaComCandidatos[]>(`${this.apiUrl}/finalizadas-by-id-empresa/${id}`);
+  }
+
   buscarVagaComCandidatos(id: number): Observable<VagaComCandidatos> {
     return this.http.get<VagaComCandidatos>(`${this.apiUrl}/visualizar-vaga/${id}`);
   }

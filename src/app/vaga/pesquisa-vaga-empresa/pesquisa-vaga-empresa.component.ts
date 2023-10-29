@@ -23,7 +23,8 @@ import Swal from 'sweetalert2';
 export class PesquisaVagaEmpresaComponent implements OnInit {
   
   caminhoDaImagem: string = '../../assets/vaga_image.png';
-  vagas: VagaComCandidatos[] = [];
+  vagasAbertas: VagaComCandidatos[] = [];
+  vagasFinalizadas: VagaComCandidatos[] = [];
   login?: AuthResponse;
   visualizarVagasAbertas: boolean = true;
   VagasAbertasAtivo: boolean = true;
@@ -41,8 +42,12 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
 
   buscarVagasPorIdEmpresa() {
     this.vagaService.buscarPorIdEmpresa(this.login?.id!).subscribe(
-      response => this.vagas = response,
+      response => this.vagasAbertas = response,
       error => console.error(`Nenhuma vaga encontrada para a empresa!`) 
+    );
+    this.vagaService.buscarHistoricoPorIdEmpresa(this.login?.id!).subscribe(
+      response => this.vagasFinalizadas = response,
+      error => console.error(`Nenhum histórico de vagas encontrado!`) 
     );
   }
 
@@ -87,14 +92,33 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
     );
   }
 
-ativarVisualizarVagasAbertas() {
-  this.VagasAbertasAtivo = true;
-  this.HistoricoAtivo = false;
-}
+  ativarVisualizarVagasAbertas() {
+    this.VagasAbertasAtivo = true;
+    this.HistoricoAtivo = false;
+  }
 
-ativarVisualizarHistorico() {
-  this.VagasAbertasAtivo = false;
-  this.HistoricoAtivo = true;
-}
+  ativarVisualizarHistorico() {
+    this.VagasAbertasAtivo = false;
+    this.HistoricoAtivo = true;
+  }
+
+  pesquisarVaga() {
+    let pesquisa = document.querySelector('#search') as HTMLInputElement;
+    if (!pesquisa.value) {
+      this.buscarVagasPorIdEmpresa();
+      return;
+    }
+    if (this.VagasAbertasAtivo) {
+      this.vagasAbertas = this.vagasAbertas.filter(vaga => vaga.titulo!.toLowerCase().indexOf(pesquisa.value.toLowerCase()) >= 0);
+    } else {
+      this.vagasFinalizadas = this.vagasFinalizadas.filter(vaga => vaga.titulo!.toLowerCase().indexOf(pesquisa.value.toLowerCase()) >= 0);
+    }
+  }
+
+  limparPesquisa() {
+    let pesquisa = document.querySelector('#search') as HTMLInputElement;
+    pesquisa.value = '';
+    this.pesquisarVaga();
+  }
 
 }
