@@ -92,15 +92,15 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
     );
   }
 
-ativarVisualizarVagasAbertas() {
-  this.VagasAbertasAtivo = true;
-  this.HistoricoAtivo = false;
-}
+  ativarVisualizarVagasAbertas() {
+    this.VagasAbertasAtivo = true;
+    this.HistoricoAtivo = false;
+  }
 
-ativarVisualizarHistorico() {
-  this.VagasAbertasAtivo = false;
-  this.HistoricoAtivo = true;
-}
+  ativarVisualizarHistorico() {
+    this.VagasAbertasAtivo = false;
+    this.HistoricoAtivo = true;
+  }
 
   pesquisarVaga() {
     let pesquisa = document.querySelector('#search') as HTMLInputElement;
@@ -108,12 +108,17 @@ ativarVisualizarHistorico() {
       this.buscarVagasPorIdEmpresa();
       return;
     }
-    if (this.visualizarVagasAbertas) {
+    if (this.VagasAbertasAtivo) {
       this.vagasAbertas = this.vagasAbertas.filter(vaga => vaga.titulo!.toLowerCase().indexOf(pesquisa.value.toLowerCase()) >= 0);
     } else {
       this.vagasFinalizadas = this.vagasFinalizadas.filter(vaga => vaga.titulo!.toLowerCase().indexOf(pesquisa.value.toLowerCase()) >= 0);
     }
-    pesquisa.value = '';  
+  }
+
+  limparPesquisa() {
+    let pesquisa = document.querySelector('#search') as HTMLInputElement;
+    pesquisa.value = '';
+    this.pesquisarVaga();
   }
 
 }
