@@ -85,3 +85,26 @@
     margin-bottom: 20px;
     padding: 20px;
 }
+
+@media (max-width: 760px) {
+
+  .content {
+    height: 50em;
+  }
+
+  .title-container {
+    width: 480px;
+    height: 95px;
+  }
+
+  .login-container {
+    width: 480px;
+    height: 450px;
+  }
+
+  .logo {
+    width: 150px;
+    height: 170px;
+  }
+  
+}
