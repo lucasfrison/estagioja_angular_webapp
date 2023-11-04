@@ -120,8 +120,11 @@
             </div>
         </form>
         <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
-        <button mat-button class="custom-button">
+        <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
            Editar
+        </button>
+        <button [hidden]="!editando" mat-button class="custom-button">
+          Confirmar
         </button>
     </div>
 </div>
