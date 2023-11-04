@@ -201,3 +201,101 @@
 .label-student {
     padding-right: 10px;
 }
+
+/* Quando ajustado a janela do browser, dinamicamente troca os valores das classes */
+@media (max-width: 800px) {
+    .content {
+        margin-top: 30em;
+        width: 90%;
+        max-width: 500px;
+        height: auto;
+    }
+
+    .title {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .register {
+        color: #ffffff;
+        font-size: 28px;
+        padding-top: 15px;
+    }
+
+    .register-box {
+        padding: 5px;
+    }
+
+    .profile-type {
+        text-align: center;
+        margin-right: 0px;
+        margin-top: 25px;
+    }
+
+    .mat-input-element-cpf,
+    .mat-input-element-name,
+    .mat-input-element-turn,
+    .mat-input-element-description,
+    .mat-input-element-requirements,
+    .mat-input-element-curse,
+    .mat-input-element-responsibilities,
+    .mat-input-element-profit,
+    .mat-input-element-backpack,
+    .mat-input-element-birth,
+    .mat-input-element-city,
+    .mat-input-element-state,
+    .mat-input-element-phone,
+    .mat-input-element-address,
+    .mat-input-element-complement,
+    .mat-input-element-email,
+    .mat-input-element-password,
+    .mat-input-element-password-confirm,
+    .mat-input-element-cep,
+    .mat-input-element-number,
+    .mat-input-element-neighborhood {
+        width: 99%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .mat-input-element-phone,
+    .mat-input-element-neighborhood,
+    .mat-input-element-password {
+        padding-right: 3px;
+    }
+    
+    .mat-input-element-phone,
+    .mat-input-element-cep,
+    .mat-input-element-number,
+    .mat-input-element-neighborhood,
+    .mat-input-element-password,
+    .mat-input-element-password-confirm {
+        width: 49%;
+    }
+
+    .mat-input-element-city {
+        width: 68%;
+        padding-right: 3px;
+    }
+
+    .mat-input-element-state {
+        width: 30%;
+    }
+
+    .buttons {
+        text-align: center;
+    }
+
+    .custom-button {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .label-company,
+    .label-student {
+        padding-left: 0;
+        padding-right: 0;
+        margin-right: 0;
+        margin-top: 15px;
+    }
+}
