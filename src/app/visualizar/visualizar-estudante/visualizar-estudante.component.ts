@@ -15,6 +15,8 @@ import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
 import { Estudante } from 'src/app/shared/models/estudante.model';
+import { Modalidade } from 'src/app/shared/models/modalidade.model';
+import { Turno } from 'src/app/shared/models/turno.model';
 
 @Component({
   selector: 'app-visualizar-estudante',
@@ -40,15 +42,16 @@ export class VisualizarEstudanteComponent implements OnInit {
 
   formEstudante!: FormGroup;
   errorService: boolean = false;
+  editando: boolean = false;
   endereco!: Endereco;
   estudante!: Estudante;
   login!: AuthResponse;
   idade!: number;
 
   ngOnInit(): void {
-    this.inicializarFormEstudante();
-    this.buscarEstudante();
     this.endereco = new Endereco();
+    this.buscarEstudante();
+    this.inicializarFormEstudante();
   }
 
   constructor(
@@ -58,20 +61,20 @@ export class VisualizarEstudanteComponent implements OnInit {
 
   inicializarFormEstudante() {
     this.formEstudante = new FormGroup({
-        descricao: new FormControl({ value: '', disabled: true }, Validators.required),
-        competencias: new FormControl({ value: '', disabled: true }, Validators.required),
-        curso: new FormControl({ value: '', disabled: true }, Validators.required),
-        modalidade: new FormControl({ value: '', disabled: true }, Validators.required),
-        valorDaBolsa: new FormControl({ value: '', disabled: true }, Validators.required),
-        turno: new FormControl({ value: '', disabled: true }, Validators.required),
-        telefone: new FormControl({ value: '', disabled: true }, Validators.required),
-        cep: new FormControl({ value: '', disabled: true }, Validators.required),
-        cidade: new FormControl({ value: '', disabled: true }, Validators.required),
-        estado: new FormControl({ value: '', disabled: true }, Validators.required),
-        bairro: new FormControl({ value: '', disabled: true }, Validators.required),
-        numero: new FormControl({ value: '', disabled: true }, Validators.required),
-        endereco: new FormControl({ value: '', disabled: true }, Validators.required),
-        complemento: new FormControl({ value: '', disabled: true })
+        descricao: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        competencias: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        curso: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        modalidade: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        valorDaBolsa: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        turno: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        telefone: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        cep: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        cidade: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        estado: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        bairro: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        numero: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        endereco: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        complemento: new FormControl({ value: '', disabled: !this.editando })
     });
   }
 
@@ -113,6 +116,35 @@ export class VisualizarEstudanteComponent implements OnInit {
     var diff =(new Date().getTime() - new Date(data).getTime()) / 1000;
     diff /= (60 * 60 * 24);
     return Math.abs(Math.round(diff/365.25) - 1);
+  }
+
+  alterarStatusEdicao() {
+    this.editando = true;
+    this.inicializarFormEstudante();
+    this.formEstudante.patchValue({
+      //descricao: ,
+      //competencias: ,
+      //curso: ,
+      //modalidade: this.getModalidadeString(Modalidade.PRESENCIAL),
+      //valorDaBolsa: ,
+      //turno: this.getTurnoString(Turno.INTEGRAL),
+      telefone: this.estudante.telefone,
+      cep: this.endereco.cep,
+      cidade: this.endereco.localidade,
+      estado: this.endereco.uf,
+      bairro: this.endereco.bairro,
+      numero: this.endereco.numero,
+      endereco: this.endereco.logradouro,
+      complemento: this.endereco.complemento
+    });
+  }
+
+  getModalidadeString(index: number): string {
+    return Modalidade[index];
+  }
+
+  getTurnoString(index: number): string {
+    return Turno[index];
   }
 
 }
