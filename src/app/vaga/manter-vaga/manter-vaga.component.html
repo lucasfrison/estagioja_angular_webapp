@@ -48,7 +48,7 @@
            <mat-form-field class="mat-input-element-curse" appearance="outline">
               <mat-label>Curso</mat-label>
               <mat-select formControlName="cursos" (selectionChange)="adicionarCurso($event)" multiple placeholder="Curso">
-              <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
+               <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.cursos.$error.required && meuFormulario.cursos.$touched">
                  Por favor, preencha o campo cursos.

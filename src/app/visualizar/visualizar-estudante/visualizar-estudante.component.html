@@ -28,14 +28,18 @@
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-compt" appearance="outline">
                         <mat-label>Competências</mat-label>
-                        <input matInput formControlName="competencias" placeholder="Digite suas competências" maxlength="14" >
+                        <mat-select formControlName="competencias" (selectionChange)="adicionarCompetencias($event)" multiple placeholder="Requisitos">
+                            <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
+                        </mat-select>                        
                         <mat-error ng-show="formEstudante.cpf.$error.required && formEstudante.cpf.$touched">
                             Por favor, preencha suas competências.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-course" appearance="outline">
                         <mat-label>Curso</mat-label>
-                        <input matInput formControlName="curso" placeholder="Digite seu curso">
+                        <mat-select formControlName="curso" (selectionChange)="adicionarCurso($event)" placeholder="Curso">
+                            <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
+                        </mat-select>                        
                         <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
                             Por favor, preencha seu curso.
                         </mat-error>
@@ -110,7 +114,7 @@
                     <mat-form-field class="mat-input-element-turn" appearance="outline">
                         <mat-label>Turno</mat-label>
                         <mat-select formControlName="turno" placeholder="Selecione o turno">
-                        <!--<mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>-->
+                        <mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>
                         </mat-select>
                         <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
                         Preencha o campo turno.

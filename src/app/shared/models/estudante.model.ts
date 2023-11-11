@@ -1,3 +1,5 @@
+import { Competencia } from "./competencia.model";
+import { Curso } from "./curso.model";
 import { Endereco } from "./endereco.model";
 
 export class Estudante {
@@ -10,7 +12,9 @@ export class Estudante {
         public telefone?: string,
         public endereco?: Endereco,
         public email?: string,
-        public senha?: string
+        public senha?: string,
+        public competencias?: Competencia[],
+        public curso?: Curso
     ) {}
 
 }

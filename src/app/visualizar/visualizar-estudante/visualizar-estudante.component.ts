@@ -8,11 +8,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CepService } from 'src/app/services/cep.service';
+import { CompetenciaService } from 'src/app/services/competencia.service';
+import { CursoService } from 'src/app/services/curso.service';
 import { EstudanteService } from 'src/app/services/estudante.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { Competencia } from 'src/app/shared/models/competencia.model';
+import { Curso } from 'src/app/shared/models/curso.model';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
 import { Estudante } from 'src/app/shared/models/estudante.model';
@@ -49,19 +53,45 @@ export class VisualizarEstudanteComponent implements OnInit {
   estudante!: Estudante;
   login!: AuthResponse;
   idade!: number;
+  competencias: Competencia[] = [];
+  cursos: Curso[] = [];
 
-  ngOnInit(): void {
-    this.endereco = new Endereco();
-    this.buscarEstudante();
-    this.inicializarFormEstudante();
-  }
+  modalidades: Modalidade[] = [
+    Modalidade.PRESENCIAL,
+    Modalidade.SEMIPRESENCIAL,
+    Modalidade.REMOTO
+  ];
+
+  turnos: Turno[] = [
+    Turno.MATUTINO,
+    Turno.VESPERTINO,
+    Turno.NOTURNO,
+    Turno.INTEGRAL
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private cepService: CepService,
-    private estudanteService: EstudanteService
+    private estudanteService: EstudanteService,
+    private competenciaService: CompetenciaService,
+    private cursoService: CursoService,
   ) {}
+
+  ngOnInit(): void {
+
+    this.competenciaService.buscarTodos().subscribe(competencias =>{
+      this.competencias = competencias;
+    });
+
+    this.cursoService.buscarTodos().subscribe(cursos =>{
+      this.cursos = cursos;
+    });
+
+    this.endereco = new Endereco();
+    this.buscarEstudante();
+    this.inicializarFormEstudante();
+  }
 
   inicializarFormEstudante() {
     this.formEstudante = new FormGroup({
@@ -149,6 +179,14 @@ export class VisualizarEstudanteComponent implements OnInit {
 
   getTurnoString(index: number): string {
     return Turno[index];
+  }
+
+  adicionarCompetencias(event: MatSelectChange) {
+    this.estudante.competencias = event.value;
+  }
+
+  adicionarCurso(event: MatSelectChange) {
+    this.estudante.curso = event.value;
   }
 
   voltar() {
