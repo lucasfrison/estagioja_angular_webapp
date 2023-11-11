@@ -40,6 +40,7 @@ export class VisualizaEmpresaComponent implements OnInit {
   errorService: boolean = false;
   endereco!: Endereco;
   empresa!: Empresa;
+  editando: boolean = false;
 
   ngOnInit(): void {
     this.inicializarFormEmpresa();
@@ -76,18 +77,36 @@ export class VisualizaEmpresaComponent implements OnInit {
 
   inicializarFormEmpresa() {
     this.formEmpresa = new FormGroup({
-        descricao: new FormControl('', Validators.required),
-        nome: new FormControl('', Validators.required),
-        telefone: new FormControl('', Validators.required),
-        cep: new FormControl('', Validators.required),
-        cidade: new FormControl('', Validators.required),
-        estado: new FormControl('', Validators.required),
-        bairro: new FormControl('', Validators.required),
-        numero: new FormControl('', Validators.required),
-        endereco: new FormControl('', Validators.required),
-        complemento: new FormControl('')
+        descricao: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        nome: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        telefone: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        cep: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        cidade: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        estado: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        bairro: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        numero: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        endereco: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+        complemento: new FormControl({ value: '', disabled: !this.editando })
     });
   } 
+
+  
+  alterarStatusEdicao() {
+    this.editando = true;
+    this.inicializarFormEmpresa();
+    this.formEmpresa.patchValue({
+      descricao: this.empresa.telefone,
+      nome: this.empresa.nomeFantasia,
+      telefone: this.empresa.telefone,
+      cep: this.endereco.cep,
+      cidade: this.endereco.localidade,
+      estado: this.endereco.uf,
+      bairro: this.endereco.bairro,
+      numero: this.endereco.numero,
+      endereco: this.endereco.logradouro,
+      complemento: this.endereco.complemento
+    });
+  }
 
   voltar() {
     this.router.navigate([`/inicial-estudante`]);
