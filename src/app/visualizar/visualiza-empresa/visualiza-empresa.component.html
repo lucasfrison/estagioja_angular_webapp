@@ -9,9 +9,9 @@
                     <div class="form-row">
                         <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
                         <mat-list>
-                            <mat-list-item> Razão Social: [Razão social empresa] </mat-list-item>
-                            <mat-list-item> Nome Fantasia: [Nome fantasia empresa] </mat-list-item>
-                            <mat-list-item> Email </mat-list-item>
+                            <mat-list-item> <b>Razão Social:</b> [Razão social empresa] </mat-list-item>
+                            <mat-list-item> <b>Nome Fantasia:</b> [Nome fantasia empresa] </mat-list-item>
+                            <mat-list-item> <b>Email:</b> </mat-list-item>
                         </mat-list>
                     </div>                        
                 </div>
@@ -92,7 +92,9 @@
                 </div>
             </div>
         </form>
-        <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        <a (click)="voltar()">
+            <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        </a>        
         <button mat-button class="custom-button">
            Editar
         </button>

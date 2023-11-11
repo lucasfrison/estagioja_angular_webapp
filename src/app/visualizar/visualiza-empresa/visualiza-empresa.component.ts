@@ -12,6 +12,7 @@ import { CepService } from 'src/app/services/cep.service';
 import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
 import { MatListModule } from '@angular/material/list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-visualiza-empresa',
@@ -46,7 +47,8 @@ export class VisualizaEmpresaComponent implements OnInit {
   }
 
   constructor(
-    private cepService: CepService 
+    private cepService: CepService,
+    private router: Router
   ) {}
 
   public buscarCep()
@@ -86,5 +88,9 @@ export class VisualizaEmpresaComponent implements OnInit {
         complemento: new FormControl('')
     });
   } 
+
+  voltar() {
+    this.router.navigate([`/inicial-estudante`]);
+  }
 
 }
