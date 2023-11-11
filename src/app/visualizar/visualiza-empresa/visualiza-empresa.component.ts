@@ -13,6 +13,8 @@ import { Empresa } from 'src/app/shared/models/empresa.model';
 import { Endereco } from 'src/app/shared/models/endereco.model';
 import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-visualiza-empresa',
@@ -41,16 +43,31 @@ export class VisualizaEmpresaComponent implements OnInit {
   endereco!: Endereco;
   empresa!: Empresa;
   editando: boolean = false;
+  login!: AuthResponse;
+
 
   ngOnInit(): void {
-    this.inicializarFormEmpresa();
     this.endereco = new Endereco();
+    this.buscarEmpresa();
+    this.inicializarFormEmpresa();
   }
 
   constructor(
     private cepService: CepService,
-    private router: Router
+    private empresaService: EmpresaService,
+    private router: Router,
   ) {}
+
+  buscarEmpresa() {
+    this.login = JSON.parse(localStorage.getItem('login')!);
+    this.empresaService.buscarPorIdLogin(this.login?.id!).subscribe(
+      response => {
+        this.empresa = response
+        this.endereco = this.empresa.endereco!
+        console.log("legal");
+      }
+    );
+  }
 
   public buscarCep()
   {
