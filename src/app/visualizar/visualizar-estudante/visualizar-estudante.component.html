@@ -8,9 +8,9 @@
                 <div class="form-row">
                     <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
                     <mat-list>
-                        <mat-list-item> Nome: {{ estudante.nome }} </mat-list-item>
-                        <mat-list-item> Idade: {{ idade }} </mat-list-item>
-                        <mat-list-item> Telefone: {{ estudante.telefone }} </mat-list-item>
+                        <mat-list-item> <b>Nome:</b> {{ estudante.nome }} </mat-list-item>
+                        <mat-list-item> <b>Idade:</b> {{ idade }} </mat-list-item>
+                        <mat-list-item> <b>Telefone:</b> {{ estudante.telefone }} </mat-list-item>
                     </mat-list>
                     <div class="curriculum">
                         <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
@@ -94,7 +94,7 @@
                     <mat-form-field class="mat-input-element-mod" appearance="outline">
                         <mat-label>Modalidade</mat-label>
                         <mat-select formControlName="modalidade" placeholder="Selecione a modalidade">
-                        <!--<mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>-->
+                        <mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>
                         </mat-select>
                         <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
                         Preencha a modalidade.
@@ -119,7 +119,9 @@
                 </div>
             </div>
         </form>
-        <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        <a (click)="voltar()">
+            <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        </a>
         <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
            Editar
         </button>

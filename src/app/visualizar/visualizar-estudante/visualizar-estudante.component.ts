@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CepService } from 'src/app/services/cep.service';
 import { EstudanteService } from 'src/app/services/estudante.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
@@ -33,7 +34,8 @@ import { Turno } from 'src/app/shared/models/turno.model';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatListModule
+    MatListModule,
+    RouterModule
   ],
   standalone: true
 })
@@ -55,6 +57,8 @@ export class VisualizarEstudanteComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private cepService: CepService,
     private estudanteService: EstudanteService
   ) {}
@@ -145,6 +149,10 @@ export class VisualizarEstudanteComponent implements OnInit {
 
   getTurnoString(index: number): string {
     return Turno[index];
+  }
+
+  voltar() {
+    this.router.navigate([`/inicial-estudante`]);
   }
 
 }
