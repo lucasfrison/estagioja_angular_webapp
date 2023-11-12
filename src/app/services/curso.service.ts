@@ -9,7 +9,7 @@ import { Curso } from "../shared/models/curso.model";
 })
 export class CursoService {
 
-  private apiUrl = 'https://localhost:7238/curso'; // URL da API
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/curso'; // URL da API
 
   constructor(private http: HttpClient) { }
 

@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
 })
 export class AuthService {
 
-    private apiUrl = 'https://localhost:7238/Auth';
+    private apiUrl = 'https://estagiojaapi.azurewebsites.net/Auth';
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'

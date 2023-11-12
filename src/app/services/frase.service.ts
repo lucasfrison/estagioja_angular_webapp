@@ -8,7 +8,7 @@ import { Frase } from '../shared/models/frase.model';
 })
 export class FraseService {
 
-  private apiUrl = 'https://localhost:7238/frase';
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/frase';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'
