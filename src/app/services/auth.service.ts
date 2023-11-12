@@ -10,7 +10,7 @@ import { AuthRequest } from '../shared/models/authRequest.model';
 })
 export class AuthService {
 
-    private apiUrl = 'https://localhost:7238/Auth';
+    private apiUrl = 'https://estagiojaapi.azurewebsites.net/Auth';
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'

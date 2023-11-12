@@ -8,7 +8,7 @@ import { Estudante } from '../shared/models/estudante.model';
   providedIn: 'root'
 })
 export class EstudanteService {
-  private apiUrl = 'https://localhost:7238/estudante';
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/estudante';
   
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'

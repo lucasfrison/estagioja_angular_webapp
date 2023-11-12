@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class EmpresaService {
 
-  private apiUrl = 'https://localhost:7238/empresa';
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/empresa';
   
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'

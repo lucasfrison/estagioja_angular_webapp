@@ -13,7 +13,7 @@ import { EstudanteCandidato } from "../shared/models/estudante-candidato.model";
 
 export class VagaService {
 
-  private apiUrl = 'https://localhost:7238/Vaga'; // URL da API
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/Vaga'; // URL da API
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'

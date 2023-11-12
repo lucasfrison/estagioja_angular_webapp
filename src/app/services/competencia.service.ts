@@ -9,7 +9,7 @@ import { Competencia } from "../shared/models/competencia.model";
 })
 export class CompetenciaService {
 
-  private apiUrl = 'https://localhost:7238/competencia'; // URL da API
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/competencia'; // URL da API
 
   constructor(private http: HttpClient) { }
 
