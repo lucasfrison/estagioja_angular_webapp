@@ -8,9 +8,9 @@
                 <div class="form-row">
                     <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
                     <mat-list>
-                        <mat-list-item> Nome: {{ estudante.nome }} </mat-list-item>
-                        <mat-list-item> Idade: {{ idade }} </mat-list-item>
-                        <mat-list-item> Telefone: {{ estudante.telefone }} </mat-list-item>
+                        <mat-list-item> <b>Nome:</b> {{ estudante.nome }} </mat-list-item>
+                        <mat-list-item> <b>Idade:</b> {{ idade }} </mat-list-item>
+                        <mat-list-item> <b>Telefone:</b> {{ estudante.telefone }} </mat-list-item>
                     </mat-list>
                     <div class="curriculum">
                         <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
@@ -28,14 +28,18 @@
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-compt" appearance="outline">
                         <mat-label>Competências</mat-label>
-                        <input matInput formControlName="competencias" placeholder="Digite suas competências" maxlength="14" >
+                        <mat-select formControlName="competencias" (selectionChange)="adicionarCompetencias($event)" multiple placeholder="Requisitos">
+                            <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
+                        </mat-select>                        
                         <mat-error ng-show="formEstudante.cpf.$error.required && formEstudante.cpf.$touched">
                             Por favor, preencha suas competências.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-course" appearance="outline">
                         <mat-label>Curso</mat-label>
-                        <input matInput formControlName="curso" placeholder="Digite seu curso">
+                        <mat-select formControlName="curso" (selectionChange)="adicionarCurso($event)" placeholder="Curso">
+                            <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
+                        </mat-select>                        
                         <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
                             Por favor, preencha seu curso.
                         </mat-error>
@@ -94,7 +98,7 @@
                     <mat-form-field class="mat-input-element-mod" appearance="outline">
                         <mat-label>Modalidade</mat-label>
                         <mat-select formControlName="modalidade" placeholder="Selecione a modalidade">
-                        <!--<mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>-->
+                        <mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>
                         </mat-select>
                         <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
                         Preencha a modalidade.
@@ -110,7 +114,7 @@
                     <mat-form-field class="mat-input-element-turn" appearance="outline">
                         <mat-label>Turno</mat-label>
                         <mat-select formControlName="turno" placeholder="Selecione o turno">
-                        <!--<mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>-->
+                        <mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>
                         </mat-select>
                         <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
                         Preencha o campo turno.
@@ -119,7 +123,9 @@
                 </div>
             </div>
         </form>
-        <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        <a (click)="voltar()">
+            <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        </a>
         <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
            Editar
         </button>

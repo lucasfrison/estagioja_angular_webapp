@@ -20,4 +20,8 @@ export class EmpresaService {
     return this.http.get<Empresa>(`${this.apiUrl}/empresaId/${id}`);  
   }
 
+  buscarPorIdLogin(id: number): Observable<Empresa> {
+    return this.http.get<Empresa>(`${this.apiUrl}/${id}`);  
+  }
+
 }
