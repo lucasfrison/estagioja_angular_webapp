@@ -119,3 +119,37 @@
 textarea {
     resize: none;
 }
+
+@media screen and (max-width: 920px) {
+    .container {
+        padding-top: 30px;
+        height: auto;
+    }
+
+    .content,
+    .title {
+        width: 35em; 
+    }
+
+    .register {
+        color: #ffffff;
+        font-size: 28px;
+        padding-top: 15px;
+    }
+
+    .register-box {
+        width: 33em;
+    }
+
+    mat-error {
+        font-size: 9px;
+    }
+
+    mat-label {
+        font-size: 12px;
+    }
+
+    input {
+        font-size: 12px;
+    }
+}
