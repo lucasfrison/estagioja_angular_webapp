@@ -13,7 +13,7 @@
               <mat-label>Título</mat-label>
               <input matInput formControlName="titulo" placeholder="Digite o título da vaga">
               <mat-error ng-show="meuFormulario.titulo.$error.required && meuFormulario.titulo.$touched">
-                 Por favor, preencha o campo titulo.
+                 Preencha o campo titulo.
               </mat-error>
            </mat-form-field>
            <mat-form-field class="mat-input-element-turn" appearance="outline">
@@ -22,7 +22,7 @@
               <mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
-                 Por favor, preencha o campo turno.
+                 Preencha o campo turno.
               </mat-error>
            </mat-form-field>
         </div>
@@ -31,7 +31,7 @@
               <mat-label>Descrição da vaga</mat-label>
               <textarea matInput formControlName="descricao" rows="6" placeholder="Digite a descrição da vaga"></textarea>
               <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
-                 Por favor, preencha o campo descrição.
+                 Preencha o campo descrição.
               </mat-error>
            </mat-form-field>
         </div>
@@ -42,7 +42,7 @@
               <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.requisitos.$error.required && meuFormulario.requisitos.$touched">
-                 Por favor, preencha o campo requisitos.
+                 Preencha o campo requisitos.
               </mat-error>
            </mat-form-field>
            <mat-form-field class="mat-input-element-curse" appearance="outline">
@@ -51,7 +51,7 @@
                <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.cursos.$error.required && meuFormulario.cursos.$touched">
-                 Por favor, preencha o campo cursos.
+                 Preencha o campo cursos.
               </mat-error>
            </mat-form-field>
         </div>
@@ -60,14 +60,14 @@
               <mat-label>Responsabilidades</mat-label>
               <textarea matInput formControlName="responsabilidades" placeholder="Digite as responsabilidades"></textarea>
               <mat-error ng-show="meuFormulario.responsabilidades.$error.required && meuFormulario.responsabilidades.$touched">
-                 Por favor, preencha o campo responsabilidades.
+                 Preencha o campo responsabilidades.
               </mat-error>
            </mat-form-field>
            <mat-form-field class="mat-input-element-profit" appearance="outline">
               <mat-label>Benefícios</mat-label>
               <textarea matInput formControlName="beneficios" placeholder="Digite os benefícios"></textarea>
               <mat-error ng-show="meuFormulario.beneficios.$error.required && meuFormulario.beneficios.$touched">
-                 Por favor, preencha o campo beneficios.
+                 Preencha o campo beneficios.
               </mat-error>
            </mat-form-field>
         </div>
@@ -76,7 +76,7 @@
               <mat-label>Bolsa</mat-label>
               <input matInput formControlName="valorDaBolsa" type="number" placeholder="Digite o valor da bolsa">
               <mat-error ng-show="meuFormulario.valorDaBolsa.$error.required && meuFormulario.valorDaBolsa.$touched">
-                 Por favor, preencha o campo bolsa.
+                 Preencha o campo bolsa.
               </mat-error>
            </mat-form-field>
            <mat-form-field class="mat-input-element-validate" appearance="outline">
@@ -85,7 +85,7 @@
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error ng-show="meuFormulario.prazo.$error.required && meuFormulario.prazo.$touched">
-                 Por favor, preencha o campo prazo.
+                 Preencha o campo prazo.
               </mat-error>
            </mat-form-field>
            <mat-form-field class="mat-input-element-mod" appearance="outline">
@@ -94,7 +94,7 @@
               <mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>
               </mat-select>
               <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
-                 Por favor, preencha a modalidade.
+                 Preencha a modalidade.
               </mat-error>
            </mat-form-field>
         </div>
