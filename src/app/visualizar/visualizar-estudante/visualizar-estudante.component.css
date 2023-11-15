@@ -2,12 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 800px;
+    height: auto;
+    margin-top: 15px;
 }
 
 .content {
     width: 910px;
-    height: 750px;
+    height: 840px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -38,9 +39,19 @@
     background-color: #F7F2FA;
     border-radius: 10px;
     position: absolute;
-    top: 385px;
+    top: 430px;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.mat-input-element-picture {
+  padding-left: 15px;
+  width: 350px;
+}
+
+.mat-input-element-resume {
+  padding-left: 65px;
+  width: 350px;
 }
 
 .mat-input-element-compt {
@@ -154,7 +165,6 @@
 .img-curriculum {
     width: 50px;
     height: 40px;
-    margin-right: 20px;
 }
 
 ::ng-deep mat-list mat-list-item {

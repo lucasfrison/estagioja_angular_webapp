@@ -19,4 +19,9 @@ export class EstudanteService {
   buscarPorId(id: number): Observable<Estudante> {
     return this.http.get<Estudante>(`${this.apiUrl}/${id}`);  
   }
+
+  atualizarEstudante(estudante: Estudante) {
+    return this.http.put<Estudante>(this.apiUrl, estudante);
+  }
+
 }

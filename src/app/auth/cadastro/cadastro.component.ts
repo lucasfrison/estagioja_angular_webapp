@@ -196,16 +196,15 @@ export class CadastroComponent implements OnInit{
         let form = this.formEstudante;
         this.endereco.numero = form.get('numero')?.value;
         this.endereco.complemento = form.get('complemento')?.value;
-        this.estudante = new Estudante(
-            0,
-            form.get('cpf')?.value,
-            form.get('nome')?.value,
-            form.get('dataNascimento')?.value,
-            form.get('telefone')?.value,
-            this.endereco,
-            form.get('email')?.value,
-            form.get('senha')?.value
-        );
+        this.estudante = new Estudante();
+
+        this.estudante.cpf = form.get('cpf')?.value;
+        this.estudante.nome = form.get('nome')?.value;
+        this.estudante.dataDeNascimento = form.get('dataNascimento')?.value;
+        this.estudante.telefone = form.get('telefone')?.value;
+        this.estudante.endereco = this.endereco;
+        this.estudante.email = form.get('email')?.value;
+        this.estudante.senha = form.get('senha')?.value;
       
         console.log(this.estudante);
         if (!CpfUtils.validarCPF(this.estudante.cpf!)) {
