@@ -108,7 +108,9 @@ export class VisualizarEstudanteComponent implements OnInit {
         bairro: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
         numero: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
         endereco: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        complemento: new FormControl({ value: '', disabled: !this.editando })
+        complemento: new FormControl({ value: '', disabled: !this.editando }),
+        uploadFoto: new FormControl({ value: '', disabled: true }),
+        uploadCurriculo: new FormControl({ value: '', disabled: true })
     });
   }
 
@@ -143,6 +145,39 @@ export class VisualizarEstudanteComponent implements OnInit {
         this.endereco = this.estudante.endereco!
         this.idade = this.calcularIdade(this.estudante.dataDeNascimento!)
       }
+    );
+  }
+
+  atualizarEstudante() {
+    this.popularEstudante();
+    this.estudanteService.atualizarEstudante(this.estudante).subscribe(
+      response => {
+        console.log("Perfil atualizado com sucesso!");
+      },
+      error => {
+        console.log("Falha ao atualizar o perfil.");
+      }
+    );
+  }
+
+  popularEstudante() {
+    let form = this.formEstudante;
+    let e = this.estudante;
+
+    e.sobre = form.get('descricao')?.value;
+    e.modalidade = form.get('modalidade')?.value;
+    e.valorDaBolsa = form.get('valorDaBolsa')?.value;
+    e.turno = form.get('turno')?.value;
+    e.telefone = form.get('telefone')?.value;
+    
+    e.endereco = new Endereco(
+      form.get('cep')?.value,
+      form.get('cidade')?.value,
+      form.get('estado')?.value,
+      form.get('bairro')?.value,
+      form.get('numero')?.value,
+      form.get('endereco')?.value,
+      form.get('complemento')?.value
     );
   }
 

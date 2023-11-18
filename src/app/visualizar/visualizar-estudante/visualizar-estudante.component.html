@@ -12,14 +12,30 @@
                         <mat-list-item> <b>Idade:</b> {{ idade }} </mat-list-item>
                         <mat-list-item> <b>Telefone:</b> {{ estudante.telefone }} </mat-list-item>
                     </mat-list>
-                    <div class="curriculum">
-                        <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
-                    </div>
+                </div>
+                <div class="form-row">
+                  <mat-form-field class="mat-input-element-picture" appearance="outline">
+                    <button mat-icon-button matPrefix (click)="f_input.click()">
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <input formControlName="uploadFoto" type="text" placeholder="Importe sua foto" readonly matInput/>
+                    <input type="file" hidden #f_input onchange="console.log(f_input.files)"/>
+                  </mat-form-field>
+                  <div class="curriculum">
+                    <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
+                  </div>
+                  <mat-form-field class="mat-input-element-resume" appearance="outline">
+                    <button mat-icon-button matPrefix (click)="c_input.click()">
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <input formControlName="uploadCurriculo" type="text" placeholder="Importe seu currículo" readonly matInput/>
+                    <input type="file" hidden #c_input onchange="console.log(c_input.files)"/>
+                  </mat-form-field>
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-description" appearance="outline">
                         <mat-label>Sobre mim</mat-label>
-                        <textarea matInput formControlName="descricao" rows="6" placeholder="Digite a descrição da vaga"></textarea>
+                        <textarea matInput formControlName="descricao" rows="6" placeholder="Fale sobre você..."></textarea>
                         <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
                         Por favor, preencha o campo descrição.
                         </mat-error>
