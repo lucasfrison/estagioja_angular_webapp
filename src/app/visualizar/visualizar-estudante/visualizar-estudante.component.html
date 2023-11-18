@@ -19,7 +19,7 @@
                       <mat-icon>attach_file</mat-icon>
                     </button>
                     <input formControlName="uploadFoto" type="text" placeholder="Importe sua foto" readonly matInput/>
-                    <input type="file" hidden #f_input onchange="console.log(f_input.files)"/>
+                    <input type="file" hidden #f_input (change)="fotoInputAction($event)" accept=".pdf, .png, .jpg, .jpeg"/>
                   </mat-form-field>
                   <div class="curriculum">
                     <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
@@ -29,7 +29,7 @@
                       <mat-icon>attach_file</mat-icon>
                     </button>
                     <input formControlName="uploadCurriculo" type="text" placeholder="Importe seu currículo" readonly matInput/>
-                    <input type="file" hidden #c_input onchange="console.log(c_input.files)"/>
+                    <input type="file" hidden #c_input (change)="curriculoInputAction($event)" accept=".pdf, .png, .jpg, .jpeg"/>
                   </mat-form-field>
                 </div>
                 <div class="form-row">
@@ -143,7 +143,7 @@
         <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
            Editar
         </button>
-        <button [hidden]="!editando" mat-button class="custom-button">
+        <button [hidden]="!editando" (click)="atualizarEstudante()" mat-button class="custom-button">
           Confirmar
         </button>
     </div>
