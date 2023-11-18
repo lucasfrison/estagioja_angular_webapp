@@ -58,6 +58,9 @@ export class VisualizarEstudanteComponent implements OnInit {
   idade!: number;
   competencias: Competencia[] = [];
   cursos: Curso[] = [];
+  foto!: Blob;
+  curriculo!: Blob;
+  fotoURL: string = '../../../assets/vaga_image.png';
 
   modalidades: Modalidade[] = [
     Modalidade.PRESENCIAL,
@@ -265,6 +268,25 @@ export class VisualizarEstudanteComponent implements OnInit {
       response => {
         this.estudante.linkCurriculo = response.fileName
         console.log(this.estudante.linkCurriculo);
+      }
+    );
+  }
+
+  obterFoto() {
+    if (!this.foto)
+      this.arquivoService.obterArquivo(this.estudante.linkFoto!).subscribe(
+        (response) => {
+          this.foto = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+          this.fotoURL = window.URL.createObjectURL(this.foto);
+        }
+      );
+    return this.fotoURL;
+  }
+
+  obterCurriculo() {
+    this.arquivoService.obterArquivo(this.estudante.linkCurriculo!).subscribe(
+      (response) => {
+        this.curriculo = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
       }
     );
   }

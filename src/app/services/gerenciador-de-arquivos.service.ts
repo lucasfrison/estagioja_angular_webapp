@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Md5 } from 'ts-md5';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,14 @@ export class GerenciadorDeArquivosService {
     const formData: FormData = new FormData();
     formData.append('arquivo', file, hash);
     return this.http.post<any>(`${this.apiUrl}`, formData);
+  }
+
+  obterArquivo(nomeArquivo: string): Observable<HttpResponse<Blob>> {
+    const url = `${this.apiUrl}/${nomeArquivo}`;
+    return this.http.get<Blob>(url, {
+      observe: 'response',
+      responseType: 'blob' as 'json', // responseType 'blob' é usado para indicar que a resposta é um arquivo binário
+    });
   }
 
 }
