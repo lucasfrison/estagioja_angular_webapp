@@ -14,6 +14,7 @@ import { CepService } from 'src/app/services/cep.service';
 import { CompetenciaService } from 'src/app/services/competencia.service';
 import { CursoService } from 'src/app/services/curso.service';
 import { EstudanteService } from 'src/app/services/estudante.service';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { Competencia } from 'src/app/shared/models/competencia.model';
 import { Curso } from 'src/app/shared/models/curso.model';
@@ -22,6 +23,8 @@ import { Endereco } from 'src/app/shared/models/endereco.model';
 import { Estudante } from 'src/app/shared/models/estudante.model';
 import { Modalidade } from 'src/app/shared/models/modalidade.model';
 import { Turno } from 'src/app/shared/models/turno.model';
+import Swal from 'sweetalert2';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-visualizar-estudante',
@@ -55,6 +58,9 @@ export class VisualizarEstudanteComponent implements OnInit {
   idade!: number;
   competencias: Competencia[] = [];
   cursos: Curso[] = [];
+  foto!: Blob;
+  curriculo!: Blob;
+  fotoURL: string = '../../../assets/vaga_image.png';
 
   modalidades: Modalidade[] = [
     Modalidade.PRESENCIAL,
@@ -76,7 +82,8 @@ export class VisualizarEstudanteComponent implements OnInit {
     private estudanteService: EstudanteService,
     private competenciaService: CompetenciaService,
     private cursoService: CursoService,
-    private location: Location
+    private location: Location,
+    private arquivoService: GerenciadorDeArquivosService
   ) {}
 
   ngOnInit(): void {
@@ -152,11 +159,21 @@ export class VisualizarEstudanteComponent implements OnInit {
   atualizarEstudante() {
     this.popularEstudante();
     this.estudanteService.atualizarEstudante(this.estudante).subscribe(
-      response => {
-        console.log("Perfil atualizado com sucesso!");
+      (response) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: `Perfil alterado com sucesso!`,
+          timer: 2500
+        })
       },
-      error => {
-        console.log("Falha ao atualizar o perfil.");
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Erro ao realizar a alteração!',
+          timer: 2500
+        })
       }
     );
   }
@@ -165,11 +182,16 @@ export class VisualizarEstudanteComponent implements OnInit {
     let form = this.formEstudante;
     let e = this.estudante;
 
+    e.id = this.login.id;
+    e.cpf = this.estudante.cpf;
     e.sobre = form.get('descricao')?.value;
     e.modalidade = form.get('modalidade')?.value;
     e.valorDaBolsa = form.get('valorDaBolsa')?.value;
     e.turno = form.get('turno')?.value;
     e.telefone = form.get('telefone')?.value;
+    e.email = this.estudante.email;
+    e.linkCurriculo = this.estudante.linkCurriculo;
+    e.linkFoto = this.estudante.linkFoto;
     
     e.endereco = new Endereco(
       form.get('cep')?.value,
@@ -180,6 +202,9 @@ export class VisualizarEstudanteComponent implements OnInit {
       form.get('endereco')?.value,
       form.get('complemento')?.value
     );
+
+    this.estudante = e;
+    console.log(this.estudante);
   }
 
   calcularIdade(data: Date): number {
@@ -227,6 +252,43 @@ export class VisualizarEstudanteComponent implements OnInit {
 
   voltar() {
     this.location.back();
+  }
+
+  fotoInputAction(fileInputEvent: any) {
+    this.arquivoService.uploadFile(fileInputEvent.target.files[0], this.estudante.nome!, 'png').subscribe(
+      response => {
+        this.estudante.linkFoto = response.fileName
+        console.log(this.estudante.linkFoto);
+      }
+    );
+  }
+
+  curriculoInputAction(fileInputEvent: any) {
+    this.arquivoService.uploadFile(fileInputEvent.target.files[0], this.estudante.nome!, 'pdf').subscribe(
+      response => {
+        this.estudante.linkCurriculo = response.fileName
+        console.log(this.estudante.linkCurriculo);
+      }
+    );
+  }
+
+  obterFoto() {
+    if (!this.foto)
+      this.arquivoService.obterArquivo(this.estudante.linkFoto!).subscribe(
+        (response) => {
+          this.foto = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+          this.fotoURL = window.URL.createObjectURL(this.foto);
+        }
+      );
+    return this.fotoURL;
+  }
+
+  obterCurriculo() {
+    this.arquivoService.obterArquivo(this.estudante.linkCurriculo!).subscribe(
+      (response) => {
+        this.curriculo = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+      }
+    );
   }
 
 }
