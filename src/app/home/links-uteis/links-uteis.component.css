@@ -26,3 +26,11 @@
 .image-ciee {
     text-align: center;
 }
+
+@media (max-width: 800px) {
+
+.container {
+    display: none;
+}
+
+}
