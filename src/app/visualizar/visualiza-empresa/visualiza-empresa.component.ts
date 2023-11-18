@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,6 +56,7 @@ export class VisualizaEmpresaComponent implements OnInit {
     private cepService: CepService,
     private empresaService: EmpresaService,
     private router: Router,
+    private location: Location
   ) {}
 
   buscarEmpresa() {
@@ -126,7 +127,7 @@ export class VisualizaEmpresaComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate([`/inicial-estudante`]);
+    this.location.back();
   }
 
 }

@@ -123,9 +123,7 @@
                 </div>
             </div>
         </form>
-        <a (click)="voltar()">
-            <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
-        </a>
+        <mat-icon (click)="voltar()" class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
         <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
            Editar
         </button>

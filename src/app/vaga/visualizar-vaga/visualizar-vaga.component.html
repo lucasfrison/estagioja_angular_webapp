@@ -7,8 +7,11 @@
                     <mat-list-item> {{ empresa.razaoSocial }} - {{ empresa.endereco?.localidade }}, {{ empresa.endereco?.uf }}({{ getModalidadeString(vaga.modalidade!) }}) </mat-list-item>
                     <mat-list-item> {{ vaga.quantidadeCandidaturas }} candidatura(s) </mat-list-item>
                 </mat-list>
-                <button mat-button class="custom-button" (click)="registrarCandidatura()" *ngIf="isEstudante()">
+                <button mat-button class="custom-button" (click)="registrarCandidatura()" *ngIf="isEstudante() && !isEstudanteInscritoNaVaga()">
                     Candidatar-se
+                </button>
+                <button mat-button class="custom-button btn-desistir" (click)="confirmarDesistirDaVaga(vaga.id!)" *ngIf="isEstudanteInscritoNaVaga()">
+                  Desistir
                 </button>
                 <button mat-button class="custom-button-3" (click)="alterarVaga()" *ngIf="isEmpresa()">
                     Editar vaga
@@ -42,8 +45,8 @@
                     </div>
                 </div>
             </div>
-        <mat-icon class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
-        <button mat-button class="custom-button-5" (click)="finalizarVaga()" *ngIf="isEmpresa()">
+        <mat-icon (click)="voltar()" class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
+        <button mat-button class="custom-button-5" (click)="confirmarFinalizarVaga(vaga.id!)" *ngIf="isEmpresa()">
             Finalizar
         </button>
     </div>

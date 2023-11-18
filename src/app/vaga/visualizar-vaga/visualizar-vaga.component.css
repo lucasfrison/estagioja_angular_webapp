@@ -161,3 +161,11 @@ textarea {
 .list-item {
     font-size: 16px;
 }
+
+.btn-desistir {
+  background-color: red;
+}
+
+.btn-desistir:hover {
+  background-color: darkred;
+}

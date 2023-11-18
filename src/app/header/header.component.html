@@ -6,16 +6,16 @@
         </div>
         <span class="spacer"></span>
         <div class="right-icons">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="abrirPaginaInicial()">
                 <mat-icon aria-hidden="false" aria-label="home_icon" fontIcon="home"></mat-icon>
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="abrirPesquisarVagas()">
                 <mat-icon aria-hidden="false" aria-label="work_icon" fontIcon="work_outline"></mat-icon>
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="abrirNotificacoes()">
                 <mat-icon aria-hidden="false" aria-label="notification_icon" fontIcon="notifications_none"></mat-icon>
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="abrirVisualizarPerfil()">
                 <mat-icon aria-hidden="false" aria-label="account_icon" fontIcon="account_circle"></mat-icon>
             </button>
             <button mat-icon-button (click)="logout()">

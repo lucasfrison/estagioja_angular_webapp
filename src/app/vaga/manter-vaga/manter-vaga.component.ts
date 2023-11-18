@@ -14,7 +14,7 @@ import { Competencia } from 'src/app/shared/models/competencia.model';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list'; 
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Vaga } from 'src/app/shared/models/vaga.model';
 import { Turno } from 'src/app/shared/models/turno.model';
 import { Modalidade } from 'src/app/shared/models/modalidade.model';
@@ -69,6 +69,7 @@ export class ManterVagaComponent implements OnInit {
     private cursoService: CursoService,
     private competenciaService: CompetenciaService,
     private empresaService: EmpresaService,
+    private location: Location
   ) {
     this.meuFormulario = new FormGroup({
       titulo: new FormControl('', Validators.required),
@@ -215,6 +216,10 @@ export class ManterVagaComponent implements OnInit {
 
   getTurnoString(index: number): string {
     return Turno[index];
+  }
+
+  voltar() {
+    this.location.back();
   }
 
 }
