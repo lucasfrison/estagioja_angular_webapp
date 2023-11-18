@@ -140,4 +140,8 @@ export class PesquisaVagaEstudanteComponent {
     this.pesquisarVaga();
   }
 
+  carregarAprovacaoVaga(vaga: VagaComCandidatos): string {
+    return vaga.status === 'CONCLUIDO' ? ' (Aprovado)' : '';
+  }
+
 }

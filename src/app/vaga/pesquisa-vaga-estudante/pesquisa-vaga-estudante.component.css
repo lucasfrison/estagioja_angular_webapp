@@ -145,3 +145,7 @@ h5 {
 .active {
   color: #cee40d;
 }
+
+.span-aprovado {
+  color: green;
+}
