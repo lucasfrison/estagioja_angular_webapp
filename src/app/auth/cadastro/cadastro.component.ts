@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RouterModule } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { AuthService } from 'src/app/services/auth.service';
 import { CepService } from 'src/app/services/cep.service';
@@ -55,7 +55,8 @@ export class CadastroComponent implements OnInit{
 
     constructor(
         private cepService: CepService, 
-        private authService: AuthService    
+        private authService: AuthService,
+        private router: Router    
     ) {}
 
     ngOnInit() {
@@ -179,7 +180,8 @@ export class CadastroComponent implements OnInit{
                 title: 'Sucesso!',
                 text: 'Cadastro realizado com sucesso!',
                 timer: 2500
-            })
+            }),
+            this.router.navigate(['/']);
           },
           (error) => {
             Swal.fire({
@@ -221,10 +223,11 @@ export class CadastroComponent implements OnInit{
         (response) => {
             Swal.fire({
                 icon: 'success',
-                title: 'ERRO',
+                title: 'Sucesso!',
                 text: 'Cadastro realizado com sucesso!',
                 timer: 2500
-            })
+            }),
+            this.router.navigate(['/']);
         },
         (error) => {
             Swal.fire({
