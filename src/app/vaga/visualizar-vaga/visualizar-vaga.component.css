@@ -116,7 +116,7 @@
 }
 
 ::ng-deep mat-list mat-list-item {
-    margin: -8%;
+    margin: -6%;
 }
 
 .right-bottom {
@@ -165,14 +165,6 @@ textarea {
     font-size: 16px;
 }
 
-.btn-desistir {
-  background-color: red;
-}
-
-.btn-desistir:hover {
-  background-color: darkred;
-}
-
 mat-list {
     margin-top: 1em;
 }
@@ -201,12 +193,16 @@ mat-list {
     }
 
     .img-perfil {
-        margin-bottom: 25px;
+        margin-bottom: 0em;
     }
 
     h1 {
         font-size: 21px;
-        margin-top: 25px;
+        margin-top: 0em;
+    }
+
+    mat-list-item {
+        width: 50%;
     }
 }
 
@@ -230,6 +226,17 @@ mat-list {
     .register-box {
         width: 90%;
         margin-top: 100px;
+    }
+
+    .custom-button {
+        position: absolute;
+        top: 1;
+        right: 0;
+        width: 160px;
+        padding: 20px;
+        margin-top: 190px;
+        margin-right: 150px;
+        margin-left: 200px;
     }
 
     .custom-button-3 {
@@ -292,13 +299,17 @@ mat-list {
         margin-left: 2em;
     }
 
+    .custom-button {
+        margin-right: 5em;
+    }
+
     h1 {
         font-size: 20px;
-        margin-top: 25px;
+        margin-top: 0em;
     }
 
     .img-perfil {
-        margin-bottom: 25px;
+        margin-bottom: 0em;
     }
 
     .list-item, .list-title {
