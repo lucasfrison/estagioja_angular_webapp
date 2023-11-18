@@ -183,7 +183,7 @@ mat-list {
         height: 800px;
         width: 80%;
         top: 50%;
-        transform: translate(20%,0%);
+        transform: translate(15%,0%);
     }
 
     .content {
@@ -216,7 +216,7 @@ mat-list {
         height: 800px;
         width: 80%;
         top: 50%;
-        transform: translate(20%,0%);
+        transform: translate(15%,0%);
     }
 
     .content {
@@ -258,7 +258,7 @@ mat-list {
         height: 800px;
         width: 80%;
         top: 50%;
-        transform: translate(20%,0%);
+        transform: translate(15%,0%);
     }
 
     .content {
