@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VagaService } from 'src/app/services/vaga.service';
@@ -33,7 +33,8 @@ export class VisualizarCandidatosComponent implements OnInit{
     private route: ActivatedRoute,
     private vagaService: VagaService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +94,7 @@ export class VisualizarCandidatosComponent implements OnInit{
   }
 
   voltar() {
-    this.router.navigate([`/visualizar-vaga/${this.idVaga}`]);
+    this.location.back();
   }
 
 }

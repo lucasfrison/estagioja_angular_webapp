@@ -29,12 +29,12 @@ const routes: Routes = [
   { path: 'links-perfil', component: LinksPerfilComponent},
   { path: 'inicial-estudante', component: InicialEstudanteComponent, canActivate: [AuthGuardEstudanteService]},
   { path: 'inicial-empresa', component: InicialEmpresaComponent, canActivate: [AuthGuardEmpresaService]},
-  { path: 'visualizar-estudante', component: VisualizarEstudanteComponent},
-  { path: 'visualizar-empresa', component: VisualizaEmpresaComponent},
+  { path: 'visualizar-estudante', component: VisualizarEstudanteComponent, canActivate: [AuthGuardEstudanteService]},
+  { path: 'visualizar-empresa', component: VisualizaEmpresaComponent, canActivate: [AuthGuardEmpresaService]},
   { path: 'visualizar-vaga/:id', component: VisualizarVagaComponent},
   { path: 'visualizar-candidatos/:idVaga', component: VisualizarCandidatosComponent, canActivate: [AuthGuardEmpresaService]},
-  { path: 'pesquisar-vaga-estudante', component: PesquisaVagaEstudanteComponent},
-  { path: 'pesquisar-vaga-empresa', component: PesquisaVagaEmpresaComponent},
+  { path: 'pesquisar-vaga-estudante', component: PesquisaVagaEstudanteComponent, canActivate: [AuthGuardEstudanteService]},
+  { path: 'pesquisar-vaga-empresa', component: PesquisaVagaEmpresaComponent, canActivate: [AuthGuardEmpresaService]},
   { path: 'recuperar-senha', component: RecuperarSenhaComponent}
 ];
 

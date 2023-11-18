@@ -4,6 +4,11 @@ import { LinksPerfilComponent } from '../links-perfil/links-perfil.component';
 import { LinksUteisComponent } from '../links-uteis/links-uteis.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { VagaService } from 'src/app/services/vaga.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.model';
 
 @Component({
   selector: 'app-inicial-empresa',
@@ -22,13 +27,70 @@ import { CommonModule } from '@angular/common';
 export class InicialEmpresaComponent {
 
   caminhoDaImagem: string = '../../assets/vaga_image.png';
+  vagasAbertas: VagaComCandidatos[] = [];
+  login?: AuthResponse;
+  visualizarVagasAbertas: boolean = true;
+  VagasAbertasAtivo: boolean = true;
+  HistoricoAtivo: boolean = false;
 
-  vagas = [
-    { id: 1, titulo: 'Estágio Programador .NET', imagemUrl: this.caminhoDaImagem },
-    { id: 2, titulo: 'Programador AngularJS', imagemUrl: this.caminhoDaImagem },
-    { id: 3, titulo: 'Desenvolvimento em React', imagemUrl: this.caminhoDaImagem },
-    { id: 4, titulo: 'Vaga Programador Flutter', imagemUrl: this.caminhoDaImagem },
-    { id: 5, titulo: 'Estágio Redes de Computadores', imagemUrl: this.caminhoDaImagem }
-  ];
+  constructor(
+    private vagaService: VagaService,
+    private router: Router
+  ) {} 
+
+  ngOnInit(): void {
+    this.login = JSON.parse(localStorage.getItem('login')!);
+    this.buscarVagasPorIdEmpresa();
+  }
+
+  buscarVagasPorIdEmpresa() {
+    this.vagaService.buscarPorIdEmpresa(this.login?.id!).subscribe(
+      response => this.vagasAbertas = response,
+      error => console.error(`Nenhuma vaga encontrada para a empresa!`) 
+    );
+    this.vagasAbertas = this.vagasAbertas.sort((a, b) => a.id! < b.id! ? -1 : 1);
+    this.vagasAbertas = this.vagasAbertas.slice(0, 5);
+  }
+
+  cadastrarVaga() {
+    this.router.navigate(['cadastrar-vaga']);
+  }
+
+  visualizarVaga(id: number) {
+    this.router.navigate([`visualizar-vaga/${id}`]);
+  }
+
+  exibirCandidatos(id: number) {
+    this.router.navigate([`visualizar-candidatos/${id}`]);
+  }
+
+  confirmarFinalizarVaga(id: number) {
+    Swal.fire({
+      title: "Deseja finalizar a vaga?",
+      text: "Essa ação não pode ser revertida!",
+      icon: "warning",
+      showCancelButton: true, 
+      confirmButtonColor: "#6638B5",
+      cancelButtonColor: "#CC0000",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.finalizarVaga(id);
+          Swal.fire(
+            "Finalizada",
+            "Vaga finalizada com sucesso!",
+            "success"
+          );
+        }
+      }
+    );
+  }
+
+  finalizarVaga(id: number) {
+    this.vagaService.finalizarVaga(id).subscribe(
+      response => this.buscarVagasPorIdEmpresa()
+    );
+  }
 
 }

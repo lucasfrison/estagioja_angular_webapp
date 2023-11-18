@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,10 +11,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { EstudanteService } from 'src/app/services/estudante.service';
 import { VagaService } from 'src/app/services/vaga.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { Candidatura } from 'src/app/shared/models/candidatura.model';
 import { Empresa } from 'src/app/shared/models/empresa.model';
+import { Estudante } from 'src/app/shared/models/estudante.model';
 import { Modalidade } from 'src/app/shared/models/modalidade.model';
 import { PerfilAcesso } from 'src/app/shared/models/perfil-acesso.model';
 import { Turno } from 'src/app/shared/models/turno.model';
@@ -47,12 +49,15 @@ export class VisualizarVagaComponent implements OnInit {
   vaga!: VagaComCandidatos;
   usuarioLogado: AuthResponse | undefined;
   empresa!: Empresa;
+  estudante!: Estudante;
 
   constructor(
     private route: ActivatedRoute,
     private vagaService: VagaService,
     private empresaService: EmpresaService,
-    private router: Router
+    private estudanteService: EstudanteService,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -65,6 +70,9 @@ export class VisualizarVagaComponent implements OnInit {
       this.router.navigate(["/"]); 
     this.loginDetectado = this.usuarioLogado!.perfil!;
     this.buscarVaga();
+    this.estudanteService.buscarPorId(this.usuarioLogado?.id!).subscribe(
+      response => this.estudante = response
+    );
   }
 
   buscarVaga() {
@@ -109,46 +117,65 @@ export class VisualizarVagaComponent implements OnInit {
     );
   }
 
+  confirmarDesistirDaVaga(id: number) {
+    Swal.fire({
+      title: "Retirar candidatura",
+      text: "Tem certeza que deseja desistir da vaga?",
+      icon: "warning",
+      showCancelButton: true, 
+      confirmButtonColor: "#6638B5",
+      cancelButtonColor: "#CC0000",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.retirarCandidatura(id);
+          Swal.fire(
+            "Sucesso",
+            "Candidatura retirada com sucesso!",
+            "success"
+          );
+        }
+      }
+    );
+  }
+
+  retirarCandidatura(id: number) {
+    this.vagaService.retirarCandidatura(new Candidatura(id, this.usuarioLogado!.id!)).subscribe(
+      response => console.log(response)
+    );
+  }
+
   alterarVaga() {
     this.router.navigate([`alterar-vaga/${this.idVaga}`]);
   }
 
-  finalizarVaga() {
-    let vaga = new Vaga(
-      this.vaga.id,
-      this.vaga.titulo,
-      this.vaga.descricao,
-      this.vaga.cursos,
-      this.vaga.responsabilidades,
-      this.vaga.beneficios,
-      'FINALIZADO',
-      this.vaga.valorDaBolsa,
-      this.vaga.modalidade,
-      this.vaga.requisitos,
-      this.vaga.prazo,
-      this.vaga.turno,
-      this.vaga.idEmpresa
-    );
-
-    console.log(vaga);
-
-    this.vagaService.alterar(vaga).subscribe(
-      (response) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso!',
-          text: 'Vaga finalizada com sucesso!',
-          timer: 2500
-        })
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'ERRO',
-          text: 'Erro ao finalizar a vaga!',
-          timer: 2500
-        })
+  confirmarFinalizarVaga(id: number) {
+    Swal.fire({
+      title: "Deseja finalizar a vaga?",
+      text: "Essa ação não pode ser revertida!",
+      icon: "warning",
+      showCancelButton: true, 
+      confirmButtonColor: "#6638B5",
+      cancelButtonColor: "#CC0000",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.finalizarVaga(id);
+          Swal.fire(
+            "Finalizada",
+            "Vaga finalizada com sucesso!",
+            "success"
+          );
+        }
       }
+    );
+  }
+
+  finalizarVaga(id: number) {
+    this.vagaService.finalizarVaga(id).subscribe(
+      response => console.log(response)
     );
   }
 
@@ -158,6 +185,10 @@ export class VisualizarVagaComponent implements OnInit {
 
   isEstudante() {
     return this.loginDetectado === 0;
+  }
+
+  isEstudanteInscritoNaVaga() {
+    return this.isEstudante() && this.vaga.idEstudantes?.find(id => id === this.estudante.id);
   }
 
   getModalidadeString(index: number): string {
@@ -170,6 +201,10 @@ export class VisualizarVagaComponent implements OnInit {
 
   visualizarCandidatos() {
     this.router.navigate([`visualizar-candidatos/${this.idVaga}`]);
+  }
+
+  voltar() {
+    this.location.back();
   }
 
 }
