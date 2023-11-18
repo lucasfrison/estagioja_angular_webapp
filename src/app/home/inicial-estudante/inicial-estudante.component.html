@@ -5,12 +5,12 @@
     <div class="vaga" *ngFor="let vaga of vagas">
         <div class="vaga-info">
             <div class="vaga-imagem">
-                <img src="{{ vaga.imagemUrl }}" alt="Imagem da Vaga">
+                <img class="img-vaga" src="{{ vaga.imagemUrl }}" alt="Imagem da Vaga">
             </div>
             <div class="vaga-detalhes">
-                <h2>{{ vaga.titulo }}</h2>
+                <h2 class="vaga-titulo">{{ vaga.titulo }}</h2>
                 <mat-icon class="icone">open_in_new</mat-icon>
-                <button class="btn-desistir" color="warn">Desistir</button>
+                <button class="mat-primary button vermelho btn-reject" color="warn">Desistir</button>
             </div>
         </div>
     </div>

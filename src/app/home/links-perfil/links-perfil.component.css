@@ -4,6 +4,7 @@
     border-radius: 10px;
     background-color: #6638B5;
     margin: 20px;
+    margin-left: 60px;
 }
 
 .menu-item {
@@ -79,12 +80,4 @@
 .text-help {
     float: left;
     padding-top: 5px;
-}
-
-@media (max-width: 800px) {
-
-    .container {
-        display: none;
-    }
-    
 }

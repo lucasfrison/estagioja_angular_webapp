@@ -1,9 +1,9 @@
 .container {
     width: 220px;
-    height: 800px;
+    height: 805px;
     border-radius: 10px;
     background-color: #6638B5;
-    margin: 20px;
+    margin-top: 35px;
 }
 
 .title {
@@ -25,12 +25,4 @@
 
 .image-ciee {
     text-align: center;
-}
-
-@media (max-width: 800px) {
-
-.container {
-    display: none;
-}
-
 }
