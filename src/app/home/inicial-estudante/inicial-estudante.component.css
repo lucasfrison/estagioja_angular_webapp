@@ -185,3 +185,7 @@ app-links-perfil {
     }
     
 }
+
+.span-aprovado {
+  color: green;
+}

@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Candidatura } from 'src/app/shared/models/candidatura.model';
 import Swal from 'sweetalert2';
+import { Vaga } from 'src/app/shared/models/vaga.model';
 
 @Component({
   selector: 'app-visualizar-candidatos',
@@ -28,6 +29,7 @@ export class VisualizarCandidatosComponent implements OnInit{
   idVaga!: number;
   candidatos: EstudanteCandidato[] = [];
   caminhoDaImagem: string = '../../assets/vaga_image.png';
+  vaga!: Vaga;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,11 +44,18 @@ export class VisualizarCandidatosComponent implements OnInit{
         this.idVaga = +params['idVaga']; 
     });
     this.buscarCandidatos();
+    this.buscarVaga();
   }
 
   buscarCandidatos() {
     this.vagaService.buscarCandidatos(this.idVaga).subscribe(
       response => this.candidatos = response
+    );
+  }
+
+  buscarVaga() {
+    this.vagaService.buscarPorId(this.idVaga).subscribe(
+      response => this.vaga = response
     );
   }
 

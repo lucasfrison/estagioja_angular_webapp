@@ -101,4 +101,8 @@ export class InicialEstudanteComponent {
     );
   }
 
+  carregarAprovacaoVaga(vaga: VagaComCandidatos): string {
+    return vaga.status === 'CONCLUIDO' ? ' (Aprovado)' : '';
+  }
+
 }
