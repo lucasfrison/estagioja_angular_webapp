@@ -2,16 +2,20 @@
 <app-links-uteis></app-links-uteis>
 <div class="container">
     <h1 class="title">Últimas vagas cadastradas</h1>
-    <div class="vaga" *ngFor="let vaga of vagas">
-        <div class="vaga-info">
-            <div class="vaga-imagem">
-                <img src="{{ vaga.imagemUrl }}" alt="Imagem da Vaga">
-            </div>
-            <div class="vaga-detalhes">
-                <h2>{{ vaga.titulo }}</h2>
-                <mat-icon class="icone">open_in_new</mat-icon>
-                <button class="btn-desistir" color="warn">Desistir</button>
-            </div>
-        </div>
-    </div>
+    <div class="vaga" *ngFor="let vaga of vagasAbertas">
+      <div class="vaga-info">
+          <div class="vaga-imagem">
+              <img src="{{ caminhoDaImagem }}" alt="Imagem da Vaga">
+          </div>
+          <div class="vaga-detalhes">
+              <div fxLayout="column">
+                  <h1>{{ vaga.titulo }}</h1>
+                  <h4>{{ vaga.nomeEmpresa }}</h4>
+              </div>
+              <mat-icon class="icone" (click)="visualizarVaga(vaga.id!)">open_in_new</mat-icon>
+              <button mat-button (click)="exibirCandidatos(vaga.id!)" class="button roxo btn-approve" color="warn">Exibir Candidatos</button>
+              <button mat-button (click)="confirmarFinalizarVaga(vaga.id!)" class="button vermelho btn-danger" color="warn">Finalizar</button>
+          </div>
+      </div>
+  </div>
 </div>
