@@ -197,7 +197,7 @@
   .aplicant-name {
     display: flex;
     align-items: center;
-    font-size: 14px; /* Reduza o valor do font-size conforme necessário */
+    font-size: 14px;
   }
   
   .aplicant-info {
@@ -205,12 +205,11 @@
   }
 
   .mat-list-item {
-    font-size: 14px; /* Reduza o valor do font-size conforme necessário */
+    font-size: 14px;
   }
   
-  /* Adicione essa regra se quiser diminuir especificamente o tamanho do texto dentro do mat-list-item */
   .mat-list-item p {
-    font-size: 13px; /* Reduza o valor do font-size conforme necessário */
+    font-size: 13px;
   }
 
 }
