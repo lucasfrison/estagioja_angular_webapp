@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
     abrirNotificacoes() {
       this.login = JSON.parse(localStorage.getItem('login')!);
       if (this.login?.perfil == PerfilAcesso.ESTUDANTE)
-        this.router.navigate(['/notificacoes-estudante']);
+        this.router.navigate(['/notificacoes-empresa']);
       else if (this.login?.perfil == PerfilAcesso.EMPRESA)
         this.router.navigate(['/notificacoes-empresa']);
     }

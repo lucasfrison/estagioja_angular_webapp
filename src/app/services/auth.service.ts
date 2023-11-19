@@ -4,6 +4,8 @@ import { Usuario } from '../shared/models/usuario.model';
 import { Estudante } from '../shared/models/estudante.model';
 import { Empresa } from '../shared/models/empresa.model';
 import { AuthRequest } from '../shared/models/authRequest.model';
+import { Notificacao } from '../shared/models/notificacao.model';
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +31,10 @@ export class AuthService {
 
     public logar(auth: AuthRequest) {
         return this.http.post<AuthRequest>(`${this.apiUrl}/logar`, auth, {headers: this.headers});
+    }
+
+    public buscarNotificacoes(idLogin: number): Observable<Notificacao[]> {
+      return this.http.get<Notificacao[]>(`${this.apiUrl}/notificacoes/${idLogin}`);
     }
 
 }
