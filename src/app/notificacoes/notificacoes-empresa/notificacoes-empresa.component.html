@@ -2,23 +2,14 @@
     <h2 class="notification-title">Minhas Notificações</h2>
 </div>
 <div class="container">
-    <div class="notification">
+    <div class="notification" *ngFor="let not of notificacoes">
         <div class="notification-info">
             <div class="notification-details">
                 <mat-list>
                     <mat-list-item>
-                        <a><h2 class="aplicant-name">NOME</h2></a>
-                    </mat-list-item>
-                    <mat-list-item>
-                        <p class="aplicant-info">
-                            local
-                            {{ 25 }}
-                        </p>
+                        <b><span class="aplicant-name">{{ not.mensagem }}</span></b>
                     </mat-list-item>
                 </mat-list>
-                <div class="buttons">
-                    <mat-icon class="icon">open_in_new</mat-icon>
-                </div>
             </div>
         </div>
     </div>
