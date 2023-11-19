@@ -49,9 +49,8 @@
 }
 
 .notification-details {
-  flex: auto; /* Faz com que os detalhes da notificação ocupem todo o espaço disponível */
-  display: flex;
-  align-items: center;
+  flex: auto; 
+  width: 100%;
   justify-content: space-between;
 }
 
@@ -67,6 +66,7 @@
 .aplicant-name {
   display: flex;
   align-items: center;
+  font-size: 16px;
 }
 
 ::-webkit-scrollbar {
@@ -87,11 +87,6 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #6638b5;
-}
-
-::ng-deep mat-list mat-list-item {
-  margin: -15%;
-  margin-top: 1%;
 }
 
 @media (max-width: 1275px) {
