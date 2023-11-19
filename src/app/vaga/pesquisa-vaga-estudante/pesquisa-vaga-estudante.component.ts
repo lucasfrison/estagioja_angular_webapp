@@ -29,6 +29,10 @@ export class PesquisaVagaEstudanteComponent {
   login?: AuthResponse;
   minhasVagasAtivo: boolean = true;
   recomendacoesAtivo: boolean = false;
+  fotosAbertas: Blob[] = [];
+  fotoAbertasURLs: string[] = [];
+  fotosRecomendadas: Blob[] = [];
+  fotosRecomendadasURLs: string[] = [];
 
   constructor(
     private vagaService: VagaService,
@@ -44,7 +48,9 @@ export class PesquisaVagaEstudanteComponent {
 
   buscarVagasPorIdEstudante() {
     this.vagaService.buscarPorIdEstudante(this.login?.id!).subscribe(
-      response => this.minhasVagas = response,
+      response => {
+        this.minhasVagas = response;
+      },
       error => console.error(`Você não está cadastrado em nenhuma vaga!`) 
     );
     this.vagaService.buscarVagasRecomendadas(this.login?.id!).subscribe(
@@ -53,6 +59,7 @@ export class PesquisaVagaEstudanteComponent {
         this.vagasRecomendadas = this.vagasRecomendadas.filter(
           vaga => vaga.status === 'ABERTO'
         );
+        this.obterFotosEmpresas();
       },
       error => console.error(`Nenhum histórico de vagas encontrado!`) 
     );
@@ -146,6 +153,51 @@ export class PesquisaVagaEstudanteComponent {
 
   carregarAprovacaoVaga(vaga: VagaComCandidatos): string {
     return vaga.status === 'CONCLUIDO' ? ' (Aprovado)' : '';
+  }
+
+  obterFotosEmpresas() {
+    for (let vaga of this.minhasVagas) {
+      this.empresaService.buscarPorId(vaga.idEmpresa!).subscribe(
+        response => {
+          //console.log(response);
+          if (response.linkFoto) {
+            this.arquivoService.obterArquivo(response.linkFoto).subscribe(
+              (arquivo) => {
+                //console.log(arquivo);
+                let foto = new Blob([arquivo.body as BlobPart], { type: 'application/octet-stream' });
+                let fotoURL = window.URL.createObjectURL(foto);
+                this.fotosAbertas.push(foto);
+                this.fotoAbertasURLs.push(fotoURL);
+              }
+            )
+          } else {
+            this.fotosAbertas.push(new Blob());
+            this.fotoAbertasURLs.push(this.caminhoDaImagem);
+          }
+        }
+      );
+    }
+    for (let vaga of this.vagasRecomendadas) {
+      this.empresaService.buscarPorId(vaga.idEmpresa!).subscribe(
+        response => {
+          console.log(response);
+          if (response.linkFoto) {
+            this.arquivoService.obterArquivo(response.linkFoto).subscribe(
+              (arquivo) => {
+                console.log(arquivo);
+                let foto = new Blob([arquivo.body as BlobPart], { type: 'application/octet-stream' });
+                let fotoURL = window.URL.createObjectURL(foto);
+                this.fotosRecomendadas.push(foto);
+                this.fotosRecomendadasURLs.push(fotoURL);
+              }
+            )
+          } else {
+            this.fotosRecomendadas.push(new Blob());
+            this.fotosRecomendadasURLs.push(this.caminhoDaImagem);
+          }
+        }
+      );
+    }
   }
 
 }
