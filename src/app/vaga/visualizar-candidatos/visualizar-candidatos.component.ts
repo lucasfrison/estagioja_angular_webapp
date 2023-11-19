@@ -9,6 +9,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Candidatura } from 'src/app/shared/models/candidatura.model';
 import Swal from 'sweetalert2';
 import { Vaga } from 'src/app/shared/models/vaga.model';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
 
 @Component({
   selector: 'app-visualizar-candidatos',
@@ -30,13 +31,16 @@ export class VisualizarCandidatosComponent implements OnInit{
   candidatos: EstudanteCandidato[] = [];
   caminhoDaImagem: string = '../../assets/vaga_image.png';
   vaga!: Vaga;
+  fotosCandidatos: Blob[] = [];
+  linksFotos: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private vagaService: VagaService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private arquivoService: GerenciadorDeArquivosService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +53,10 @@ export class VisualizarCandidatosComponent implements OnInit{
 
   buscarCandidatos() {
     this.vagaService.buscarCandidatos(this.idVaga).subscribe(
-      response => this.candidatos = response
+      response => {
+        this.candidatos = response;
+        this.obterFotosCandidatos();
+      }
     );
   }
 
@@ -106,6 +113,41 @@ export class VisualizarCandidatosComponent implements OnInit{
     var diff =(new Date().getTime() - new Date(data).getTime()) / 1000;
     diff /= (60 * 60 * 24);
     return Math.abs(Math.round(diff/365.25) - 1);
+  }
+
+  obterFotosCandidatos() {
+    for (let candidato of this.candidatos) {
+      if (candidato.linkFoto) {
+        this.arquivoService.obterArquivo(candidato.linkFoto).subscribe(
+          (arquivo) => {
+            //console.log(arquivo);
+            let foto = new Blob([arquivo.body as BlobPart], { type: 'application/octet-stream' });
+            let fotoURL = window.URL.createObjectURL(foto);
+            this.fotosCandidatos.push(foto);
+            this.linksFotos.push(fotoURL);
+          }
+        )
+      } else {
+        this.fotosCandidatos.push(new Blob());
+        this.linksFotos.push(this.caminhoDaImagem);
+      }
+    }
+  }
+
+  baixarCurriculo(estudante: EstudanteCandidato) {
+    if (!estudante.linkCurriculo) return;
+    this.arquivoService.obterArquivo(estudante.linkCurriculo).subscribe(
+      (response) => {
+        const curriculo = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+        const url = window.URL.createObjectURL(curriculo);
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = estudante.linkCurriculo;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    );
   }
 
   voltar() {

@@ -97,6 +97,12 @@
   align-items: center;
 }
 
+.img-vaga {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
   }

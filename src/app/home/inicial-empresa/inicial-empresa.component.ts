@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.model';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-inicial-empresa',
@@ -32,15 +34,20 @@ export class InicialEmpresaComponent {
   visualizarVagasAbertas: boolean = true;
   VagasAbertasAtivo: boolean = true;
   HistoricoAtivo: boolean = false;
+  foto!: Blob;
+  fotoURL: string = '../../../assets/vaga_image.png';
 
   constructor(
     private vagaService: VagaService,
-    private router: Router
+    private router: Router,
+    private empresaService: EmpresaService,
+    private arquivoService: GerenciadorDeArquivosService  
   ) {} 
 
   ngOnInit(): void {
     this.login = JSON.parse(localStorage.getItem('login')!);
     this.buscarVagasPorIdEmpresa();
+    this.obterFoto();
   }
 
   buscarVagasPorIdEmpresa() {
@@ -90,6 +97,21 @@ export class InicialEmpresaComponent {
   finalizarVaga(id: number) {
     this.vagaService.finalizarVaga(id).subscribe(
       response => this.buscarVagasPorIdEmpresa()
+    );
+  }
+
+  obterFoto() {
+    this.empresaService.buscarPorIdLogin(this.login?.id!).subscribe(
+      (empresa) => {
+        if (!empresa.linkFoto) return;
+        if (!this.foto)
+          this.arquivoService.obterArquivo(empresa.linkFoto!).subscribe(
+            (response) => {
+              this.foto = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+              this.fotoURL = window.URL.createObjectURL(this.foto);
+            }
+          )
+      }
     );
   }
 

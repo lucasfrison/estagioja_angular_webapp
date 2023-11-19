@@ -78,6 +78,12 @@ app-links-perfil {
     background-color: darkred;
 }
 
+.img-vaga {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
 @media (max-width: 1775px) {
 
     .container {

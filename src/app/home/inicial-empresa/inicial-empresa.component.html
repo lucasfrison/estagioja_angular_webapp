@@ -5,7 +5,7 @@
     <div class="vaga" *ngFor="let vaga of vagasAbertas">
       <div class="vaga-info">
           <div class="vaga-imagem">
-              <img class="img-vaga" src="{{ caminhoDaImagem }}" alt="Imagem da Vaga">
+              <img class="img-vaga" [src]="fotoURL" alt="Imagem da Vaga">
           </div>
           <div class="vaga-detalhes">
               <div>
