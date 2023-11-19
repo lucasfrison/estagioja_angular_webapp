@@ -147,6 +147,12 @@ h5 {
   color: green;
 }
 
+.img-vaga {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
 @media (max-width: 1275px) {
 
   .container {
