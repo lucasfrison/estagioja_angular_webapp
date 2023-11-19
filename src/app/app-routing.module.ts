@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'pesquisar-vaga-estudante', component: PesquisaVagaEstudanteComponent, canActivate: [AuthGuardEstudanteService]},
   { path: 'pesquisar-vaga-empresa', component: PesquisaVagaEmpresaComponent, canActivate: [AuthGuardEmpresaService]},
   { path: 'recuperar-senha', component: RecuperarSenhaComponent},
-  { path: 'notificacoes-empresa', component: NotificacoesEmpresaComponent}
+  { path: 'notificacoes-empresa', component: NotificacoesEmpresaComponent, canActivate: [AuthGuardEmpresaService]}
 ];
 
 @NgModule({
