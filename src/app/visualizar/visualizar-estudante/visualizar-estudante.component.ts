@@ -59,7 +59,6 @@ export class VisualizarEstudanteComponent implements OnInit {
   competencias: Competencia[] = [];
   cursos: Curso[] = [];
   foto!: Blob;
-  curriculo!: Blob;
   fotoURL: string = '../../../assets/vaga_image.png';
 
   modalidades: Modalidade[] = [
@@ -147,7 +146,7 @@ export class VisualizarEstudanteComponent implements OnInit {
 
   buscarEstudante() {
     this.login = JSON.parse(localStorage.getItem('login')!);
-    this.estudanteService.buscarPorId(this.login?.id!).subscribe(
+    this.estudanteService.buscarDadosPerfilPorId(this.login?.id!).subscribe(
       response => {
         this.estudante = response
         this.endereco = this.estudante.endereco!
@@ -165,7 +164,8 @@ export class VisualizarEstudanteComponent implements OnInit {
           title: 'Sucesso!',
           text: `Perfil alterado com sucesso!`,
           timer: 2500
-        })
+        });
+        this.buscarEstudante();
       },
       (error) => {
         Swal.fire({
@@ -185,9 +185,9 @@ export class VisualizarEstudanteComponent implements OnInit {
     e.id = this.login.id;
     e.cpf = this.estudante.cpf;
     e.sobre = form.get('descricao')?.value;
-    e.modalidade = form.get('modalidade')?.value;
+    e.modalidade = form.get('modalidade')?.value ?? this.estudante.modalidade;
     e.valorDaBolsa = form.get('valorDaBolsa')?.value;
-    e.turno = form.get('turno')?.value;
+    e.turno = form.get('turno')?.value ?? this.estudante.turno;
     e.telefone = form.get('telefone')?.value;
     e.email = this.estudante.email;
     e.linkCurriculo = this.estudante.linkCurriculo;
@@ -216,13 +216,14 @@ export class VisualizarEstudanteComponent implements OnInit {
   alterarStatusEdicao() {
     this.editando = true;
     this.inicializarFormEstudante();
+    console.log(this.estudante);
     this.formEstudante.patchValue({
-      //descricao: ,
-      //competencias: ,
-      //curso: ,
-      //modalidade: this.getModalidadeString(Modalidade.PRESENCIAL),
-      //valorDaBolsa: ,
-      //turno: this.getTurnoString(Turno.INTEGRAL),
+      descricao: this.estudante.sobre,
+      //competencias: this.estudante.competencias,
+      //curso: this.estudante.curso,
+      modalidade: this.estudante.modalidade,
+      valorDaBolsa: this.estudante.valorDaBolsa,
+      turno: this.estudante.turno,
       telefone: this.estudante.telefone,
       cep: this.endereco.cep,
       cidade: this.endereco.localidade,
@@ -234,12 +235,17 @@ export class VisualizarEstudanteComponent implements OnInit {
     });
   }
 
+  alterarStatusVisualizacao() {
+    this.editando = false;
+    this.inicializarFormEstudante();
+  }
+
   getModalidadeString(index: number): string {
     return Modalidade[index];
   }
 
   getTurnoString(index: number): string {
-    return Turno[index];
+      return Turno[index];
   }
 
   adicionarCompetencias(event: MatSelectChange) {
@@ -273,6 +279,7 @@ export class VisualizarEstudanteComponent implements OnInit {
   }
 
   obterFoto() {
+    if (!this.estudante.linkFoto!) return this.fotoURL;
     if (!this.foto)
       this.arquivoService.obterArquivo(this.estudante.linkFoto!).subscribe(
         (response) => {
@@ -283,12 +290,29 @@ export class VisualizarEstudanteComponent implements OnInit {
     return this.fotoURL;
   }
 
-  obterCurriculo() {
+  baixarCurriculo() {
+    if (!this.estudante.linkCurriculo) return;
     this.arquivoService.obterArquivo(this.estudante.linkCurriculo!).subscribe(
       (response) => {
-        this.curriculo = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+        const curriculo = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+        const url = window.URL.createObjectURL(curriculo);
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = this.estudante.linkCurriculo!;
+        a.click();
+        window.URL.revokeObjectURL(url);
       }
     );
+  }
+
+  getPlaceholderCompetencias(): string {
+    if (!this.estudante.competencias) return 'Competências';
+    let competenciasStr = '';
+    this.estudante.competencias.forEach(
+      comp => competenciasStr += `${comp.descricao}; `
+    );
+    return competenciasStr;
   }
 
 }

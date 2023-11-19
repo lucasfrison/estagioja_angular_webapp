@@ -102,6 +102,12 @@ export class VisualizarCandidatosComponent implements OnInit{
     );
   }
 
+  calcularIdade(data: Date): number {
+    var diff =(new Date().getTime() - new Date(data).getTime()) / 1000;
+    diff /= (60 * 60 * 24);
+    return Math.abs(Math.round(diff/365.25) - 1);
+  }
+
   voltar() {
     this.location.back();
   }

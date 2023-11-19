@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { Candidatura } from 'src/app/shared/models/candidatura.model';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
 
 @Component({
     selector: 'app-pesquisa-vaga-estudante',
@@ -30,7 +32,9 @@ export class PesquisaVagaEstudanteComponent {
 
   constructor(
     private vagaService: VagaService,
-    private router: Router
+    private router: Router,
+    private empresaService: EmpresaService,
+    private arquivoService: GerenciadorDeArquivosService
   ) {} 
 
   ngOnInit(): void {

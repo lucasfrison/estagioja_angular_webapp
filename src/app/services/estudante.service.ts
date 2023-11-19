@@ -20,6 +20,10 @@ export class EstudanteService {
     return this.http.get<Estudante>(`${this.apiUrl}/${id}`);  
   }
 
+  buscarDadosPerfilPorId(id: number): Observable<Estudante> {
+    return this.http.get<Estudante>(`${this.apiUrl}/perfil/${id}`);  
+  }
+
   atualizarEstudante(estudante: Estudante) {
     return this.http.put<Estudante>(this.apiUrl, estudante);
   }

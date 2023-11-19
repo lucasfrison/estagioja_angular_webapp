@@ -15,27 +15,26 @@
                 </div>
                 <div class="form-row">
                   <mat-form-field class="mat-input-element-picture" appearance="outline">
-                    <button mat-icon-button matPrefix (click)="f_input.click()">
+                    <button [disabled]="!editando" mat-icon-button matPrefix (click)="f_input.click()">
                       <mat-icon>attach_file</mat-icon>
                     </button>
-                    <input formControlName="uploadFoto" type="text" placeholder="Importe sua foto" readonly matInput/>
+                    <input formControlName="uploadFoto" type="text" [placeholder]="estudante.linkFoto ?? 'Importe sua foto'" readonly matInput/>
                     <input type="file" hidden #f_input (change)="fotoInputAction($event)" accept=".pdf, .png, .jpg, .jpeg"/>
                   </mat-form-field>
                   <div class="curriculum">
-                    <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" alt="Imagem do currículo">
+                    <img class="img-curriculum right-bottom" src="../../../assets/curriculumIMG.png" (click)="baixarCurriculo()" alt="Imagem do currículo">
                   </div>
                   <mat-form-field class="mat-input-element-resume" appearance="outline">
                     <button mat-icon-button matPrefix (click)="c_input.click()">
                       <mat-icon>attach_file</mat-icon>
                     </button>
-                    <input formControlName="uploadCurriculo" type="text" placeholder="Importe seu currículo" readonly matInput/>
+                    <input formControlName="uploadCurriculo" type="text" [placeholder]="estudante.linkCurriculo ?? 'Importe seu currículo'" readonly matInput/>
                     <input type="file" hidden #c_input (change)="curriculoInputAction($event)" accept=".pdf, .png, .jpg, .jpeg"/>
                   </mat-form-field>
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-description" appearance="outline">
-                        <mat-label>Sobre mim</mat-label>
-                        <textarea matInput formControlName="descricao" rows="6" placeholder="Fale sobre você..."></textarea>
+                        <textarea matInput formControlName="descricao" rows="6" [placeholder]="estudante.sobre ?? 'Sobre mim'"></textarea>
                         <mat-error ng-show="meuFormulario.descricao.$error.required && meuFormulario.descricao.$touched">
                         Por favor, preencha o campo descrição.
                         </mat-error>
@@ -43,8 +42,7 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-compt" appearance="outline">
-                        <mat-label>Competências</mat-label>
-                        <mat-select formControlName="competencias" (selectionChange)="adicionarCompetencias($event)" multiple placeholder="Requisitos">
+                        <mat-select formControlName="competencias" (selectionChange)="adicionarCompetencias($event)" multiple [placeholder]="getPlaceholderCompetencias()">
                             <mat-option *ngFor="let item of competencias" [value]="item">{{ item.descricao }}</mat-option>
                         </mat-select>                        
                         <mat-error ng-show="formEstudante.cpf.$error.required && formEstudante.cpf.$touched">
@@ -52,8 +50,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-course" appearance="outline">
-                        <mat-label>Curso</mat-label>
-                        <mat-select formControlName="curso" (selectionChange)="adicionarCurso($event)" placeholder="Curso">
+                        <mat-select formControlName="curso" (selectionChange)="adicionarCurso($event)" [placeholder]="estudante.curso?.descricao ?? 'Curso'">
                             <mat-option *ngFor="let item of cursos" [value]="item">{{ item.descricao }} - {{getTurnoString(item.turno)}}</mat-option>
                         </mat-select>                        
                         <mat-error ng-show="formEstudante.nome.$error.required && formEstudante.cpf.$touched">
@@ -106,14 +103,13 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-complement" appearance="outline">
-                        <input matInput formControlName="complemento" [placeholder]="endereco.complemento!" >
+                        <input matInput formControlName="complemento" [placeholder]="endereco.complemento ?? 'Complemento'" >
                         <mat-error ng-show="formEstudante.complemento.$error.required && formEstudante.complemento.$touched">
                             Por favor, informe o complemento.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-mod" appearance="outline">
-                        <mat-label>Modalidade</mat-label>
-                        <mat-select formControlName="modalidade" placeholder="Selecione a modalidade">
+                        <mat-select formControlName="modalidade" [placeholder]="estudante.modalidade ? getModalidadeString(estudante.modalidade) : 'Modalidade preferida'">
                         <mat-option *ngFor="let item of modalidades; let i = index" [value]="item">{{ getModalidadeString(i) }}</mat-option>
                         </mat-select>
                         <mat-error ng-show="meuFormulario.modalidade.$error.required && meuFormulario.modalidade.$touched">
@@ -121,15 +117,13 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-backpack" appearance="outline">
-                        <mat-label>Bolsa</mat-label>
-                        <input matInput formControlName="valorDaBolsa" type="number" placeholder="Digite o valor da bolsa">
+                        <input matInput formControlName="valorDaBolsa" type="number" [placeholder]="estudante.valorDaBolsa?.toString() ?? 'Remuneração desejada'">
                         <mat-error ng-show="meuFormulario.valorDaBolsa.$error.required && meuFormulario.valorDaBolsa.$touched">
                         Preencha o campo bolsa.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-turn" appearance="outline">
-                        <mat-label>Turno</mat-label>
-                        <mat-select formControlName="turno" placeholder="Selecione o turno">
+                        <mat-select formControlName="turno" [placeholder]="estudante.turno ? getTurnoString(estudante.turno) : 'Turno disponível'">
                         <mat-option *ngFor="let item of turnos; let i = index" [value]="item">{{ getTurnoString(i) }}</mat-option>
                         </mat-select>
                         <mat-error ng-show="meuFormulario.turno.$error.required && meuFormulario.turno.$touched">
@@ -142,6 +136,9 @@
         <mat-icon (click)="voltar()" class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>
         <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
            Editar
+        </button>
+        <button [hidden]="!editando" (click)="alterarStatusVisualizacao()" mat-button class="custom-button-3">
+          Desabilitar edição
         </button>
         <button [hidden]="!editando" (click)="atualizarEstudante()" mat-button class="custom-button">
           Confirmar
