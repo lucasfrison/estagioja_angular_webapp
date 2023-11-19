@@ -4,7 +4,8 @@
                 <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
                 <mat-list>
                     <mat-list-item> <h1>{{ vaga.titulo }}</h1> </mat-list-item>
-                    <mat-list-item> {{ empresa.razaoSocial }} - {{ empresa.endereco?.localidade }}, {{ empresa.endereco?.uf }}({{ getModalidadeString(vaga.modalidade!) }}) </mat-list-item>
+                    <mat-list-item> {{ empresa.razaoSocial }} - {{ empresa.endereco?.localidade }}, {{ empresa.endereco?.uf }} </mat-list-item>
+                    <mat-list-item> {{ getModalidadeString(vaga.modalidade!) }} </mat-list-item>
                     <mat-list-item> {{ vaga.quantidadeCandidaturas }} candidatura(s) </mat-list-item>
                 </mat-list>
                 <button mat-button class="custom-button" (click)="registrarCandidatura()" *ngIf="isEstudante() && !isEstudanteInscritoNaVaga()">
