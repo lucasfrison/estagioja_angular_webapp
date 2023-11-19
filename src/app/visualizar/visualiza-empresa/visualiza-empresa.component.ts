@@ -15,6 +15,8 @@ import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-visualiza-empresa',
@@ -44,7 +46,8 @@ export class VisualizaEmpresaComponent implements OnInit {
   empresa!: Empresa;
   editando: boolean = false;
   login!: AuthResponse;
-
+  foto!: Blob;
+  fotoURL: string = '../../../assets/vaga_image.png';
 
   ngOnInit(): void {
     this.endereco = new Endereco();
@@ -56,18 +59,70 @@ export class VisualizaEmpresaComponent implements OnInit {
     private cepService: CepService,
     private empresaService: EmpresaService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private arquivoService: GerenciadorDeArquivosService
   ) {}
 
   buscarEmpresa() {
     this.login = JSON.parse(localStorage.getItem('login')!);
-    this.empresaService.buscarPorIdLogin(this.login?.id!).subscribe(
+    this.empresaService.buscarPerfilPorIdLogin(this.login?.id!).subscribe(
       response => {
         this.empresa = response
         this.endereco = this.empresa.endereco!
-        console.log("legal");
+        console.log(this.empresa);
       }
     );
+  }
+
+  atualizarEmpresa() {
+    this.popularEmpresa();
+    this.empresaService.atualizarEmpresa(this.empresa).subscribe(
+      (response) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: `Perfil alterado com sucesso!`,
+          timer: 2500
+        });
+        this.buscarEmpresa();
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'ERRO',
+          text: 'Erro ao realizar a alteração!',
+          timer: 2500
+        })
+      }
+    );
+  }
+
+  popularEmpresa() {
+    let form = this.formEmpresa;
+    let e = this.empresa;
+
+    e.id = this.login.id;
+    e.cnpj = this.empresa.cnpj;
+    e.razaoSocial = this.empresa.razaoSocial;
+    e.nomeFantasia = this.empresa.nomeFantasia;
+    e.descricao = form.get('descricao')?.value;
+    e.telefone = form.get('telefone')?.value;
+    e.email = this.empresa.email;
+    e.linkFoto = this.empresa.linkFoto;
+    e.ramoDeAtuacao = form.get('ramoDeAtuacao')?.value;
+    
+    e.endereco = new Endereco(
+      form.get('cep')?.value,
+      form.get('cidade')?.value,
+      form.get('estado')?.value,
+      form.get('bairro')?.value,
+      form.get('numero')?.value,
+      form.get('endereco')?.value,
+      form.get('complemento')?.value
+    );
+
+    this.empresa = e;
+    console.log(this.empresa);
   }
 
   public buscarCep()
@@ -95,16 +150,17 @@ export class VisualizaEmpresaComponent implements OnInit {
 
   inicializarFormEmpresa() {
     this.formEmpresa = new FormGroup({
-        descricao: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        nome: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        telefone: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        cep: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        cidade: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        estado: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        bairro: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        numero: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        endereco: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
-        complemento: new FormControl({ value: '', disabled: !this.editando })
+      descricao: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      ramoDeAtuacao: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      telefone: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      cep: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      cidade: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      estado: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      bairro: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      numero: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      endereco: new FormControl({ value: '', disabled: !this.editando }, Validators.required),
+      complemento: new FormControl({ value: '', disabled: !this.editando }),
+      uploadFoto: new FormControl({ value: '', disabled: true })
     });
   } 
 
@@ -113,8 +169,8 @@ export class VisualizaEmpresaComponent implements OnInit {
     this.editando = true;
     this.inicializarFormEmpresa();
     this.formEmpresa.patchValue({
-      descricao: this.empresa.telefone,
-      nome: this.empresa.nomeFantasia,
+      descricao: this.empresa.descricao,
+      ramoDeAtuacao: this.empresa.ramoDeAtuacao,
       telefone: this.empresa.telefone,
       cep: this.endereco.cep,
       cidade: this.endereco.localidade,
@@ -124,6 +180,32 @@ export class VisualizaEmpresaComponent implements OnInit {
       endereco: this.endereco.logradouro,
       complemento: this.endereco.complemento
     });
+  }
+
+  alterarStatusVisualizacao() {
+    this.editando = false;
+    this.inicializarFormEmpresa();
+  }
+
+  obterFoto() {
+    if (!this.empresa.linkFoto!) return this.fotoURL;
+    if (!this.foto)
+      this.arquivoService.obterArquivo(this.empresa.linkFoto!).subscribe(
+        (response) => {
+          this.foto = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+          this.fotoURL = window.URL.createObjectURL(this.foto);
+        }
+      );
+    return this.fotoURL;
+  }
+
+  fotoInputAction(fileInputEvent: any) {
+    this.arquivoService.uploadFile(fileInputEvent.target.files[0], this.empresa.nomeFantasia!, 'png').subscribe(
+      response => {
+        this.empresa.linkFoto = response.fileName
+        console.log(this.empresa.linkFoto);
+      }
+    );
   }
 
   voltar() {

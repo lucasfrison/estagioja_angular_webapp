@@ -13,14 +13,12 @@
             <div class="vaga-detalhes">
                 <mat-list>
                     <mat-list-item>
-                        <a href="visualizar-estudante">
-                            <h2 class="aplicant-name">{{ candidato.nome }}</h2>
-                        </a>
+                        <h2 class="aplicant-name">{{ candidato.nome }}</h2>
                     </mat-list-item>
                     <mat-list-item>
                         <p class="aplicant-info">
                             {{ candidato.endereco.localidade }} - {{ candidato.endereco.uf }},
-                            {{ 25 }}
+                            {{ calcularIdade(candidato.dataDeNascimento) }}
                         </p>
                     </mat-list-item>
                 </mat-list>

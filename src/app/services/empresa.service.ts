@@ -24,4 +24,12 @@ export class EmpresaService {
     return this.http.get<Empresa>(`${this.apiUrl}/${id}`);  
   }
 
+  buscarPerfilPorIdLogin(id: number): Observable<Empresa> {
+    return this.http.get<Empresa>(`${this.apiUrl}/perfil/${id}`);  
+  }
+
+  atualizarEmpresa(empresa: Empresa) {
+    return this.http.put<Empresa>(this.apiUrl, empresa);
+  }
+
 }

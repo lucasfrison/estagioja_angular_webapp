@@ -7,7 +7,7 @@
             <div class="register-box">
                 <div class="form-row">
                     <div class="form-row">
-                        <img class="img-perfil" src="../../../assets/vaga_image.png" alt="Imagem do estudante">  
+                        <img class="img-perfil" [src]="obterFoto()" alt="Imagem da empresa">   
                         <mat-list>
                             <mat-list-item> <b>Razão Social:</b> {{ empresa.razaoSocial }} </mat-list-item>
                             <mat-list-item> <b>Nome Fantasia:</b> {{ empresa.nomeFantasia }} </mat-list-item>
@@ -16,9 +16,17 @@
                     </div>                        
                 </div>
                 <div class="form-row">
+                  <mat-form-field class="mat-input-element-picture" appearance="outline">
+                    <button [disabled]="!editando" mat-icon-button matPrefix (click)="f_input.click()">
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <input formControlName="uploadFoto" type="text" [placeholder]="empresa.linkFoto ?? 'Importe sua foto'" readonly matInput/>
+                    <input type="file" hidden #f_input (change)="fotoInputAction($event)" accept=".pdf, .png, .jpg, .jpeg"/>
+                  </mat-form-field>
+                </div>
+                <div class="form-row">
                     <mat-form-field class="mat-input-element-description" appearance="outline">
-                        <mat-label>Sobre a empresa</mat-label>
-                        <textarea matInput formControlName="descricao" rows="6" placeholder="Digite as informações da empresa"></textarea>
+                        <textarea matInput formControlName="descricao" rows="6" [placeholder]="empresa.descricao ?? 'Sobre a empresa'"></textarea>
                         <mat-error ng-show="formEmpresa.descricao.$error.required && formEmpresa.descricao.$touched">
                         Por favor, preencha o campo descrição.
                         </mat-error>
@@ -26,15 +34,13 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-branch" appearance="outline">
-                        <mat-label>Ramo de Atuação</mat-label>
-                        <input matInput formControlName="nome" placeholder="Digite o ramo de atuação da empresa">
+                        <input matInput formControlName="ramoDeAtuacao" [placeholder]="empresa.ramoDeAtuacao ?? 'Ramo de atuação'">
                         <mat-error ng-show="formEmpresa.nome.$error.required && formEmpresa.cpf.$touched">
                             Por favor, preencha o ramo de atuação.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-phone" appearance="outline">
-                        <mat-label>Telefone</mat-label>
-                        <input matInput formControlName="telefone" placeholder="(00) 00000-0000" maxlength="14" mask="(00)00000-0000">
+                        <input matInput formControlName="telefone" [placeholder]="empresa.telefone!" maxlength="14" mask="(00)00000-0000">
                         <mat-error ng-show="formEmpresa.telefone.$error.required && formEmpresa.telefone.$touched">
                             Por favor, preencha o campo Telefone.
                         </mat-error>
@@ -42,29 +48,25 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-cep" appearance="outline">
-                        <mat-label>CEP</mat-label>
-                        <input matInput formControlName="cep" placeholder="000000-000" (input)="buscarCep()" maxlength="9" mask="00000-000">
+                        <input matInput formControlName="cep" [placeholder]="endereco.cep!" (input)="buscarCep()" maxlength="9" mask="00000-000">
                         <mat-error ng-show="formEmpresa.cep.$error.required && formEmpresa.cep.$touched">
                             Preencha o CEP.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-city" appearance="outline">
-                        <mat-label>Cidade</mat-label>
-                        <input matInput formControlName="cidade" placeholder="Informe a cidade">
+                        <input matInput formControlName="cidade" [placeholder]="endereco.localidade!">
                         <mat-error ng-show="formEmpresa.cidade.$error.required && formEmpresa.cidade.$touched">
                             Por favor, preencha o campo cidade.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-state" appearance="outline">
-                        <mat-label>UF</mat-label>
-                        <input matInput formControlName="estado" placeholder="UF">
+                        <input matInput formControlName="estado" [placeholder]="endereco.uf!">
                         <mat-error ng-show="formEmpresa.estado.$error.required && formEmpresa.estado.$touched">
                             Preencha.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-neighborhood" appearance="outline">
-                        <mat-label>Bairro</mat-label>
-                        <input matInput formControlName="bairro" placeholder="Informe o bairro">
+                        <input matInput formControlName="bairro" [placeholder]="endereco.bairro!">
                         <mat-error ng-show="formEmpresa.bairro.$error.required && formEmpresa.bairro.titulo.$touched">
                             Preencha o campo bairro.
                         </mat-error>
@@ -72,19 +74,16 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-address" appearance="outline">
-                        <mat-label>Endereço</mat-label>
-                        <input matInput formControlName="endereco" placeholder="Ex: Rua Alcides Vieira Arcoverde">
+                        <input matInput formControlName="endereco" [placeholder]="endereco.logradouro!">
                         <mat-error ng-show="formEmpresa.endereco.$error.required && formEmpresa.endereco.$touched">
                             Por favor, informe o endereço.
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-number" appearance="outline">
-                        <mat-label>Número</mat-label>
-                        <input matInput formControlName="numero" placeholder="000">
+                        <input matInput formControlName="numero" [placeholder]="endereco.numero!.toString()">
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-complement" appearance="outline">
-                        <mat-label>Complemento</mat-label>
-                        <input matInput formControlName="complemento" placeholder="Apartamento, sala, edifício, andar, etc." >
+                        <input matInput formControlName="complemento" [placeholder]="endereco.complemento ?? 'Complemento'" >
                         <mat-error ng-show="formEmpresa.complemento.$error.required && formEmpresa.complemento.$touched">
                             Por favor, informe o complemento.
                         </mat-error>
@@ -95,8 +94,11 @@
         <mat-icon (click)="voltar()" class="mat-primary custom-button-2" aria-hidden="false" aria-label="keyboard_return" fontIcon="keyboard_return"></mat-icon>    
         <button [hidden]="editando" mat-button class="custom-button" (click)="alterarStatusEdicao()">
             Editar
-         </button>
-        <button [hidden]="!editando" mat-button class="custom-button">
+        </button>
+        <button [hidden]="!editando" (click)="alterarStatusVisualizacao()" mat-button class="custom-button-3">
+          Desabilitar edição
+        </button>
+        <button [hidden]="!editando" mat-button (click)="atualizarEmpresa()" class="custom-button">
             Confirmar
         </button>
     </div>
