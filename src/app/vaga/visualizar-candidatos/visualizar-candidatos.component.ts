@@ -71,7 +71,7 @@ export class VisualizarCandidatosComponent implements OnInit{
       },
       (error) => {
         Swal.fire({
-            icon: 'success',
+            icon: 'error',
             title: 'ERRO',
             text: `Ocorreu um erro durante a requisição!`,
             timer: 2500
@@ -93,7 +93,7 @@ export class VisualizarCandidatosComponent implements OnInit{
       },
       (error) => {
         Swal.fire({
-            icon: 'success',
+            icon: 'error',
             title: 'ERRO',
             text: `Erro ao rejeitar o candidato!`,
             timer: 2500
