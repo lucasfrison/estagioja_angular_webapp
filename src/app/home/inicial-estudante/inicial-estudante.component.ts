@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Candidatura } from 'src/app/shared/models/candidatura.model';
 import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.model';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
 
 @Component({
   selector: 'app-inicial-estudante',
@@ -30,10 +32,14 @@ export class InicialEstudanteComponent {
   login?: AuthResponse;
   minhasVagas: VagaComCandidatos[] = [];
   caminhoDaImagem: string = '../../assets/vaga_image.png';
+  fotosAbertas: Blob[] = [];
+  fotoAbertasURLs: string[] = [];
 
   constructor(
     private vagaService: VagaService,
-    private router: Router
+    private router: Router,
+    private empresaService: EmpresaService,
+    private arquivoService: GerenciadorDeArquivosService
   ) {} 
 
   ngOnInit(): void {
@@ -43,7 +49,10 @@ export class InicialEstudanteComponent {
   
   buscarVagasPorIdEstudante() {
     this.vagaService.buscarPorIdEstudante(this.login?.id!).subscribe(
-      response => this.minhasVagas = response,
+      response => {
+        this.minhasVagas = response;
+        this.obterFotosEmpresas();
+      },
       error => console.error(`Você não está cadastrado em nenhuma vaga!`) 
     );
   }
@@ -103,6 +112,30 @@ export class InicialEstudanteComponent {
 
   carregarAprovacaoVaga(vaga: VagaComCandidatos): string {
     return vaga.status === 'CONCLUIDO' ? ' (Aprovado)' : '';
+  }
+
+  obterFotosEmpresas() {
+    for (let vaga of this.minhasVagas) {
+      this.empresaService.buscarPorId(vaga.idEmpresa!).subscribe(
+        response => {
+          //console.log(response);
+          if (response.linkFoto) {
+            this.arquivoService.obterArquivo(response.linkFoto).subscribe(
+              (arquivo) => {
+                //console.log(arquivo);
+                let foto = new Blob([arquivo.body as BlobPart], { type: 'application/octet-stream' });
+                let fotoURL = window.URL.createObjectURL(foto);
+                this.fotosAbertas.push(foto);
+                this.fotoAbertasURLs.push(fotoURL);
+              }
+            )
+          } else {
+            this.fotosAbertas.push(new Blob());
+            this.fotoAbertasURLs.push(this.caminhoDaImagem);
+          }
+        }
+      );
+    }
   }
 
 }

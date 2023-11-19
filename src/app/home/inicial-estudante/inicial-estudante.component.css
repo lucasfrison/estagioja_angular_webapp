@@ -44,6 +44,12 @@ app-links-perfil {
     margin-right: 20px;
 }
 
+.img-vaga {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
 .vaga-detalhes {
     flex: auto; /* Faz com que os detalhes da vaga ocupem todo o espaço disponível */
     display: flex;

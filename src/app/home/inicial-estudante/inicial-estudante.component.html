@@ -2,10 +2,10 @@
 <app-links-uteis></app-links-uteis>
 <div class="container">
     <h1 class="title">Candidaturas recentes</h1>
-    <div class="vaga" *ngFor="let vaga of minhasVagas" [hidden]="vaga.status === 'FINALIZADO'">
+    <div class="vaga" *ngFor="let vaga of minhasVagas; let i = index" [hidden]="vaga.status === 'FINALIZADO'">
       <div class="vaga-info">
           <div class="vaga-imagem">
-              <img src="{{ caminhoDaImagem }}" alt="Imagem da Vaga">
+              <img class="img-vaga" [src]="fotoAbertasURLs[i]" alt="Imagem da Vaga">
           </div>
           <div class="vaga-detalhes">
               <div fxLayout="column">
