@@ -8,6 +8,8 @@ import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { VagaComCandidatos } from 'src/app/shared/models/vaga-com-candidatos.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
 
 @Component({
   selector: 'app-pesquisa-vaga-empresa',
@@ -29,15 +31,20 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
   visualizarVagasAbertas: boolean = true;
   VagasAbertasAtivo: boolean = true;
   HistoricoAtivo: boolean = false;
+  foto!: Blob;
+  fotoURL: string = '../../../assets/vaga_image.png';
 
   constructor(
     private vagaService: VagaService,
-    private router: Router
+    private router: Router,
+    private empresaService: EmpresaService,
+    private arquivoService: GerenciadorDeArquivosService  
   ) {} 
 
   ngOnInit(): void {
     this.login = JSON.parse(localStorage.getItem('login')!);
     this.buscarVagasPorIdEmpresa();
+    this.obterFoto();
   }
 
   buscarVagasPorIdEmpresa() {
@@ -123,6 +130,21 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
 
   carregarAprovacaoVaga(vaga: VagaComCandidatos): string {
     return vaga.status === 'CONCLUIDO' ? ' (Concluída)' : '';
+  }
+
+  obterFoto() {
+    this.empresaService.buscarPorIdLogin(this.login?.id!).subscribe(
+      (empresa) => {
+        if (!empresa.linkFoto) return;
+          if (!this.foto)
+            this.arquivoService.obterArquivo(empresa.linkFoto!).subscribe(
+              (response) => {
+                this.foto = new Blob([response.body as BlobPart], { type: 'application/octet-stream' });
+                this.fotoURL = window.URL.createObjectURL(this.foto);
+              }
+            )
+      }
+    );
   }
 
 }
