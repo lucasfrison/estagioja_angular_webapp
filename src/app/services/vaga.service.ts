@@ -6,6 +6,7 @@ import { VagaComCandidatos } from "../shared/models/vaga-com-candidatos.model";
 import { Candidatura } from "../shared/models/candidatura.model";
 import { Estudante } from "../shared/models/estudante.model";
 import { EstudanteCandidato } from "../shared/models/estudante-candidato.model";
+import { CandidaturaComEmpresa } from "../shared/models/candidatura-com-empresa.model";
 
 @Injectable({
   providedIn: 'root'
@@ -61,8 +62,8 @@ export class VagaService {
     return this.http.get<EstudanteCandidato[]>(`${this.apiUrl}/candidatos-vaga/${idVaga}`);
   }
 
-  aprovarCandidato(candidatura: Candidatura): Observable<Candidatura> {
-    return this.http.post<Candidatura>(`${this.apiUrl}/aprovar-candidato`, candidatura, {headers: this.headers});
+  aprovarCandidato(candidatura: CandidaturaComEmpresa): Observable<CandidaturaComEmpresa> {
+    return this.http.post<CandidaturaComEmpresa>(`${this.apiUrl}/aprovar-candidato`, candidatura, {headers: this.headers});
   }
 
   rejeitarCandidato(candidatura: Candidatura): Observable<Candidatura> {

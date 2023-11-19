@@ -10,6 +10,8 @@ import { Candidatura } from 'src/app/shared/models/candidatura.model';
 import Swal from 'sweetalert2';
 import { Vaga } from 'src/app/shared/models/vaga.model';
 import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
+import { CandidaturaComEmpresa } from 'src/app/shared/models/candidatura-com-empresa.model';
+import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 
 @Component({
   selector: 'app-visualizar-candidatos',
@@ -33,6 +35,7 @@ export class VisualizarCandidatosComponent implements OnInit{
   vaga!: Vaga;
   fotosCandidatos: Blob[] = [];
   linksFotos: string[] = [];
+  login!: AuthResponse;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,7 +70,8 @@ export class VisualizarCandidatosComponent implements OnInit{
   }
 
   aprovarCandidato(id: number) {
-    this.vagaService.aprovarCandidato(new Candidatura(this.idVaga, id)).subscribe(
+    this.login = JSON.parse(localStorage.getItem('login')!);
+    this.vagaService.aprovarCandidato(new CandidaturaComEmpresa(this.idVaga, id, this.login.id!)).subscribe(
       (response) => {
         Swal.fire({
             icon: 'success',
