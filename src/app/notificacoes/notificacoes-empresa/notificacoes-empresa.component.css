@@ -32,9 +32,9 @@
   padding-top: 15px;
 }
 
-.vaga {
+.notification {
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
   margin: 10px;
   margin-left: 20px;
@@ -43,19 +43,19 @@
   background-color: #fff;
 }
 
-.vaga-info {
+.notification-info {
   display: flex;
   align-items: center;
 }
 
-.vaga-detalhes {
-  flex: auto; /* Faz com que os detalhes da vaga ocupem todo o espaço disponível */
+.notification-details {
+  flex: auto; /* Faz com que os detalhes da notificação ocupem todo o espaço disponível */
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.icone {
+.icon {
   cursor: pointer;
   width: 30px;
   font-size: 30px;
