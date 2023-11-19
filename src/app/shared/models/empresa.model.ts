@@ -10,7 +10,10 @@ export class Empresa {
         public telefone?: string,
         public endereco?: Endereco,
         public email?: string,
-        public senha?: string
+        public senha?: string,
+        public descricao?: string,
+        public ramoDeAtuacao?: string,
+        public linkFoto?: string
     ) {}
 
 }
