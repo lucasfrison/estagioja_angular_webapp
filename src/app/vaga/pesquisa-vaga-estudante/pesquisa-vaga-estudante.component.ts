@@ -156,6 +156,10 @@ export class PesquisaVagaEstudanteComponent {
   }
 
   obterFotosEmpresas() {
+    this.fotoAbertasURLs = [];
+    this.fotosAbertas = [];
+    this.fotosRecomendadas = [];
+    this.fotosRecomendadasURLs = [];
     for (let vaga of this.minhasVagas) {
       this.empresaService.buscarPorId(vaga.idEmpresa!).subscribe(
         response => {

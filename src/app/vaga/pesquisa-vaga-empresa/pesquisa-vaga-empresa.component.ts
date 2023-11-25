@@ -88,6 +88,8 @@ export class PesquisaVagaEmpresaComponent implements OnInit {
             "Vaga finalizada com sucesso!",
             "success"
           );
+          this.buscarVagasPorIdEmpresa();
+          this.obterFoto();
         }
       }
     );
