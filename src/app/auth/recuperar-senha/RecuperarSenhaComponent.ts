@@ -7,6 +7,7 @@ import emailjs from '@emailjs/browser';
 import { Email } from 'src/app/shared/models/email.model';
 import { RecuperarSenhaService } from 'src/app/services/recuperar-senha.service';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-recuperar-senha',
@@ -17,22 +18,24 @@ import Swal from 'sweetalert2';
     MatFormFieldModule,
     MatInputModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ]
 })
 export class RecuperarSenhaComponent implements OnInit {
 
+  token?: string;
+
   form: FormGroup = this.fb.group({
     email: [''],
-    from_name: 'james',
-    to_name: 'Admin',
-    from_email: 'diagjames@gmail.com',
-    subject: 'dasdsad',
-    message: 'boa tarde teste 123'
-    
+    token: [''],
+    senha: [''],
+    novaSenha: ['']
   });
 
   constructor(private builder: FormBuilder, private fb: FormBuilder, private senhaService: RecuperarSenhaService) { }
+
+  showExtraFields = false;
 
   ngOnInit() {}
 
@@ -45,13 +48,14 @@ export class RecuperarSenhaComponent implements OnInit {
       response => {
         email = response 
         if(email.email !== "E-mail não encontrado") {
-          emailjs.init('0yVYnT_golLNxmqYp');// chave api
-
+          this.token = Math.random().toString(16).substr(2);
+          this.showExtraFields = true;
+          emailjs.init('0yVYnT_golLNxmqYp'); //chave api
           emailjs.send('service_kyoiey7', 'template_i2i1m6f', {
             from_name: 'EstagioJa',
             to_name: email.nome,
             subject: 'Recuperação de senha',
-            message: 'this is message', 
+            message: 'Copie e cole este token no site para prosseguir com a redefinição de senha: ' + this.token, 
             to_email: emailValue
           }).then (
             () => {
@@ -71,10 +75,8 @@ export class RecuperarSenhaComponent implements OnInit {
           timer: 2500
         })
       }
-      }
-    );
-
+    }
+  );
 
   }
-
 }

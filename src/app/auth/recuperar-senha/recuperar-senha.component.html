@@ -19,10 +19,60 @@
             />
             <mat-error ng-show=""> Por favor, preencha o e-mail. </mat-error>
           </mat-form-field>
+          <div *ngIf="showExtraFields">
+            <div class="input-container">
+              <mat-form-field class="full-width">
+                <mat-label>Token</mat-label>
+                <input
+                  matInput
+                  class="input-token"
+                  type="text"
+                  formControlName="token"
+                  placeholder="Digite o token"
+                  required
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="input-container">
+              <mat-form-field class="full-width">
+                <mat-label>Nova Senha</mat-label>
+                <input
+                  matInput
+                  class="input-password"
+                  type="password"
+                  formControlName="novaSenha"
+                  placeholder="Digite a nova senha"
+                  required
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="input-container">
+              <mat-form-field class="full-width">
+                <mat-label>Confirmar Nova Senha</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  class="input-password"
+                  formControlName="confirmarNovaSenha"
+                  placeholder="Confirme a nova senha"
+                  required
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="!showExtraFields">
+            <button mat-button class="mat-primary custom-button" type="submit">
+              Confirmar
+            </button>
+          </div>
+          <div *ngIf="showExtraFields">
+            <button mat-button class="mat-primary custom-button" type="submit">
+              Atualizar senha
+            </button>
+          </div>
         </div>
-        <button mat-button class="mat-primary custom-button" type="submit">
-          Confirmar
-        </button>
       </div>
       <a [routerLink]="['/']">Voltar</a>
     </form>

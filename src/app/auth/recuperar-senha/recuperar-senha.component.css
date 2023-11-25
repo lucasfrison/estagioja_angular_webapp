@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 45em;
+  height: 53em;
 }
 
 .container {
@@ -47,11 +47,6 @@ h2 {
 p {
   font-size: 17px;
   padding: 30px;
-}
-
-.input-container {
-  width: 100%;
-  margin-bottom: 10px;
 }
 
 .recovery-container {
