@@ -4,7 +4,7 @@
       <h2>Estágio Já</h2>
     </div>
     <p>Preencha o campo para recuperar sua senha</p>
-    <form [formGroup]="form" (submit)="send()">
+    <form [formGroup]="form">
       <div class="recovery-container">
         <div class="input-container">
           <mat-form-field class="full-width">
@@ -66,6 +66,7 @@
             class="mat-primary custom-button"
             [hidden]="showExtraFields"
             type="submit"
+            (click)="send()"
           >
             Confirmar
           </button>

@@ -29,8 +29,8 @@ export class RecuperarSenhaComponent implements OnInit {
   form: FormGroup = this.fb.group({
     email: [''],
     token: [''],
-    senha: [''],
-    novaSenha: ['']
+    novaSenha: [''],
+    confirmarNovaSenha: ['']
   });
 
   constructor(private builder: FormBuilder, private fb: FormBuilder, private senhaService: RecuperarSenhaService) { }
@@ -79,6 +79,6 @@ export class RecuperarSenhaComponent implements OnInit {
   }
 
   atualizarSenha() {
-    
+    console.log(this.form);
   }
 }
