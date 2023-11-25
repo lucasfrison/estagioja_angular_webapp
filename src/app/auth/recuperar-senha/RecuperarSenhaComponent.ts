@@ -20,6 +20,7 @@ import emailjs from '@emailjs/browser';
 export class RecuperarSenhaComponent implements OnInit {
 
   form: FormGroup = this.fb.group({
+    email: [''],
     from_name: 'james',
     to_name: 'Admin',
     from_email: 'diagjames@gmail.com',
@@ -28,19 +29,27 @@ export class RecuperarSenhaComponent implements OnInit {
     
   });
 
-  constructor(private builder: FormBuilder, private fb: FormBuilder) { }
+  constructor(private builder: FormBuilder, private fb: FormBuilder, private senhaService: RecuperarSenhaComponent) { }
 
   ngOnInit() {}
 
   async send() {
+
+    const emailValue = this.form.get('email')?.value;
+
+    this.senhaService.buscarEmail(emailValue).subscribe(
+      response => 
+    );
+
     emailjs.init('0yVYnT_golLNxmqYp');// chave api
+
     let response = await emailjs.send('service_kyoiey7', 'template_i2i1m6f', {
       from_name: 'EstagioJa',
       to_name: 'James',
       from_email: 'james.govida@hotmail.com',
       subject: 'Test subject',
       message: 'this is message', 
-      to_email: 'lucfg15@gmail.com'
+      to_email: emailValue
     });
 
     alert("mensagem enviada!");
