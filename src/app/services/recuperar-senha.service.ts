@@ -8,11 +8,11 @@ import { Email } from '../shared/models/email.model';
 })
 export class RecuperarSenhaService {
 
-  private apiUrl = 'https://localhost:7238/';
+  private apiUrl = 'https://localhost:7238/Auth';
 
   constructor(private http: HttpClient) { }
   
   buscarEmail(email: string): Observable<Email> {
-    return this.http.get<Email>(`${this.apiUrl}/empresa/${id}`);  
+    return this.http.get<Email>(`${this.apiUrl}/recuperar-senha/${email}`);  
   }
 }
