@@ -35,7 +35,7 @@ export class NotificacoesComponent implements OnInit{
 
   buscarNotificacoes() {
     this.loginService.buscarNotificacoes(this.login.id!).subscribe(
-      response => this.notificacoes = response
+      response => this.notificacoes = response.reverse()
     );
   }
 
