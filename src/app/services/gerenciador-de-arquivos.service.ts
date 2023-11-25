@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GerenciadorDeArquivosService {
-  private apiUrl = 'https://localhost:7238/arquivo';
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/arquivo';
 
   constructor(private http: HttpClient) {}
 

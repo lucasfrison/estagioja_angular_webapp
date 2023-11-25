@@ -10,7 +10,7 @@ import { AuthResponse } from '../shared/models/auth-response.model';
 })
 export class RecuperarSenhaService{
 
-  private apiUrl = 'https://localhost:7238/Auth';
+  private apiUrl = 'https://estagiojaapi.azurewebsites.net/Auth';
 
   constructor(private http: HttpClient) { }
   
