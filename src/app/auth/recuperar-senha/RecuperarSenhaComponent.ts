@@ -26,6 +26,7 @@ import { AuthRequest } from 'src/app/shared/models/authRequest.model';
 export class RecuperarSenhaComponent implements OnInit {
 
   token?: string;
+  emailAlteracao?: string;
 
   form: FormGroup = this.fb.group({
     email: [''],
@@ -43,6 +44,7 @@ export class RecuperarSenhaComponent implements OnInit {
   async send() {
     let email: Email;
     const emailValue = this.form.get('email')?.value;
+    this.emailAlteracao = emailValue;
 
     this.senhaService.buscarEmail(emailValue).subscribe(
       response => {
@@ -81,15 +83,19 @@ export class RecuperarSenhaComponent implements OnInit {
 
   atualizarSenha() {
     let authRequest!: AuthRequest;
+    
     if (this.token === this.form.get('token')?.value) {
-      authRequest.email = this.form.get('email')?.value;
-      authRequest.senha = this.form.get('novaSenha')?.value;
+      authRequest = new AuthRequest(
+        this.form.get('email')?.value, 
+        this.form.get('novaSenha')?.value
+      );
+
       this.senhaService.modificarSenha(authRequest).subscribe(
         response => {
           Swal.fire({
             icon: 'success',
             title: 'Sucesso!',
-            text: 'Email enviado com sucesso!',
+            text: 'Senha alterada com sucesso!',
             timer: 3500
           })
           this.router.navigate(['/']);

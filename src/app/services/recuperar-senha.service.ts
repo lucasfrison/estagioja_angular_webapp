@@ -19,6 +19,6 @@ export class RecuperarSenhaService{
   }
 
   modificarSenha(authRequest: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/alterarSenha`, authRequest);
+    return this.http.post<AuthResponse>(`${this.apiUrl}/alterar-senha`, authRequest);
   }
 }
