@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Notificacao } from 'src/app/shared/models/notificacao.model';
@@ -26,10 +26,12 @@ export class NotificacoesComponent implements OnInit{
   notificacoes: Notificacao[] = [];
   login!: AuthResponse;
 
-  constructor(private loginService: AuthService) {}
+  constructor(private loginService: AuthService, private router: Router,) {}
 
   ngOnInit() {
     this.login = JSON.parse(localStorage.getItem('login')!);
+    if (!this.login)
+      this.router.navigate(["/"]);
     this.buscarNotificacoes();
   }
 
