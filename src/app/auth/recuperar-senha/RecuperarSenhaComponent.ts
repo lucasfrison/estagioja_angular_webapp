@@ -37,17 +37,16 @@ export class RecuperarSenhaComponent implements OnInit {
 
   showExtraFields = false;
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   async send() {
-
     let email: Email;
     const emailValue = this.form.get('email')?.value;
 
     this.senhaService.buscarEmail(emailValue).subscribe(
       response => {
-        email = response 
-        if(email.email !== "E-mail não encontrado") {
+        email = response
+        if (email.email !== "E-mail não encontrado") {
           this.token = Math.random().toString(16).substr(2);
           this.showExtraFields = true;
           emailjs.init('0yVYnT_golLNxmqYp'); //chave api
@@ -55,9 +54,9 @@ export class RecuperarSenhaComponent implements OnInit {
             from_name: 'EstagioJa',
             to_name: email.nome,
             subject: 'Recuperação de senha',
-            message: 'Copie e cole este token no site para prosseguir com a redefinição de senha: ' + this.token, 
+            message: 'Copie e cole este token no site para prosseguir com a redefinição de senha: ' + this.token,
             to_email: emailValue
-          }).then (
+          }).then(
             () => {
               Swal.fire({
                 icon: 'success',
@@ -67,16 +66,19 @@ export class RecuperarSenhaComponent implements OnInit {
               })
             }
           );
-      } else {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso!',
-          text: 'Email enviado com sucesso!',
-          timer: 2500
-        })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: 'Email enviado com sucesso!',
+            timer: 2500
+          })
+        }
       }
-    }
-  );
+    );
+  }
 
+  atualizarSenha() {
+    
   }
 }

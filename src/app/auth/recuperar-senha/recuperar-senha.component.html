@@ -47,14 +47,13 @@
                 />
               </mat-form-field>
             </div>
-
             <div class="input-container">
               <mat-form-field class="full-width">
                 <mat-label>Confirmar Nova Senha</mat-label>
                 <input
                   matInput
                   type="password"
-                  class="input-password"
+                  class="input-confirmPassword"
                   formControlName="confirmarNovaSenha"
                   placeholder="Confirme a nova senha"
                   required
@@ -62,16 +61,23 @@
               </mat-form-field>
             </div>
           </div>
-          <div *ngIf="!showExtraFields">
-            <button mat-button class="mat-primary custom-button" type="submit">
-              Confirmar
-            </button>
-          </div>
-          <div *ngIf="showExtraFields">
-            <button mat-button class="mat-primary custom-button" type="submit">
-              Atualizar senha
-            </button>
-          </div>
+          <button
+            mat-button
+            class="mat-primary custom-button"
+            [hidden]="showExtraFields"
+            type="submit"
+          >
+            Confirmar
+          </button>
+          <button
+            mat-button
+            class="mat-primary custom-button"
+            [hidden]="!showExtraFields"
+            type="submit"
+            (click)="atualizarSenha()"
+          >
+            Atualizar senha
+          </button>
         </div>
       </div>
       <a [routerLink]="['/']">Voltar</a>
