@@ -31,7 +31,7 @@
                         <mat-label>Data de Nascimento</mat-label>
                         <input matInput formControlName="dataNascimento" [matDatepicker]="picker">
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-datepicker #picker [startAt]="dataInicial"></mat-datepicker>
                         <mat-error ng-show="formEstudante.dataNascimento.$error.required && formEstudante.dataNascimento.$touched">
                             Por favor, preencha sua data de nascimento.
                         </mat-error>

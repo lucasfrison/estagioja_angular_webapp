@@ -52,6 +52,7 @@ export class CadastroComponent implements OnInit{
     empresa!: Empresa;
     estudante!: Estudante;
     esconderSenha: boolean = true;
+    dataInicial = new Date(2000, 1, 1); 
 
     constructor(
         private cepService: CepService, 
