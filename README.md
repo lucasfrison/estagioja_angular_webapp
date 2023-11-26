@@ -23,6 +23,15 @@ Aqui estão algumas informações essenciais para entender e contribuir para o p
 - EmailJS (servidor de e-mail)
 - SweetAlert2 (estilização)
 
+## Objetivo
+
+O principal objetivo deste projeto é oferecer uma plataforma simples e eficiente para os usuários encontrarem vagas de estágio. Para atingir isso, concentramos nossos esforços em dois aspectos principais:
+
+1. **Layout Clean:** Optamos por um design minimalista, removendo distrações visuais e mantendo a interface limpa. Queremos que os usuários se concentrem facilmente nas informações essenciais.
+
+2. **Facilidade de Uso:** A navegação intuitiva e a simplicidade são prioridades. Queremos que os usuários possam criare, ncontrar e candidatar-se as vagas de estágio sem obstáculos desnecessários.
+
+
 ## Pré-Requisitos
 
 Antes de começar, certifique-se de ter o Node.js e o npm (Node Package Manager) instalados.
@@ -52,3 +61,14 @@ Para a funcionalidade de recuperação de senha, nosso projeto utiliza o serviç
 4. **OBS**: É necessário utilizar a aplicação back-end em conjunto, pois a validação de senha verifica se o e-mail existe antes de realizar o envio.
 
 Depois de configurar a conexão com o serviço de emailjs e a aplicação back-end estiver iniciada, a recuperação de senha estará pronta para ser utilizada.
+
+## Curiosidades
+
+- **Desenvolvimento em Standalone:** A maioria dos componentes deste projeto foi desenvolvida como módulos standalone, pode ser importado e utilizado diretamente em qualquer parte da aplicação, sem a necessidade de configurar um módulo
+
+- **Responsividade em Todas as Telas:** Todas as telas do projeto foram cuidadosamente projetadas para garantir uma experiência de usuário consistente em diferentes tamanhos do browser. A responsividade é uma prioridade para oferecer a melhor experiência possível.
+ 
+- **Design Clean:** Todo o layout do projeto foi concebido com o princípio de simplicidade. Buscamos proporcionar uma experiência de usuário agradável sem excesso de informações.
+
+- **Foco na Informação Essencial:** Cada detalhe apresentado tem como objetivo ser relevante para a busca de vagas de estágio, eliminando qualquer informação supérflua.
+
