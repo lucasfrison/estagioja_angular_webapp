@@ -1,7 +1,7 @@
 # Projeto EstagioJá
 
 Bem-vindo ao repositório do projeto EstagioJá! </br>
-Este é um projeto web full-stack desenvolvido utilizando diversas tecnologias modernas. </br>
+Este é um projeto web desenvolvido utilizando diversas tecnologias modernas. </br>
 Professor orientador: **Jaime Wojciechowski**</br>
 Aqui estão algumas informações essenciais para entender e contribuir para o projeto.
 
