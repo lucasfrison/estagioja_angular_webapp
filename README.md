@@ -2,13 +2,12 @@
 
 Bem-vindo ao repositório do projeto EstagioJá! </br>
 Este é um projeto web full-stack desenvolvido utilizando diversas tecnologias modernas. </br>
+Professor orientador: **Jaime Wojciechowski**</br>
 Aqui estão algumas informações essenciais para entender e contribuir para o projeto.
 
 ## Desenvolvedores
-
 - [James Rovel Barbosa](https://github.com/Diagnoster)
 - [Lucas Frison Gonçalves](https://github.com/lucasfrison)
-- Professor orientador: **Jaime Wojciechowski**
 
 ## Tecnologias Utilizadas
 
