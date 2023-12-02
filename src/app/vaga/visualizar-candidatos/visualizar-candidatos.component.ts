@@ -15,6 +15,8 @@ import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalPerfilCandidatoComponent } from '../modal-perfil-candidato/modal-perfil-candidato.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EstudanteService } from 'src/app/services/estudante.service';
+import { Estudante } from 'src/app/shared/models/estudante.model';
 
 
 @Component({
@@ -41,6 +43,7 @@ export class VisualizarCandidatosComponent implements OnInit{
   fotosCandidatos: Blob[] = [];
   linksFotos: string[] = [];
   login!: AuthResponse;
+  estudanteModal!: Estudante
 
   constructor(
     private route: ActivatedRoute,
@@ -49,7 +52,8 @@ export class VisualizarCandidatosComponent implements OnInit{
     private router: Router,
     private location: Location,
     private arquivoService: GerenciadorDeArquivosService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private estudanteService: EstudanteService
   ) {}
 
   ngOnInit(): void {
@@ -60,14 +64,19 @@ export class VisualizarCandidatosComponent implements OnInit{
     this.buscarVaga();
   }
 
-  modalCandidato(): void {
-    const dialogRef = this.dialog.open(ModalPerfilCandidatoComponent, {
-      width: '250px'
-    });
+  modalCandidato(id: number) {
+    this.estudanteService.buscarPorId(id).subscribe(
+      response => {
+        this.estudanteModal = response;
+        const dialogRef = this.dialog.open(ModalPerfilCandidatoComponent, {
+          width: '250px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      }
+    );
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   buscarCandidatos() {
