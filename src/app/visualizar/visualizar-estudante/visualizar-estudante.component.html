@@ -103,7 +103,7 @@
                 </div>
                 <div class="form-row">
                     <mat-form-field class="mat-input-element-complement" appearance="outline">
-                        <input matInput formControlName="complemento" [placeholder]="endereco.complemento ?? 'Complemento'" >
+                        <input matInput formControlName="complemento" [placeholder]="endereco.complemento?.trim() != '' ? endereco.complemento! : 'Complemento'" >
                         <mat-error ng-show="formEstudante.complemento.$error.required && formEstudante.complemento.$touched">
                             Por favor, informe o complemento.
                         </mat-error>
@@ -117,7 +117,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="mat-input-element-backpack" appearance="outline">
-                        <input matInput formControlName="valorDaBolsa" type="number" [placeholder]="estudante.valorDaBolsa?.toString() ?? 'Remuneração desejada'">
+                        <input matInput formControlName="valorDaBolsa" type="number" [placeholder]="estudante.valorDaBolsa! > 0 ? estudante.valorDaBolsa!.toString() : 'Bolsa desejada'">
                         <mat-error ng-show="meuFormulario.valorDaBolsa.$error.required && meuFormulario.valorDaBolsa.$touched">
                         Preencha o campo bolsa.
                         </mat-error>

@@ -11,7 +11,7 @@ export class Estudante {
         public cpf?: string,
         public nome?: string,
         public sobre?: string,
-        public dataDeNascimento?: Date,
+        public dataNascimento?: Date,
         public telefone?: string,
         public endereco?: Endereco,
         public valorDaBolsa?: number,
