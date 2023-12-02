@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 import { FraseService } from 'src/app/services/frase.service';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
 import { Frase } from 'src/app/shared/models/frase.model';
@@ -24,8 +25,10 @@ export class LinksPerfilComponent implements OnInit {
   chave: string = "login";
   usuarioLogado!: AuthResponse;
 
-  constructor(private fraseService: FraseService) {
-  }
+  constructor(
+    private fraseService: FraseService,
+    private router: Router
+  ) { }
 
   ngOnInit(){
     this.usuarioLogado = JSON.parse(localStorage.getItem(this.chave)!);
@@ -46,6 +49,14 @@ export class LinksPerfilComponent implements OnInit {
     this.fraseService.buscarPorIdEmpresa(numeroAleatorio).subscribe(response =>{
       this.frase = response;
     });
+  }
+
+  pesquisarVagas() {
+    let login: AuthResponse = JSON.parse(localStorage.getItem('login')!);
+    if (login.perfil === PerfilAcesso.EMPRESA)
+      this.router.navigate(["/pesquisar-vaga-empresa"]);
+    else 
+    this.router.navigate(["/pesquisar-vaga-estudante"]);
   }
 
 }

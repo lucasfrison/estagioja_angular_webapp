@@ -168,7 +168,7 @@ export class CadastroComponent implements OnInit{
             Swal.fire({
                 icon: 'error',
                 title: 'ERRO',
-                text: 'Por favor, verifique se todos os campos foram preenchidos!',
+                text: 'CNPJ Inválido! Por favor, verifique.',
                 timer: 2500
             })
             return;
@@ -214,7 +214,7 @@ export class CadastroComponent implements OnInit{
             Swal.fire({
                 icon: 'error',
                 title: 'ERRO',
-                text: 'Por favor, verifique se todos os campos foram preenchidos!',
+                text: 'CPF inválido! Por favor, verifique.',
                 timer: 2500
             })
             return;
