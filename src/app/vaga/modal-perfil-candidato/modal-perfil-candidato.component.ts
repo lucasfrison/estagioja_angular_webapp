@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Estudante } from 'src/app/shared/models/estudante.model';
+import { Turno } from 'src/app/shared/models/turno.model';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -9,7 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   standalone: true,
   imports: [
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
   templateUrl: './modal-perfil-candidato.component.html',
   styleUrls: ['./modal-perfil-candidato.component.css']
@@ -17,7 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 export class ModalPerfilCandidatoComponent implements OnInit{
 
   constructor(
-    public dialogRef: MatDialogRef<ModalPerfilCandidatoComponent>
+    public dialogRef: MatDialogRef<ModalPerfilCandidatoComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Estudante 
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +31,19 @@ export class ModalPerfilCandidatoComponent implements OnInit{
 
   fechar(): void {
     this.dialogRef.close();
+  }
+
+  getPlaceholderCompetencias(): string {
+    if (!this.data.competencias) return 'Competências';
+    let competenciasStr = '';
+    this.data.competencias.forEach(
+      comp => competenciasStr += `${comp.descricao}; `
+    );
+    return competenciasStr;
+  }
+
+  getTurnoString(): string {
+    return Turno[this.data.curso?.turno!];
   }
 
 }

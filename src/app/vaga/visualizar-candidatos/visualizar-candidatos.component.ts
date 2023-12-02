@@ -65,11 +65,12 @@ export class VisualizarCandidatosComponent implements OnInit{
   }
 
   modalCandidato(id: number) {
-    this.estudanteService.buscarPorId(id).subscribe(
+    this.estudanteService.buscarPorIdEstudante(id).subscribe(
       response => {
         this.estudanteModal = response;
         const dialogRef = this.dialog.open(ModalPerfilCandidatoComponent, {
-          width: '250px'
+          width: '500px',
+          data: response
         });
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
