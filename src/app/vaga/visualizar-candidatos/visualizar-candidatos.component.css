@@ -35,6 +35,11 @@
     font-size: 35px;
 }
 
+h2:hover {
+  color:#6638B5 !important;
+  cursor: pointer;
+}
+
 .mat-primary.custom-button-2 {
     position: absolute;
     left: 0;
@@ -95,6 +100,7 @@
 .aplicant-name {
   display: flex;
   align-items: center;
+  margin-bottom: 15%;
 }
 
 .img-vaga {
@@ -124,7 +130,7 @@
   }
 
   ::ng-deep mat-list mat-list-item {
-    margin: -15%;
+    margin: -12%;
   }
 
   @media (max-width: 1275px) {

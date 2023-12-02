@@ -12,6 +12,10 @@ import { Vaga } from 'src/app/shared/models/vaga.model';
 import { GerenciadorDeArquivosService } from 'src/app/services/gerenciador-de-arquivos.service';
 import { CandidaturaComEmpresa } from 'src/app/shared/models/candidatura-com-empresa.model';
 import { AuthResponse } from 'src/app/shared/models/auth-response.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalPerfilCandidatoComponent } from '../modal-perfil-candidato/modal-perfil-candidato.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-visualizar-candidatos',
@@ -21,7 +25,8 @@ import { AuthResponse } from 'src/app/shared/models/auth-response.model';
     MatIconModule,
     RouterModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   templateUrl: './visualizar-candidatos.component.html',
   styleUrls: ['./visualizar-candidatos.component.css']
@@ -43,7 +48,8 @@ export class VisualizarCandidatosComponent implements OnInit{
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
-    private arquivoService: GerenciadorDeArquivosService
+    private arquivoService: GerenciadorDeArquivosService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +58,16 @@ export class VisualizarCandidatosComponent implements OnInit{
     });
     this.buscarCandidatos();
     this.buscarVaga();
+  }
+
+  modalCandidato(): void {
+    const dialogRef = this.dialog.open(ModalPerfilCandidatoComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   buscarCandidatos() {
