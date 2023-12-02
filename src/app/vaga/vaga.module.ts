@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AlterarVagaComponent } from './alterar-vaga/alterar-vaga.component';
 import { PesquisaVagaComponent } from './pesquisa-vaga/pesquisa-vaga.component';
 import { VisualizarCandidatosComponent } from './visualizar-candidatos/visualizar-candidatos.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { VisualizarCandidatosComponent } from './visualizar-candidatos/visualiza
       MatInputModule,
       MatDatepickerModule,
       NgModule,
-      BrowserModule    
+      BrowserModule,
+      MatDialogModule  
     ]
 })
 export class VagaModule { }

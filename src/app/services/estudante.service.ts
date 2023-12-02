@@ -28,4 +28,8 @@ export class EstudanteService {
     return this.http.put<Estudante>(this.apiUrl, estudante);
   }
 
+  buscarPorIdEstudante(id: number): Observable<Estudante> {
+    return this.http.get<Estudante>(`${this.apiUrl}/candidato/${id}`);  
+  }
+
 }
