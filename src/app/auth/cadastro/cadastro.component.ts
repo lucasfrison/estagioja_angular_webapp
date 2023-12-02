@@ -203,7 +203,7 @@ export class CadastroComponent implements OnInit{
 
         this.estudante.cpf = form.get('cpf')?.value;
         this.estudante.nome = form.get('nome')?.value;
-        this.estudante.dataDeNascimento = form.get('dataNascimento')?.value;
+        this.estudante.dataNascimento = form.get('dataNascimento')?.value;
         this.estudante.telefone = form.get('telefone')?.value;
         this.estudante.endereco = this.endereco;
         this.estudante.email = form.get('email')?.value;

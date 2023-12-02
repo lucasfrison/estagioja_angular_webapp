@@ -150,7 +150,7 @@ export class VisualizarEstudanteComponent implements OnInit {
       response => {
         this.estudante = response
         this.endereco = this.estudante.endereco!
-        this.idade = this.calcularIdade(this.estudante.dataDeNascimento!)
+        this.idade = this.calcularIdade(this.estudante.dataNascimento!)
       }
     );
   }
@@ -307,9 +307,9 @@ export class VisualizarEstudanteComponent implements OnInit {
   }
 
   getPlaceholderCompetencias(): string {
-    if (!this.estudante.competencias) return 'Competências';
+    if (this.estudante.competencias?.length == 0) return 'Competências';
     let competenciasStr = '';
-    this.estudante.competencias.forEach(
+    this.estudante.competencias!.forEach(
       comp => competenciasStr += `${comp.descricao}; `
     );
     return competenciasStr;
